@@ -11,10 +11,13 @@ import {
 } from '@/lib/constants';
 import { fadeInUp, slideInLeft, slideInRight } from '@/lib/animations';
 import HeroVisual from './HeroVisual';
+import FloatingCyberElements from './FloatingCyberElements';
 
 export default function HeroSection() {
   return (
     <section className="relative min-h-[calc(100vh-5rem)] flex items-center overflow-hidden bg-gradient-to-b from-black via-slate-950/40 to-black">
+      <FloatingCyberElements />
+
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 -left-32 w-[28rem] h-[28rem] bg-primary-500/15 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-[32rem] h-[32rem] bg-cyan-500/10 rounded-full blur-3xl" />

@@ -3,6 +3,12 @@ export interface NavLink {
   href: string;
 }
 
+export interface NavGroup {
+  label: string;
+  href?: string;
+  children?: NavLink[];
+}
+
 export interface Service {
   id: string;
   title: string;

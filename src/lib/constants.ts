@@ -1,4 +1,4 @@
-import { Service, Industry, CaseStudy, ProcessStep, NavLink } from '@/types';
+import { Service, Industry, CaseStudy, ProcessStep, NavLink, NavGroup } from '@/types';
 
 // Note: Icon components are imported in component files to avoid circular dependencies
 // See ServicesGrid.tsx for icon mapping
@@ -16,6 +16,69 @@ export const NAVIGATION_LINKS: NavLink[] = [
   { label: 'Compliance', href: '/compliance' },
   { label: 'Incident Response', href: '/incident-response' },
   { label: 'Virtual CISO', href: '/virtual-ciso' },
+  { label: 'About', href: '/about' },
+  { label: 'Founder', href: '/founder' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Cyber Risk Score', href: '/cyber-risk-score' },
+  { label: 'Cloud Misconfiguration Demo', href: '/cloud-misconfiguration-demo' },
+  { label: 'Compliance Calculator', href: '/compliance-calculator' },
+  { label: 'Security Maturity', href: '/security-maturity' },
+  { label: 'Security Roadmap', href: '/security-roadmap' },
+  { label: 'Executive Dashboard', href: '/executive-dashboard' },
+  { label: 'Resource Library', href: '/resources' },
+  { label: 'Trust Center', href: '/trust-center' },
+  { label: 'Healthcare', href: '/industries/healthcare' },
+  { label: 'Finance', href: '/industries/finance' },
+  { label: 'Education', href: '/industries/education' },
+  { label: 'Small Business', href: '/industries/small-business' },
+  { label: 'Startups', href: '/industries/startups' },
+  { label: 'Cloud Teams', href: '/industries/cloud-teams' },
+  { label: 'Government', href: '/industries/government' },
+];
+
+export const NAV_GROUPS: NavGroup[] = [
+  {
+    label: 'Services',
+    children: [
+      { label: 'All Services', href: '/services' },
+      { label: 'Cloud Security', href: '/cloud-security' },
+      { label: 'Compliance', href: '/compliance' },
+      { label: 'Incident Response', href: '/incident-response' },
+      { label: 'Virtual CISO', href: '/virtual-ciso' },
+    ],
+  },
+  {
+    label: 'Tools',
+    children: [
+      { label: 'Cyber Risk Score', href: '/cyber-risk-score' },
+      { label: 'Cloud Misconfiguration Demo', href: '/cloud-misconfiguration-demo' },
+      { label: 'Compliance Calculator', href: '/compliance-calculator' },
+      { label: 'Security Maturity Model', href: '/security-maturity' },
+      { label: 'Security Roadmap Generator', href: '/security-roadmap' },
+      { label: 'Executive Dashboard', href: '/executive-dashboard' },
+    ],
+  },
+  {
+    label: 'Industries',
+    children: [
+      { label: 'Healthcare', href: '/industries/healthcare' },
+      { label: 'Finance', href: '/industries/finance' },
+      { label: 'Education', href: '/industries/education' },
+      { label: 'Small Business', href: '/industries/small-business' },
+      { label: 'Startups', href: '/industries/startups' },
+      { label: 'Cloud Teams', href: '/industries/cloud-teams' },
+      { label: 'Government Contractors', href: '/industries/government' },
+    ],
+  },
+  {
+    label: 'Resources',
+    children: [
+      { label: 'Resource Library', href: '/resources' },
+      { label: 'Trust Center', href: '/trust-center' },
+      { label: 'Blog', href: '/blog' },
+    ],
+  },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ];
