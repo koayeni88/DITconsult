@@ -5,6 +5,7 @@ import { Service, Industry, CaseStudy, ProcessStep, NavLink, NavGroup } from '@/
 
 export const COMPANY_NAME = 'DITconsult';
 export const COMPANY_TAGLINE = 'Enterprise Cybersecurity Consulting';
+export const COMPANY_MOTTO = 'Secure. Transform. Protect.';
 export const COMPANY_EMAIL = 'support@ditconsult.com';
 export const COMPANY_PHONE = '(281) 885-9497';
 export const COMPANY_DESCRIPTION =

@@ -8,6 +8,7 @@ import {
   HERO_SUBHEADLINE,
   HERO_CTA_PRIMARY,
   HERO_CTA_SECONDARY,
+  COMPANY_MOTTO,
 } from '@/lib/constants';
 import { fadeInUp, slideInLeft, slideInRight } from '@/lib/animations';
 import HeroVisual from './HeroVisual';
@@ -50,7 +51,7 @@ export default function HeroSection() {
                 transition={{ delay: 0.15 }}
               >
                 <span className="h-1.5 w-1.5 rounded-full bg-primary-400 animate-pulse" />
-                Enterprise Cybersecurity
+                {COMPANY_MOTTO}
               </motion.span>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] font-extrabold text-white leading-[1.1] tracking-tight">
                 {HERO_HEADLINE}{' '}

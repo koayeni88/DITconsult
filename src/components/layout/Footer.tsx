@@ -22,6 +22,9 @@ export default function Footer() {
               </div>
               <span className="text-lg font-bold text-white">{COMPANY_NAME}</span>
             </Link>
+            <p className="text-primary-400 font-semibold text-xs uppercase tracking-widest mb-1">
+              Secure. Transform. Protect.
+            </p>
             <p className="text-white/50 text-sm leading-relaxed">
               Practical cloud security, compliance, and incident readiness for growing organizations.
             </p>
