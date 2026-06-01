@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from 'next/font/google';
 import { COMPANY_NAME, COMPANY_DESCRIPTION, COMPANY_EMAIL, COMPANY_PHONE } from '@/lib/constants';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import ThemeProvider from '@/components/common/ThemeProvider';
 import './globals.css';
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -70,7 +71,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={plusJakarta.variable}>
+    <html lang="en" className={plusJakarta.variable} suppressHydrationWarning>
       <head>
         <link
           rel="icon"
@@ -82,17 +83,19 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-black text-white font-sans antialiased">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary-500 focus:text-white focus:rounded-lg focus:font-semibold"
-        >
-          Skip to main content
-        </a>
-        <Header />
-        <main id="main-content" className="pt-20 md:pt-24">
-          {children}
-        </main>
-        <Footer />
+        <ThemeProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary-500 focus:text-white focus:rounded-lg focus:font-semibold"
+          >
+            Skip to main content
+          </a>
+          <Header />
+          <main id="main-content" className="pt-20 md:pt-24">
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

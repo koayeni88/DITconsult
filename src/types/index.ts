@@ -32,6 +32,12 @@ export interface CaseStudy {
   description: string;
   metric: string;
   metricValue: string;
+  slug?: string;
+  industry?: string;
+  challenge?: string;
+  approach?: string[];
+  outcome?: string[];
+  services?: string[];
 }
 
 export interface ProcessStep {

@@ -1,4 +1,11 @@
+import { Metadata } from 'next';
 import HeroSection from '@/components/home/HeroSection';
+
+export const metadata: Metadata = {
+  title: 'DITconsult | Enterprise Cybersecurity Consulting',
+  description: 'DITconsult helps organizations identify cyber risk, strengthen cloud security, meet compliance requirements, and respond confidently to modern threats.',
+  keywords: ['cybersecurity consulting', 'cloud security', 'compliance', 'incident response', 'virtual CISO', 'risk management'],
+};
 import StatsBar from '@/components/home/StatsBar';
 import TrustBar from '@/components/home/TrustBar';
 import ProblemSection from '@/components/home/ProblemSection';

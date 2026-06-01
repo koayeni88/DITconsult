@@ -41,7 +41,7 @@ export default function PrivacyPage() {
             <div>
               <h2 className="text-2xl font-bold text-white mb-4">Contact Us</h2>
               <p>
-                If you have questions about this Privacy Policy, please contact us at hello@ditconsult.com.
+                If you have questions about this Privacy Policy, please contact us at support@ditconsult.com.
               </p>
             </div>
           </div>

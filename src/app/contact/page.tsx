@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import SectionHeading from '@/components/common/SectionHeading';
-import ContactForm from '@/components/forms/ContactForm';
+import ContactTabs from '@/components/forms/ContactTabs';
 import { COMPANY_EMAIL, COMPANY_PHONE } from '@/lib/constants';
 
 export const metadata: Metadata = {
@@ -58,9 +58,9 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Right - Form */}
+            {/* Right - Form + Calendly tabs */}
             <div>
-              <ContactForm />
+              <ContactTabs />
             </div>
           </div>
         </div>

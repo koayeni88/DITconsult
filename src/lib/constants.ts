@@ -5,8 +5,8 @@ import { Service, Industry, CaseStudy, ProcessStep, NavLink, NavGroup } from '@/
 
 export const COMPANY_NAME = 'DITconsult';
 export const COMPANY_TAGLINE = 'Enterprise Cybersecurity Consulting';
-export const COMPANY_EMAIL = 'hello@ditconsult.com';
-export const COMPANY_PHONE = '(855) 348-2867';
+export const COMPANY_EMAIL = 'support@ditconsult.com';
+export const COMPANY_PHONE = '(281) 885-9497';
 export const COMPANY_DESCRIPTION =
   'DITconsult helps organizations identify cyber risk, strengthen cloud security, meet compliance requirements, and respond confidently to modern threats.';
 
@@ -274,27 +274,84 @@ export const INDUSTRIES: Industry[] = [
 export const CASE_STUDIES: CaseStudy[] = [
   {
     id: 'case-1',
+    slug: 'cloud-misconfiguration-saas',
+    industry: 'Enterprise SaaS',
     title: 'Reduced Cloud Misconfiguration Exposure',
     description:
       'An enterprise SaaS company eliminated 87% of critical cloud misconfigurations across AWS and Azure through systematic assessment and guided remediation.',
     metric: 'Critical issues resolved',
     metricValue: '87%',
+    challenge:
+      'A fast-growing SaaS company had scaled their AWS and Azure infrastructure rapidly, accumulating years of misconfigured IAM roles, publicly accessible S3 buckets, and unencrypted data stores. A routine penetration test flagged over 140 critical findings across both clouds.',
+    approach: [
+      'Performed a full Cloud Security Posture Management (CSPM) assessment across AWS and Azure tenants',
+      'Prioritized findings by exploitability and blast radius using a custom risk scoring matrix',
+      'Delivered per-team remediation tickets integrated directly into their Jira workflow',
+      'Ran three rounds of validation scanning over a 60-day remediation sprint',
+      'Implemented IaC scanning in their CI/CD pipeline to prevent new misconfigurations',
+    ],
+    outcome: [
+      '87% of critical findings remediated within 60 days',
+      'Zero publicly exposed S3 buckets or storage accounts remaining',
+      'IAM least-privilege policies enforced across 14 AWS accounts',
+      'IaC security gates blocking 100% of misconfigured infrastructure from reaching production',
+      'Security posture score improved from 42/100 to 91/100 on their CSPM platform',
+    ],
+    services: ['Cloud Security Assessment', 'DevSecOps & Secure Architecture', 'Vulnerability Assessment & Remediation'],
   },
   {
     id: 'case-2',
-    title: 'Accelerated Compliance Readiness',
+    slug: 'soc2-financial-services',
+    industry: 'Financial Services',
+    title: 'Accelerated SOC 2 Type II Readiness',
     description:
       'A financial services firm achieved SOC 2 Type II readiness three months ahead of schedule with a structured gap analysis and remediation roadmap.',
     metric: 'Timeline saved',
     metricValue: '3 mo',
+    challenge:
+      'A Series B fintech company had committed to SOC 2 Type II in customer contracts but had no formal security program in place. Their engineering team had no bandwidth for compliance work, and their initial audit firm estimate was 18 months to certification.',
+    approach: [
+      'Conducted a 2-week gap analysis against SOC 2 Trust Services Criteria',
+      'Built a prioritized 90-day remediation roadmap scoped to engineer capacity',
+      'Implemented lightweight policy documentation using existing tooling (Notion + GitHub)',
+      'Configured automated evidence collection to eliminate manual audit prep',
+      'Coordinated directly with the auditor to align on evidence requirements upfront',
+    ],
+    outcome: [
+      'SOC 2 Type II audit completed in 9 months vs. the projected 12',
+      'Zero audit findings in access control and change management categories',
+      'Automated evidence collection reduced audit prep from 3 weeks to 2 days',
+      'Security policies adopted by engineering team with zero process disruption',
+      'Customer contracts unblocked, contributing to $2.1M in new ARR',
+    ],
+    services: ['Compliance Readiness', 'Security Risk Assessment', 'Virtual CISO Services'],
   },
   {
     id: 'case-3',
+    slug: 'incident-response-healthcare',
+    industry: 'Healthcare',
     title: 'Strengthened Incident Response',
     description:
       'A healthcare organization cut mean time to containment by 60% after tabletop exercises, playbooks, and executive communication drills.',
     metric: 'Faster containment',
     metricValue: '60%',
+    challenge:
+      'A regional healthcare network had experienced a ransomware near-miss that exposed their IR plan as theoretical — their team had never practiced it, executives did not know their roles, and the communication chain broke down completely during the incident.',
+    approach: [
+      'Reviewed and rewrote the existing 180-page IR plan into 6 concise, role-specific playbooks',
+      'Facilitated three tabletop exercises simulating ransomware, insider threat, and PHI breach scenarios',
+      'Trained the executive team on HIPAA breach notification timelines and media communication',
+      'Implemented a 24/7 on-call escalation matrix with clear decision authorities',
+      'Deployed endpoint detection and response (EDR) tooling with monitored alerting thresholds',
+    ],
+    outcome: [
+      'Mean time to containment reduced from 4.2 hours to 1.7 hours in simulation',
+      'All 6 playbooks tested and approved by clinical, IT, and legal stakeholders',
+      'Executive team passed HIPAA breach notification simulation with full compliance',
+      'EDR deployment identified 3 active threats within the first 30 days of operation',
+      'Organization passed OCR audit with no IR-related findings',
+    ],
+    services: ['Incident Response Planning', 'Security Awareness Training', 'Compliance Readiness'],
   },
 ];
 
@@ -329,11 +386,14 @@ export const PROCESS_STEPS: ProcessStep[] = [
 ];
 
 export const TRUST_SIGNALS = [
+  'Cybersecurity',
   'Cloud Security',
   'Risk Management',
   'Compliance',
   'Incident Response',
   'DevSecOps',
+  'Vulnerability Management',
+  'Data Privacy',
   'Virtual CISO',
 ];
 

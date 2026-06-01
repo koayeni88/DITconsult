@@ -7,6 +7,7 @@ import { COMPANY_NAME, NAV_GROUPS } from '@/lib/constants';
 import { NavGroup } from '@/types';
 import Button from '@/components/common/Button';
 import MobileMenu from './MobileMenu';
+import ThemeToggle from '@/components/common/ThemeToggle';
 import { cn } from '@/lib/utils';
 
 function DropdownMenu({ group, isActive }: { group: NavGroup; isActive: (href: string) => boolean }) {
@@ -19,6 +20,12 @@ function DropdownMenu({ group, isActive }: { group: NavGroup; isActive: (href: s
     };
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setOpen(false);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const active = group.children?.some((c) => isActive(c.href)) ?? false;
@@ -47,7 +54,7 @@ function DropdownMenu({ group, isActive }: { group: NavGroup; isActive: (href: s
       </button>
 
       {open && (
-        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 min-w-[220px] bg-slate-950/98 backdrop-blur-xl border border-white/10 rounded-2xl shadow-xl shadow-black/40 py-2 z-50">
+        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 min-w-[220px] bg-slate-950 border border-white/10 rounded-2xl shadow-xl shadow-black/60 py-2 z-50">
           {group.children?.map((child) => (
             <Link
               key={child.href}
@@ -129,37 +136,41 @@ export default function Header() {
             )}
           </div>
 
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex items-center gap-2">
+            <ThemeToggle />
             <Button asLink href="/contact" variant="primary" size="md">
               Get Started
             </Button>
           </div>
 
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden flex flex-col gap-1.5 p-2 -mr-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded-lg"
-            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={mobileMenuOpen}
-          >
-            <span
-              className={cn(
-                'h-0.5 w-6 bg-white transition-all duration-300',
-                mobileMenuOpen && 'rotate-45 translate-y-2'
-              )}
-            />
-            <span
-              className={cn(
-                'h-0.5 w-6 bg-white transition-all duration-300',
-                mobileMenuOpen && 'opacity-0 w-0'
-              )}
-            />
-            <span
-              className={cn(
-                'h-0.5 w-6 bg-white transition-all duration-300',
-                mobileMenuOpen && '-rotate-45 -translate-y-2'
-              )}
-            />
-          </button>
+          <div className="flex items-center gap-1 lg:hidden">
+            <ThemeToggle />
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="flex flex-col gap-1.5 p-2 -mr-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded-lg"
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={mobileMenuOpen}
+            >
+              <span
+                className={cn(
+                  'h-0.5 w-6 bg-current transition-all duration-300 dark:bg-white',
+                  mobileMenuOpen && 'rotate-45 translate-y-2'
+                )}
+              />
+              <span
+                className={cn(
+                  'h-0.5 w-6 bg-current transition-all duration-300 dark:bg-white',
+                  mobileMenuOpen && 'opacity-0 w-0'
+                )}
+              />
+              <span
+                className={cn(
+                  'h-0.5 w-6 bg-current transition-all duration-300 dark:bg-white',
+                  mobileMenuOpen && '-rotate-45 -translate-y-2'
+                )}
+              />
+            </button>
+          </div>
         </nav>
       </header>
 

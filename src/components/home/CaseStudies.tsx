@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import GlassmorphismCard from '@/components/common/GlassmorphismCard';
 import SectionHeading from '@/components/common/SectionHeading';
 import { CASE_STUDIES } from '@/lib/constants';
@@ -41,6 +42,16 @@ export default function CaseStudies() {
                 </p>
                 <h3 className="text-lg font-bold text-white mb-2">{caseStudy.title}</h3>
                 <p className="text-white/60 text-sm leading-relaxed">{caseStudy.description}</p>
+                {caseStudy.slug && (
+                  <div className="mt-4 pt-4 border-t border-white/8">
+                    <Link
+                      href={`/case-studies/${caseStudy.slug}`}
+                      className="text-primary-400 text-sm font-semibold hover:text-primary-300 transition-colors"
+                    >
+                      View Full Case Study →
+                    </Link>
+                  </div>
+                )}
               </GlassmorphismCard>
             </motion.div>
           ))}

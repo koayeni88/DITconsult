@@ -2,11 +2,12 @@
   "name": "ditconsult",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "start:hostinger": "node server.js",
     "lint": "next lint"
   },
   "repository": {
@@ -26,10 +27,12 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.40.0",
     "next": "^16.2.6",
+    "next-themes": "^0.4.6",
     "postcss": "^8.5.15",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-hook-form": "^7.76.1",
+    "resend": "^6.12.4",
     "tailwindcss": "^3.4.1",
     "typescript": "^6.0.3"
   },
