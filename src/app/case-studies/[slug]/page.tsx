@@ -4,15 +4,16 @@ import Link from 'next/link';
 import { CASE_STUDIES } from '@/lib/constants';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
   return CASE_STUDIES.filter((cs) => cs.slug).map((cs) => ({ slug: cs.slug }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const study = CASE_STUDIES.find((cs) => cs.slug === params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const study = CASE_STUDIES.find((cs) => cs.slug === slug);
   if (!study) return { title: 'Case Study | DITconsult' };
   return {
     title: `${study.title} | DITconsult`,
@@ -20,8 +21,9 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function CaseStudyPage({ params }: Props) {
-  const study = CASE_STUDIES.find((cs) => cs.slug === params.slug);
+export default async function CaseStudyPage({ params }: Props) {
+  const { slug } = await params;
+  const study = CASE_STUDIES.find((cs) => cs.slug === slug);
   if (!study) notFound();
 
   return (
