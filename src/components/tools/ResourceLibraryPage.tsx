@@ -25,7 +25,7 @@ const RESOURCES: Resource[] = [
     category: 'Checklists',
     pages: 8,
     tags: ['AWS', 'Azure', 'GCP', 'Cloud', 'IAM'],
-    fileName: 'DITconsult-Cloud-Security-Checklist.pdf',
+    fileName: 'DiTconsult-Cloud-Security-Checklist.pdf',
     preview: [
       '☐ S3 Block Public Access enabled at account level',
       '☐ Root account MFA enabled and access keys deleted',
@@ -45,7 +45,7 @@ const RESOURCES: Resource[] = [
     category: 'Templates',
     pages: 14,
     tags: ['Incident Response', 'NIST', 'PICERL'],
-    fileName: 'DITconsult-Incident-Response-Plan-Template.pdf',
+    fileName: 'DiTconsult-Incident-Response-Plan-Template.pdf',
     preview: [
       '1. Executive Summary & Policy Statement',
       '2. IR Team Roles and Responsibilities',
@@ -64,7 +64,7 @@ const RESOURCES: Resource[] = [
     category: 'Templates',
     pages: 10,
     tags: ['Ransomware', 'Incident Response', 'Recovery'],
-    fileName: 'DITconsult-Ransomware-Response-Playbook.pdf',
+    fileName: 'DiTconsult-Ransomware-Response-Playbook.pdf',
     preview: [
       '📋 Hour 0–1: Immediate isolation and team activation',
       '📋 Hour 1–4: Scope assessment and evidence collection',
@@ -82,7 +82,7 @@ const RESOURCES: Resource[] = [
     category: 'Guides',
     pages: 18,
     tags: ['NIST CSF', 'Compliance', 'Governance'],
-    fileName: 'DITconsult-NIST-CSF-Implementation-Guide.pdf',
+    fileName: 'DiTconsult-NIST-CSF-Implementation-Guide.pdf',
     preview: [
       '✦ Understanding the 6 NIST CSF 2.0 Functions (Govern is new)',
       '✦ Creating your Organization Profile',
@@ -100,7 +100,7 @@ const RESOURCES: Resource[] = [
     category: 'Guides',
     pages: 16,
     tags: ['SOC 2', 'SaaS', 'Compliance', 'Audit'],
-    fileName: 'DITconsult-SOC2-Readiness-Guide.pdf',
+    fileName: 'DiTconsult-SOC2-Readiness-Guide.pdf',
     preview: [
       '✦ Trust Services Criteria (TSC) explained',
       '✦ Scope definition and system description',
@@ -118,7 +118,7 @@ const RESOURCES: Resource[] = [
     category: 'Checklists',
     pages: 6,
     tags: ['HIPAA', 'Healthcare', 'PHI', 'Compliance'],
-    fileName: 'DITconsult-HIPAA-Security-Checklist.pdf',
+    fileName: 'DiTconsult-HIPAA-Security-Checklist.pdf',
     preview: [
       '☐ Risk analysis conducted and documented',
       '☐ Risk management plan implemented',
@@ -137,7 +137,7 @@ const RESOURCES: Resource[] = [
     category: 'Templates',
     pages: 7,
     tags: ['Vendor Risk', 'Third-Party', 'Supply Chain'],
-    fileName: 'DITconsult-Vendor-Risk-Questionnaire.pdf',
+    fileName: 'DiTconsult-Vendor-Risk-Questionnaire.pdf',
     preview: [
       '1. Company and Contact Information',
       '2. Data Handling and Classification',
@@ -156,7 +156,7 @@ const RESOURCES: Resource[] = [
     category: 'Guides',
     pages: 12,
     tags: ['Kubernetes', 'K8s', 'Container Security', 'Cloud'],
-    fileName: 'DITconsult-Kubernetes-Security-Guide.pdf',
+    fileName: 'DiTconsult-Kubernetes-Security-Guide.pdf',
     preview: [
       '✦ Cluster hardening and API server security',
       '✦ RBAC design principles and least privilege',
@@ -175,7 +175,7 @@ const RESOURCES: Resource[] = [
     category: 'Templates',
     pages: 28,
     tags: ['Policy', 'Governance', 'Compliance', 'NIST', 'SOC 2'],
-    fileName: 'DITconsult-Security-Policy-Bundle.pdf',
+    fileName: 'DiTconsult-Security-Policy-Bundle.pdf',
     preview: [
       '1. Information Security Policy (Master)',
       '2. Acceptable Use Policy',
@@ -194,7 +194,7 @@ const RESOURCES: Resource[] = [
     category: 'Frameworks',
     pages: 14,
     tags: ['CMMC', 'DoD', 'CUI', 'Compliance'],
-    fileName: 'DITconsult-CMMC-Readiness-Guide.pdf',
+    fileName: 'DiTconsult-CMMC-Readiness-Guide.pdf',
     preview: [
       '✦ CMMC 2.0 levels explained (1, 2, 3)',
       '✦ FAR 52.204-21 (Level 1) requirements checklist',
@@ -212,7 +212,7 @@ const RESOURCES: Resource[] = [
     category: 'Frameworks',
     pages: 10,
     tags: ['CIS Controls', 'Baseline', 'SMB', 'Enterprise'],
-    fileName: 'DITconsult-CIS-Controls-v8-Guide.pdf',
+    fileName: 'DiTconsult-CIS-Controls-v8-Guide.pdf',
     preview: [
       '✦ IG1 (Basic): 56 safeguards every org must implement',
       '✦ IG2 (Foundational): Security for orgs with IT staff',
@@ -230,7 +230,7 @@ const RESOURCES: Resource[] = [
     category: 'Templates',
     pages: 5,
     tags: ['Penetration Testing', 'Red Team', 'Scoping'],
-    fileName: 'DITconsult-PenTest-Scope-Template.pdf',
+    fileName: 'DiTconsult-PenTest-Scope-Template.pdf',
     preview: [
       '1. Engagement authorization and signoff page',
       '2. In-scope and out-of-scope systems definition',
@@ -269,7 +269,7 @@ export default function ResourceLibraryPage() {
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Cybersecurity Resource Library</h1>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Professional-grade checklists, templates, guides, and frameworks — free from DITconsult. No email required to preview; download via the contact form.
+            Professional-grade checklists, templates, guides, and frameworks — free from DiTconsult. No email required to preview; download via the contact form.
           </p>
         </motion.div>
 

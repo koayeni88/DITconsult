@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import IndustryPageTemplate from '@/components/common/IndustryPageTemplate';
 
 export const metadata: Metadata = {
-  title: 'Cybersecurity for Cloud Teams | DITconsult',
+  title: 'Cybersecurity for Cloud Teams | DiTconsult',
   description: 'Cloud-native security, DevSecOps, and Kubernetes hardening for engineering teams. Secure your AWS, Azure, GCP workloads and shift security left.',
 };
 

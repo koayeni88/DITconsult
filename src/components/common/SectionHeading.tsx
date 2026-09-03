@@ -2,6 +2,7 @@ import { forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 
 interface SectionHeadingProps {
+  id?: string;
   title: string;
   subtitle?: string;
   description?: string;
@@ -14,6 +15,7 @@ interface SectionHeadingProps {
 const SectionHeading = forwardRef<HTMLDivElement, SectionHeadingProps>(
   (
     {
+      id,
       title,
       subtitle,
       description,
@@ -40,7 +42,7 @@ const SectionHeading = forwardRef<HTMLDivElement, SectionHeadingProps>(
             {subtitle}
           </span>
         )}
-        <Tag className={titleClass}>
+        <Tag id={id} className={titleClass}>
           {highlight ? (
             <>
               {title.split(highlight)[0]}

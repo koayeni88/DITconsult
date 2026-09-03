@@ -359,7 +359,7 @@ export default function ComplianceCalculator() {
               {/* CTAs */}
               <div className="glass-effect-lg rounded-2xl p-6 border border-primary-500/20 text-center mb-6">
                 <h3 className="text-lg font-bold text-white mb-2">Ready to close the gaps?</h3>
-                <p className="text-white/60 text-sm mb-5">DITconsult provides gap assessments, remediation roadmaps, and audit support for all major frameworks.</p>
+                <p className="text-white/60 text-sm mb-5">DiTconsult provides gap assessments, remediation roadmaps, and audit support for all major frameworks.</p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Button asLink href="/contact" variant="primary">Schedule a Compliance Consultation</Button>
                   <Button onClick={() => { setAnswers({}); setSubmitted(false); }} variant="secondary">Try Another Framework</Button>

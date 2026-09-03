@@ -4,29 +4,25 @@ import {
   COMPANY_EMAIL,
   COMPANY_PHONE,
   FOOTER_SECTIONS,
+  SOCIAL_LINKS,
 } from '@/lib/constants';
+import Logo from '@/components/common/Logo';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const socialEntries = Object.entries(SOCIAL_LINKS).filter(([, url]) => Boolean(url));
 
   return (
-    <footer className="bg-slate-950 border-t border-white/10">
+    <footer className="bg-navy-950 border-t border-white/10">
       <div className="container-custom py-16 md:py-20">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-12">
-          {/* Brand Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-10 mb-12">
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4 group">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold">D</span>
-              </div>
-              <span className="text-lg font-bold text-white">{COMPANY_NAME}</span>
-            </Link>
+            <Logo className="mb-4" />
             <p className="text-primary-400 font-semibold text-xs uppercase tracking-widest mb-1">
               Secure. Transform. Protect.
             </p>
             <p className="text-white/50 text-sm leading-relaxed">
-              Practical cloud security, compliance, and incident readiness for growing organizations.
+              Multi-cloud security, compliance readiness, and risk-prioritized remediation for growing organizations.
             </p>
             <Link
               href="/contact"
@@ -36,18 +32,12 @@ export default function Footer() {
             </Link>
           </div>
 
-          {/* Services Links */}
           <div>
-            <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
-              Services
-            </h4>
+            <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Services</h4>
             <ul className="space-y-3">
               {FOOTER_SECTIONS.services.map((item) => (
                 <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-white/60 hover:text-white transition-colors text-sm"
-                  >
+                  <Link href={item.href} className="text-white/60 hover:text-white transition-colors text-sm">
                     {item.label}
                   </Link>
                 </li>
@@ -55,18 +45,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Company Links */}
           <div>
-            <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
-              Company
-            </h4>
+            <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Company</h4>
             <ul className="space-y-3">
               {FOOTER_SECTIONS.company.map((item) => (
                 <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-white/60 hover:text-white transition-colors text-sm"
-                  >
+                  <Link href={item.href} className="text-white/60 hover:text-white transition-colors text-sm">
                     {item.label}
                   </Link>
                 </li>
@@ -74,11 +58,21 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact Info */}
           <div>
-            <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
-              Contact
-            </h4>
+            <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Tools</h4>
+            <ul className="space-y-3">
+              {FOOTER_SECTIONS.tools.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-white/60 hover:text-white transition-colors text-sm">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Contact</h4>
             <ul className="space-y-3">
               <li>
                 <a
@@ -96,33 +90,29 @@ export default function Footer() {
                   {COMPANY_PHONE}
                 </a>
               </li>
-              <li className="pt-2 flex gap-4">
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/60 hover:text-white transition-colors text-sm"
-                  aria-label="LinkedIn"
-                >
-                  LinkedIn
-                </a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/60 hover:text-white transition-colors text-sm"
-                  aria-label="Twitter"
-                >
-                  Twitter
-                </a>
-              </li>
+              {socialEntries.length > 0 ? (
+                <li className="pt-2 flex gap-4">
+                  {socialEntries.map(([network, url]) => (
+                    <a
+                      key={network}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white/60 hover:text-white transition-colors text-sm capitalize"
+                    >
+                      {network}
+                    </a>
+                  ))}
+                </li>
+              ) : null}
             </ul>
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-white/50 text-sm">
-          <p>&copy; {currentYear} {COMPANY_NAME}. All rights reserved.</p>
+          <p>
+            &copy; {currentYear} {COMPANY_NAME}. All rights reserved.
+          </p>
           <div className="flex gap-6">
             <Link href="/privacy" className="hover:text-white transition-colors">
               Privacy Policy

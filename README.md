@@ -1,4 +1,4 @@
-# DITconsult — Cybersecurity Advisory Platform
+# DiTconsult — Cybersecurity Advisory Platform
 
 > Full-spectrum cybersecurity consulting website built with Next.js 16, TypeScript, and Tailwind CSS. Functions as both a marketing site and an interactive advisory platform with free tools that build trust, capture qualified leads, and demonstrate expertise before a visitor books a consultation.
 
@@ -23,7 +23,7 @@
 
 ## Overview
 
-DITconsult is a cybersecurity consulting firm website designed to go beyond a static brochure. It includes six interactive assessment tools, seven industry-specific landing pages, a full services directory, an executive dashboard preview, a resource library, a trust center, and a founder profile — all built to convert qualified visitors into consultation leads.
+DiTconsult is a cybersecurity consulting firm website designed to go beyond a static brochure. It includes six interactive assessment tools, seven industry-specific landing pages, a full services directory, an executive dashboard preview, a resource library, a trust center, and a founder profile — all built to convert qualified visitors into consultation leads.
 
 **Key design goals:**
 - Demonstrate expertise _before_ the first call via free, interactive tools
@@ -53,8 +53,8 @@ DITconsult is a cybersecurity consulting firm website designed to go beyond a st
 
 ```bash
 # Clone the repo
-git clone https://github.com/koayeni88/DITconsult.git
-cd DITconsult
+git clone https://github.com/koayeni88/DiTconsult.git
+cd DiTconsult
 
 # Install dependencies
 npm install
@@ -70,7 +70,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser. If port 300
 ## Project Structure
 
 ```
-DITconsult/
+DiTconsult/
 ├── src/
 │   ├── app/                          # Next.js App Router pages
 │   │   ├── page.tsx                  # Homepage
@@ -106,10 +106,12 @@ DITconsult/
 │   ├── components/
 │   │   ├── common/                   # Shared UI primitives
 │   │   │   ├── Badge.tsx
+│   │   │   ├── Breadcrumbs.tsx
 │   │   │   ├── Button.tsx
 │   │   │   ├── Card.tsx
 │   │   │   ├── GlassmorphismCard.tsx
 │   │   │   ├── IndustryPageTemplate.tsx  # Shared template for all industry pages
+│   │   │   ├── Logo.tsx
 │   │   │   └── SectionHeading.tsx
 │   │   ├── dashboard/
 │   │   │   └── ExecutiveDashboard.tsx    # 4-tab interactive dashboard
@@ -117,24 +119,30 @@ DITconsult/
 │   │   │   └── ContactForm.tsx
 │   │   ├── home/                     # Homepage section components
 │   │   │   ├── AIRemediationSection.tsx
-│   │   │   ├── CaseStudies.tsx
+│   │   │   ├── CapabilityStrip.tsx
+│   │   │   ├── CoreStrengths.tsx
 │   │   │   ├── CTASection.tsx
-│   │   │   ├── FloatingCyberElements.tsx  # Animated hero background
+│   │   │   ├── CustomerProblems.tsx
+│   │   │   ├── CyberAtmosphere.tsx       # Shared cyber grid / glow layer
+│   │   │   ├── DeliverablesSection.tsx
+│   │   │   ├── ExampleEngagements.tsx
+│   │   │   ├── FAQSection.tsx
+│   │   │   ├── FeaturedServices.tsx
+│   │   │   ├── FeaturedTools.tsx
+│   │   │   ├── FloatingCyberElements.tsx # Animated cyber icons / particles
 │   │   │   ├── HeroSection.tsx
 │   │   │   ├── HeroVisual.tsx
 │   │   │   ├── IndustriesServed.tsx
-│   │   │   ├── ProblemSection.tsx
-│   │   │   ├── ProcessSection.tsx
-│   │   │   ├── ServicesGrid.tsx
-│   │   │   ├── StatsBar.tsx
-│   │   │   ├── TrustBar.tsx
-│   │   │   └── WhyChooseUs.tsx
+│   │   │   ├── PackagedEngagements.tsx
+│   │   │   └── ProcessSection.tsx
 │   │   ├── icons/
 │   │   │   └── CybersecurityIcons.tsx   # Custom SVG icon set
 │   │   ├── layout/
 │   │   │   ├── Footer.tsx
 │   │   │   ├── Header.tsx               # Dropdown navigation
 │   │   │   └── MobileMenu.tsx
+│   │   ├── services/
+│   │   │   └── ServicePageTemplate.tsx
 │   │   └── tools/                    # Interactive assessment tools
 │   │       ├── CloudMisconfigDemo.tsx
 │   │       ├── ComplianceCalculator.tsx
@@ -144,7 +152,10 @@ DITconsult/
 │   │       └── SecurityRoadmapGenerator.tsx
 │   ├── lib/
 │   │   ├── animations.ts             # Framer Motion variants
-│   │   ├── constants.ts              # Site data, nav, services, industries
+│   │   ├── constants.ts              # Brand, nav, founder, site config
+│   │   ├── content.ts                # Homepage and marketing copy
+│   │   ├── insights.ts               # Blog / insights content
+│   │   ├── services-data.ts          # Service page content
 │   │   └── utils.ts                  # cn() and helper utilities
 │   └── types/
 │       └── index.ts                  # Shared TypeScript interfaces
@@ -301,14 +312,18 @@ npx tsc --noEmit # TypeScript type-check without emitting files
 
 ## Environment Variables
 
-No environment variables are required to run the site locally. If you add server-side integrations (email, CRM, analytics), create a `.env.local` file — it is already in `.gitignore`.
+Copy `.env.example` to `.env.local` for local development. `.env.local` is gitignored and must never be committed.
 
 ```bash
-# .env.local (not committed)
-# NEXT_PUBLIC_SITE_URL=https://ditconsult.com
-# SENDGRID_API_KEY=...
-# HUBSPOT_API_KEY=...
+cp .env.example .env.local
 ```
+
+| Variable | Purpose |
+|---|---|
+| `RESEND_API_KEY` | Resend API key for the contact form |
+| `CONTACT_EMAIL` | Inbox that receives form submissions (default: support@ditconsult.com) |
+| `FROM_EMAIL` | Verified Resend sender address |
+| `PORT` / `HOSTNAME` | Used by `server.js` for Hostinger-style deployments |
 
 ---
 
@@ -316,22 +331,22 @@ No environment variables are required to run the site locally. If you add server
 
 The site is a standard Next.js App Router project and can be deployed to:
 
-- **Vercel** (recommended) — connect the GitHub repo, zero configuration required
-- **Netlify** — use the `@netlify/plugin-nextjs` plugin
+- **Vercel** — connect the GitHub repo
+- **Hostinger / Node host** — `npm run build` then `npm run start:hostinger` (or your `server.js` script)
 - **Self-hosted** — run `npm run build && npm run start` behind a reverse proxy (nginx/Caddy)
 
 ### Pre-deployment checklist
 
 - [ ] `npm run build` completes without errors
-- [ ] `npx tsc --noEmit` returns zero errors
-- [ ] Replace placeholder contact form endpoint with a real email/CRM integration
-- [ ] Update `COMPANY_EMAIL` and `COMPANY_PHONE` in `src/lib/constants.ts`
-- [ ] Set canonical `NEXT_PUBLIC_SITE_URL` for meta tags
-- [ ] Add `sitemap.xml` and `robots.txt` (Next.js 13+ supports `app/sitemap.ts`)
-- [ ] Configure CSP and security headers in `next.config.js`
+- [ ] Set `RESEND_API_KEY` and verified `FROM_EMAIL` in production
+- [ ] Confirm `COMPANY_EMAIL` and `COMPANY_PHONE` in `src/lib/constants.ts`
+- [ ] Confirm founder photo and LinkedIn URL in `FOUNDER`
+- [ ] Never commit `.env.local` or API keys
+- [ ] Smoke-test `/`, `/founder`, `/contact`, and one service page
+- [ ] Confirm security headers in `next.config.js`
 
 ---
 
 ## License
 
-ISC © DITconsult
+ISC © DiTconsult

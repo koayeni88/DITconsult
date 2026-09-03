@@ -22,21 +22,13 @@ const securityHeaders = [
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      // Next.js inline scripts + Calendly widget script
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://assets.calendly.com",
-      // Styles: self + inline (Tailwind/framer-motion inject inline styles)
-      "style-src 'self' 'unsafe-inline' https://assets.calendly.com https://fonts.googleapis.com",
-      // Fonts
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
-      // Images: self + data URIs (favicon) + any HTTPS (for potential future images)
       "img-src 'self' data: https:",
-      // API calls: self + Resend (handled server-side, not from browser) + Calendly embed + ipapi geolocation
-      "connect-src 'self' https://ipapi.co https://calendly.com",
-      // Calendly iframe
-      "frame-src https://calendly.com",
-      // No plugins
+      "connect-src 'self' https://ipapi.co",
+      "frame-src 'none'",
       "object-src 'none'",
-      // Upgrade insecure requests
       "upgrade-insecure-requests",
     ].join('; '),
   },
@@ -53,14 +45,9 @@ const nextConfig = {
   },
   images: {
     remotePatterns: [
-      // Restrict to HTTPS only — no wildcard protocol
       {
         protocol: 'https',
         hostname: '**.ditconsult.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'assets.calendly.com',
       },
     ],
     formats: ['image/avif', 'image/webp'],

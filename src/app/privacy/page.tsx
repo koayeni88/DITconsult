@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | DITconsult',
-  description: 'Privacy policy for DITconsult website and services.',
+  title: 'Privacy Policy | DiTconsult',
+  description: 'Privacy policy for DiTconsult website and services.',
 };
 
 export default function PrivacyPage() {
@@ -14,7 +14,7 @@ export default function PrivacyPage() {
 
           <div className="prose prose-invert max-w-none space-y-6 text-white/70">
             <p>
-              At DITconsult, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and share your information.
+              At DiTconsult, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and share your information.
             </p>
 
             <div>

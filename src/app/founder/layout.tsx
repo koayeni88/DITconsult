@@ -1,9 +1,18 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { COMPANY_NAME, FOUNDER } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Founder | David Idowu – Principal Consultant',
-  description: 'Meet David Idowu, founder and principal consultant at DITconsult. Cloud architect, threat hunter, and trusted cybersecurity advisor with CISSP, CCSP, and AWS Security certifications.',
-  keywords: ['David Idowu', 'DITconsult founder', 'cybersecurity consultant', 'CISSP', 'CCSP', 'cloud security expert'],
+  title: `Founder | ${COMPANY_NAME}`,
+  description: `Meet ${FOUNDER.name}, founder of ${COMPANY_NAME}, with ${FOUNDER.experienceYears} years of cybersecurity and IT experience. Cloud security, compliance readiness, and remediation consulting.`,
+  keywords: [
+    FOUNDER.name,
+    `${COMPANY_NAME} founder`,
+    'cybersecurity consultant',
+    '15+ years cybersecurity experience',
+    'cloud security advisor',
+    'CISM',
+    'CEH',
+  ],
 };
 
 export default function FounderLayout({ children }: { children: React.ReactNode }) {

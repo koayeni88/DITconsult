@@ -22,7 +22,7 @@
   }
 
   body {
-    @apply bg-black text-white;
+    @apply bg-navy-900 text-white;
     font-feature-settings: 'ss01' 1, 'cv01' 1;
   }
 
@@ -61,7 +61,7 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-primary-400 via-cyan-400 to-primary-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary-400 via-cyan-400 to-gold-400 bg-clip-text text-transparent;
   }
 
   .text-gradient {
@@ -94,6 +94,27 @@
 
   .link-underline {
     @apply relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary-400 after:transition-all hover:after:w-full;
+  }
+
+  /* Homepage / marketing cybersecurity section shells */
+  .cyber-section {
+    @apply relative overflow-hidden border-b border-white/10;
+    background:
+      radial-gradient(ellipse 80% 60% at 10% 0%, rgba(0, 102, 255, 0.12), transparent 55%),
+      radial-gradient(ellipse 70% 50% at 90% 100%, rgba(6, 182, 212, 0.08), transparent 50%),
+      linear-gradient(180deg, #0a1628 0%, #060e1a 55%, #0a1628 100%);
+  }
+
+  .cyber-section-alt {
+    @apply relative overflow-hidden border-b border-white/10;
+    background:
+      radial-gradient(ellipse 70% 55% at 85% 10%, rgba(0, 102, 255, 0.14), transparent 55%),
+      radial-gradient(ellipse 60% 45% at 15% 90%, rgba(233, 185, 73, 0.05), transparent 50%),
+      linear-gradient(180deg, #060e1a 0%, #0f1f38 45%, #060e1a 100%);
+  }
+
+  .cyber-panel {
+    @apply glass-effect-lg rounded-2xl border border-primary-500/15 shadow-[0_0_40px_-12px_rgba(0,102,255,0.35)];
   }
 }
 
@@ -163,6 +184,45 @@ html:not(.dark) body {
 /* --- Section/page backgrounds --- */
 html:not(.dark) section {
   background: #f1f5f9 !important;
+}
+
+/* Keep cyber-themed homepage sections dark (brand atmosphere) */
+html:not(.dark) section.cyber-section,
+html:not(.dark) section.cyber-section-alt,
+html:not(.dark) section.cyber-hero {
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 0%, rgba(0, 102, 255, 0.12), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 90% 100%, rgba(6, 182, 212, 0.08), transparent 50%),
+    linear-gradient(180deg, #0a1628 0%, #060e1a 55%, #0a1628 100%) !important;
+  color: #fff !important;
+}
+
+html:not(.dark) section.cyber-section *[class*="text-white"],
+html:not(.dark) section.cyber-section-alt *[class*="text-white"],
+html:not(.dark) section.cyber-hero *[class*="text-white"] {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+html:not(.dark) section.cyber-section h1,
+html:not(.dark) section.cyber-section h2,
+html:not(.dark) section.cyber-section h3,
+html:not(.dark) section.cyber-section-alt h1,
+html:not(.dark) section.cyber-section-alt h2,
+html:not(.dark) section.cyber-section-alt h3,
+html:not(.dark) section.cyber-hero h1,
+html:not(.dark) section.cyber-hero h2,
+html:not(.dark) section.cyber-hero h3 {
+  color: #ffffff !important;
+}
+
+html:not(.dark) section.cyber-section .glass-effect,
+html:not(.dark) section.cyber-section .glass-effect-lg,
+html:not(.dark) section.cyber-section-alt .glass-effect,
+html:not(.dark) section.cyber-section-alt .glass-effect-lg,
+html:not(.dark) section.cyber-hero .glass-effect,
+html:not(.dark) section.cyber-hero .glass-effect-lg {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
 }
 
 /* --- Glass utility classes --- */

@@ -2,9 +2,11 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Button from '@/components/common/Button';
-import { SERVICES } from '@/lib/constants';
+import { SERVICES, COMPANY_NAME } from '@/lib/constants';
+import { ENGAGEMENT_PACKAGES } from '@/lib/content';
 import { validateEmail } from '@/lib/utils';
 
 const COUNTRY_CODES = [
@@ -282,10 +284,13 @@ interface FormInputs {
   fullName: string;
   businessEmail: string;
   company: string;
-  phone: string;
+  phone?: string;
   serviceNeeded: string;
+  otherService?: string;
   message: string;
   preferredDate?: string;
+  consent: boolean;
+  website?: string;
 }
 
 export default function ContactForm() {
@@ -307,25 +312,52 @@ export default function ContactForm() {
       .catch(() => {}); // silently fall back to +1
   }, []);
 
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormInputs>({
-    defaultValues: { serviceNeeded: '' },
+  const searchParams = useSearchParams();
+  const packageParam = searchParams.get('service') ?? '';
+
+  const packageToService: Record<string, string> = {
+    'cloud-posture-review': 'cloud-security',
+    'compliance-readiness-sprint': 'compliance',
+    'remediation-acceleration': 'ai-remediation',
+  };
+
+  const initialService =
+    packageToService[packageParam] ||
+    (SERVICES.some((s) => s.id === packageParam) ? packageParam : '');
+
+  const { register, handleSubmit, watch, formState: { errors }, reset } = useForm<FormInputs>({
+    defaultValues: { serviceNeeded: initialService, consent: false, website: '', otherService: '' },
   });
+
+  const selectedService = watch('serviceNeeded');
+  const isOtherService = selectedService === 'other';
 
   const onSubmit = async (data: FormInputs) => {
     setSubmitting(true);
     setSubmitError(null);
 
+    const packageLabel = ENGAGEMENT_PACKAGES.find((p) => p.id === packageParam)?.name;
+    const otherDetail = data.otherService?.trim() ?? '';
     const serviceLabel =
-      SERVICES.find((s) => s.id === data.serviceNeeded)?.title ?? data.serviceNeeded;
+      packageLabel ||
+      (data.serviceNeeded === 'other'
+        ? `Other: ${otherDetail}`
+        : SERVICES.find((s) => s.id === data.serviceNeeded)?.title || data.serviceNeeded);
 
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...data,
-          serviceNeeded: serviceLabel,
+          fullName: data.fullName,
+          businessEmail: data.businessEmail,
+          company: data.company,
           phone: data.phone ? `${countryCode} ${data.phone}` : '',
+          serviceNeeded: serviceLabel,
+          preferredDate: data.preferredDate || '',
+          message: data.message,
+          consent: data.consent === true,
+          website: data.website || '',
         }),
       });
 
@@ -350,10 +382,13 @@ export default function ContactForm() {
         animate={{ opacity: 1, y: 0 }}
         className="glass-effect rounded-2xl p-8 md:p-12 text-center"
       >
-        <div className="text-5xl mb-4">✓</div>
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-primary-500/40 bg-primary-500/15 text-2xl font-bold text-primary-400">
+          ✓
+        </div>
         <h3 className="text-2xl font-bold text-white mb-2">Thank you!</h3>
         <p className="text-white/70">
-          Your message has been sent to our team. We typically respond within one business day.
+          Your message has been sent to {COMPANY_NAME}. We typically confirm within one business day, then schedule a
+          short discovery call and recommend a packaged next step.
         </p>
       </motion.div>
     );
@@ -363,7 +398,13 @@ export default function ContactForm() {
     'w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-primary-500 transition-colors';
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="glass-effect rounded-2xl p-6 md:p-8 space-y-5 w-full">
+    <form onSubmit={handleSubmit(onSubmit)} className="glass-effect rounded-2xl p-6 md:p-8 space-y-5 w-full" noValidate>
+      {/* Honeypot — hidden from users */}
+      <div className="absolute opacity-0 pointer-events-none h-0 overflow-hidden" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input id="website" type="text" tabIndex={-1} autoComplete="off" {...register('website')} />
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
         {/* Full Name */}
@@ -407,17 +448,18 @@ export default function ContactForm() {
 
         {/* Phone */}
         <div>
-          <label className="block text-sm font-semibold text-white mb-1.5">Phone</label>
+          <label className="block text-sm font-semibold text-white mb-1.5">
+            Phone <span className="text-white/40 font-normal">(optional)</span>
+          </label>
           <div className="flex gap-2">
             <CountryCodePicker value={countryCode} onChange={setCountryCode} />
             <input
               type="tel"
               placeholder="555 123-4567"
-              {...register('phone', { required: 'Phone is required' })}
+              {...register('phone')}
               className="flex-1 min-w-0 bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-primary-500 transition-colors"
             />
           </div>
-          {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone.message}</p>}
         </div>
 
         {/* Service Needed */}
@@ -436,6 +478,29 @@ export default function ContactForm() {
             <option value="other" className="bg-slate-900">Other</option>
           </select>
           {errors.serviceNeeded && <p className="text-red-400 text-xs mt-1">{errors.serviceNeeded.message}</p>}
+
+          {isOtherService && (
+            <div className="mt-3">
+              <label htmlFor="otherService" className="block text-sm font-semibold text-white mb-1.5">
+                What are you enquiring about?
+              </label>
+              <input
+                id="otherService"
+                type="text"
+                placeholder="Describe the service or topic you need help with..."
+                {...register('otherService', {
+                  validate: (value, formValues) =>
+                    formValues.serviceNeeded !== 'other' ||
+                    (typeof value === 'string' && value.trim().length >= 3) ||
+                    'Please describe what you are enquiring about',
+                })}
+                className={inputClass}
+              />
+              {errors.otherService && (
+                <p className="text-red-400 text-xs mt-1">{errors.otherService.message}</p>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Preferred Date */}
@@ -463,7 +528,24 @@ export default function ContactForm() {
         </div>
       </div>
 
-      {submitError && <p className="text-red-400 text-sm">{submitError}</p>}
+      <div className="flex items-start gap-3">
+        <input
+          id="consent"
+          type="checkbox"
+          {...register('consent', { required: 'You must agree to the privacy policy' })}
+          className="mt-1 h-4 w-4 rounded border-white/30 bg-white/10 text-primary-500 focus:ring-primary-400"
+        />
+        <label htmlFor="consent" className="text-sm text-white/70 leading-relaxed">
+          I agree to the{' '}
+          <a href="/privacy" className="text-primary-400 hover:underline" target="_blank" rel="noopener noreferrer">
+            Privacy Policy
+          </a>{' '}
+          and consent to {COMPANY_NAME} contacting me about my inquiry. <span className="text-red-400">*</span>
+        </label>
+      </div>
+      {errors.consent && <p className="text-red-400 text-xs">{errors.consent.message}</p>}
+
+      {submitError && <p className="text-red-400 text-sm" role="alert">{submitError}</p>}
 
       <Button type="submit" variant="primary" size="lg" className="w-full" disabled={submitting}>
         {submitting ? 'Sending...' : 'Submit Inquiry'}

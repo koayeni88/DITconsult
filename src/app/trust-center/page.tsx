@@ -3,8 +3,8 @@ import SectionHeading from '@/components/common/SectionHeading';
 import CTASection from '@/components/home/CTASection';
 
 export const metadata: Metadata = {
-  title: 'Trust Center | DITconsult',
-  description: 'Learn how DITconsult protects client data, maintains confidentiality, and follows professional security methodology.',
+  title: 'Trust Center | DiTconsult',
+  description: 'Learn how DiTconsult protects client data, maintains confidentiality, and follows professional security methodology.',
   keywords: ['trust center', 'data security', 'confidentiality', 'methodology', 'compliance'],
 };
 
@@ -57,7 +57,7 @@ const PILLARS = [
     icon: '🏢',
     title: 'Operational Security',
     points: [
-      'DITconsult operates a documented information security program covering access control, incident response, and data protection.',
+      'DiTconsult operates a documented information security program covering access control, incident response, and data protection.',
       'Privileged access to client environments is managed through role-based access controls and removed immediately upon project completion.',
       'Client system access is documented, time-bounded, and reviewed throughout each engagement.',
       'Penetration testing engagements require signed authorization letters and scoping agreements before work begins.',
@@ -122,7 +122,7 @@ export default function TrustCenterPage() {
         <div className="container-custom max-w-3xl mx-auto text-center">
           <h2 className="text-2xl font-bold text-white mb-4">Our Security Commitment</h2>
           <p className="text-white/65 leading-relaxed mb-6">
-            DITconsult was built by cybersecurity practitioners who understand the sensitivity of the work. We apply the same security rigor to our own operations that we recommend to clients. When you engage with us, your environment, your data, and your reputation are in the hands of professionals who take security personally.
+            DiTconsult was built by cybersecurity practitioners who understand the sensitivity of the work. We apply the same security rigor to our own operations that we recommend to clients. When you engage with us, your environment, your data, and your reputation are in the hands of professionals who take security personally.
           </p>
           <p className="text-white/65 leading-relaxed">
             If you have questions about our security practices, require specific contractual protections, or need a completed vendor security questionnaire, please reach out — we are happy to provide complete documentation.

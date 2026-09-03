@@ -169,7 +169,7 @@ export default function ExecutiveDashboard() {
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Executive Cyber Dashboard</h1>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            This is a preview of the executive-level reporting DITconsult delivers to clients — risk metrics, compliance posture, remediation tracking, and cloud exposure in one view.
+            This is a preview of the executive-level reporting DiTconsult delivers to clients — risk metrics, compliance posture, remediation tracking, and cloud exposure in one view.
           </p>
         </motion.div>
 
@@ -177,7 +177,7 @@ export default function ExecutiveDashboard() {
         <div className="glass-effect-lg rounded-2xl p-4 mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border border-white/10">
           <div>
             <h2 className="font-bold text-white text-base">Acme Corp — Cybersecurity Dashboard</h2>
-            <p className="text-white/40 text-xs">Sample Data · Q2 2026 · Prepared by DITconsult</p>
+            <p className="text-white/40 text-xs">Sample Data · Q2 2026 · Prepared by DiTconsult</p>
           </div>
           <div className="flex items-center gap-2 text-xs text-yellow-400 border border-yellow-500/30 bg-yellow-500/10 px-3 py-1.5 rounded-full">
             <span className="h-1.5 w-1.5 rounded-full bg-yellow-400 animate-pulse" />
@@ -370,7 +370,7 @@ export default function ExecutiveDashboard() {
         {/* CTA */}
         <div className="mt-10 glass-effect-lg rounded-2xl p-8 text-center border border-primary-500/20">
           <h3 className="text-2xl font-bold text-white mb-3">Want This Dashboard For Your Organization?</h3>
-          <p className="text-white/60 mb-6">DITconsult delivers executive-level cybersecurity reporting tailored to your environment, compliance requirements, and business objectives.</p>
+          <p className="text-white/60 mb-6">DiTconsult delivers executive-level cybersecurity reporting tailored to your environment, compliance requirements, and business objectives.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="/contact" className="px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white font-semibold rounded-lg transition-colors">
               Schedule a Dashboard Demo

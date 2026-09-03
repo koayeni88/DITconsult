@@ -75,7 +75,7 @@ const ICONS = [
   { id: 2, Icon: NetworkSVG,     x: 92, y: 55, size: 36, color: '#6366f1', delay: 0.5, duration: 8 },
   { id: 3, Icon: BugSVG,         x: 3,  y: 70, size: 28, color: '#f43f5e', delay: 2,   duration: 6 },
   { id: 4, Icon: EyeSVG,         x: 80, y: 80, size: 34, color: '#3b82f6', delay: 1.5, duration: 10 },
-  { id: 5, Icon: KeySVG,         x: 15, y: 85, size: 30, color: '#a855f7', delay: 0.8, duration: 7.5 },
+  { id: 5, Icon: KeySVG,         x: 15, y: 85, size: 30, color: '#e9b949', delay: 0.8, duration: 7.5 },
   { id: 6, Icon: FingerPrintSVG, x: 50, y: 5,  size: 36, color: '#06b6d4', delay: 3,   duration: 8.5 },
   { id: 7, Icon: ShieldSVG,      x: 68, y: 90, size: 26, color: '#10b981', delay: 2.5, duration: 6.5 },
 ];
@@ -135,31 +135,39 @@ function RadarRings() {
 
 // ── Main component ──────────────────────────────────────────────────────────
 
-export default function FloatingCyberElements() {
+type FloatingCyberElementsProps = {
+  density?: 'full' | 'subtle';
+};
+
+export default function FloatingCyberElements({ density = 'full' }: FloatingCyberElementsProps) {
+  const icons = density === 'subtle' ? ICONS.filter((_, i) => i % 2 === 0).slice(0, 4) : ICONS;
+  const particles = density === 'subtle' ? CODE_PARTICLES.slice(0, 4) : CODE_PARTICLES;
+  const iconOpacity = density === 'subtle' ? [0, 0.28, 0.28, 0] : [0, 0.55, 0.55, 0];
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none select-none" aria-hidden="true">
-      {/* Scanning line */}
-      <ScanLine />
+      {density === 'full' && (
+        <>
+          <ScanLine />
+          <RadarRings />
+        </>
+      )}
 
-      {/* Radar rings */}
-      <RadarRings />
-
-      {/* Floating icons */}
-      {ICONS.map(({ id, Icon, x, y, size, color, delay, duration }) => (
+      {icons.map(({ id, Icon, x, y, size, color, delay, duration }) => (
         <motion.div
           key={id}
           className="absolute"
           style={{
             left: `${x}%`,
             top: `${y}%`,
-            width: size,
-            height: size,
+            width: density === 'subtle' ? size * 0.85 : size,
+            height: density === 'subtle' ? size * 0.85 : size,
             color,
             filter: `drop-shadow(0 0 6px ${color}66)`,
           }}
           initial={{ opacity: 0, scale: 0.6 }}
           animate={{
-            opacity: [0, 0.55, 0.55, 0],
+            opacity: iconOpacity,
             scale: [0.6, 1, 1, 0.6],
             y: [0, -18, -18, 0],
           }}
@@ -174,18 +182,17 @@ export default function FloatingCyberElements() {
         </motion.div>
       ))}
 
-      {/* Floating code particles */}
-      {CODE_PARTICLES.map(({ id, text, x, delay, duration }) => (
+      {particles.map(({ id, text, x, delay, duration }) => (
         <motion.span
           key={id}
           className="absolute font-mono text-[10px] tracking-wider"
           style={{
             left: `${x}%`,
-            color: 'rgba(99,102,241,0.5)',
+            color: density === 'subtle' ? 'rgba(99,102,241,0.28)' : 'rgba(99,102,241,0.5)',
             textShadow: '0 0 8px rgba(99,102,241,0.4)',
           }}
           initial={{ bottom: '-5%', opacity: 0 }}
-          animate={{ bottom: '110%', opacity: [0, 0.7, 0.7, 0] }}
+          animate={{ bottom: '110%', opacity: density === 'subtle' ? [0, 0.4, 0.4, 0] : [0, 0.7, 0.7, 0] }}
           transition={{
             duration,
             delay,
@@ -197,20 +204,21 @@ export default function FloatingCyberElements() {
         </motion.span>
       ))}
 
-      {/* Corner accent — top-right terminal blink */}
-      <motion.div
-        className="absolute top-6 right-6 flex items-center gap-1.5"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: [0, 1, 1, 0] }}
-        transition={{ duration: 3, repeat: Infinity, delay: 1 }}
-      >
-        <span className="font-mono text-[10px] text-emerald-400/60 tracking-widest">THREAT SCAN ACTIVE</span>
-        <motion.span
-          className="inline-block w-1.5 h-3 bg-emerald-400/70"
-          animate={{ opacity: [1, 0, 1] }}
-          transition={{ duration: 0.8, repeat: Infinity }}
-        />
-      </motion.div>
+      {density === 'full' && (
+        <motion.div
+          className="absolute top-6 right-6 flex items-center gap-1.5"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0, 1, 1, 0] }}
+          transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+        >
+          <span className="font-mono text-[10px] text-emerald-400/60 tracking-widest">POSTURE MONITORING</span>
+          <motion.span
+            className="inline-block w-1.5 h-3 bg-emerald-400/70"
+            animate={{ opacity: [1, 0, 1] }}
+            transition={{ duration: 0.8, repeat: Infinity }}
+          />
+        </motion.div>
+      )}
     </div>
   );
 }

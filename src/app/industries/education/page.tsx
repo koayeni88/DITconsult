@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import IndustryPageTemplate from '@/components/common/IndustryPageTemplate';
 
 export const metadata: Metadata = {
-  title: 'Cybersecurity for Education | DITconsult',
+  title: 'Cybersecurity for Education | DiTconsult',
   description: 'Cybersecurity for K-12 schools, universities, and EdTech companies. Protect student data, meet FERPA requirements, and defend against ransomware.',
 };
 

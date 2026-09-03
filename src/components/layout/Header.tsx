@@ -3,9 +3,10 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { COMPANY_NAME, NAV_GROUPS } from '@/lib/constants';
+import { NAV_GROUPS } from '@/lib/constants';
 import { NavGroup } from '@/types';
 import Button from '@/components/common/Button';
+import Logo from '@/components/common/Logo';
 import MobileMenu from './MobileMenu';
 import ThemeToggle from '@/components/common/ThemeToggle';
 import { cn } from '@/lib/utils';
@@ -24,8 +25,15 @@ function DropdownMenu({ group, isActive }: { group: NavGroup; isActive: (href: s
 
   useEffect(() => {
     const onScroll = () => setOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      document.removeEventListener('keydown', onKey);
+    };
   }, []);
 
   const active = group.children?.some((c) => isActive(c.href)) ?? false;
@@ -100,19 +108,12 @@ export default function Header() {
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-smooth',
           isScrolled
-            ? 'bg-black/85 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/20'
+            ? 'bg-navy-950/90 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/20'
             : 'bg-transparent'
         )}
       >
         <nav className="container-custom py-4 flex items-center justify-between" aria-label="Main">
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-neon group-hover:scale-105 transition-transform">
-              <span className="text-white font-bold text-lg">D</span>
-            </div>
-            <span className="text-xl font-bold text-white group-hover:text-primary-400 transition-colors">
-              {COMPANY_NAME}
-            </span>
-          </Link>
+          <Logo />
 
           <div className="hidden lg:flex items-center gap-0.5">
             {NAV_GROUPS.map((group) =>
@@ -139,7 +140,7 @@ export default function Header() {
           <div className="hidden lg:flex items-center gap-2">
             <ThemeToggle />
             <Button asLink href="/contact" variant="primary" size="md">
-              Get Started
+              Book a Consultation
             </Button>
           </div>
 

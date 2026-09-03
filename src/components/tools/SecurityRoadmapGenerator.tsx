@@ -380,7 +380,7 @@ export default function SecurityRoadmapGenerator() {
               {/* CTAs */}
               <div className="glass-effect-lg rounded-2xl p-8 text-center border border-primary-500/20 mt-6">
                 <h3 className="text-2xl font-bold text-white mb-3">Want Expert Help Executing This?</h3>
-                <p className="text-white/60 mb-6">DITconsult can help you execute this roadmap with expert guidance, accountability, and measurable results.</p>
+                <p className="text-white/60 mb-6">DiTconsult can help you execute this roadmap with expert guidance, accountability, and measurable results.</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button asLink href="/contact" variant="primary">Book a Roadmap Review Call</Button>
                   <Button onClick={() => { setGenerated(false); setStep(0); setBusiness(null); setCloud(null); setCompliance(null); setMaturity(null); }} variant="secondary">Start Over</Button>

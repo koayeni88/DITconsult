@@ -8,6 +8,12 @@ const config = {
   theme: {
     extend: {
       colors: {
+        navy: {
+          DEFAULT: '#0a1628',
+          800: '#0f1f38',
+          900: '#0a1628',
+          950: '#060e1a',
+        },
         primary: {
           50: '#f0f7ff',
           100: '#e0efff',
@@ -20,6 +26,11 @@ const config = {
         cyan: {
           400: '#22d3ee',
           500: '#06b6d4',
+        },
+        gold: {
+          300: '#f7d27a',
+          400: '#e9b949',
+          500: '#c9982b',
         },
         slate: {
           50: '#f8fafc',

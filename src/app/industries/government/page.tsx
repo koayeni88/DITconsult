@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import IndustryPageTemplate from '@/components/common/IndustryPageTemplate';
 
 export const metadata: Metadata = {
-  title: 'Cybersecurity for Government Contractors | DITconsult',
+  title: 'Cybersecurity for Government Contractors | DiTconsult',
   description: 'CMMC 2.0, NIST SP 800-171, and DoD contractor cybersecurity. Protect CUI, pass assessments, and maintain your DoD contract eligibility.',
 };
 

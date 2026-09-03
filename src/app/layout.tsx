@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
-import { COMPANY_NAME, COMPANY_DESCRIPTION, COMPANY_EMAIL, COMPANY_PHONE } from '@/lib/constants';
+import { COMPANY_NAME, COMPANY_DESCRIPTION, COMPANY_EMAIL, COMPANY_PHONE, COMPANY_TAGLINE } from '@/lib/constants';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import ThemeProvider from '@/components/common/ThemeProvider';
@@ -14,20 +14,24 @@ const plusJakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: `${COMPANY_NAME} | Enterprise Cybersecurity Consulting`,
+    default: `${COMPANY_NAME} | Cybersecurity Consulting`,
     template: `%s | ${COMPANY_NAME}`,
   },
   description: COMPANY_DESCRIPTION,
   keywords: [
     'cybersecurity consulting',
-    'cloud security',
+    'cloud security consulting',
     'AWS security',
     'Azure security',
-    'GCP security',
+    'vulnerability management',
     'compliance readiness',
+    'NIST',
+    'CIS Controls',
+    'ISO 27001',
+    'SOC 2',
     'incident response',
-    'virtual CISO',
-    'DevSecOps',
+    'vCISO services',
+    'risk management',
   ],
   authors: [{ name: COMPANY_NAME }],
   metadataBase: new URL('https://ditconsult.com'),
@@ -36,8 +40,19 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://ditconsult.com',
     siteName: COMPANY_NAME,
-    title: `${COMPANY_NAME} | Enterprise Cybersecurity Consulting`,
+    title: `${COMPANY_NAME} | ${COMPANY_TAGLINE}`,
     description: COMPANY_DESCRIPTION,
+    images: [{ url: '/logo.png', width: 1024, height: 390, alt: `${COMPANY_NAME} logo` }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${COMPANY_NAME} | Cybersecurity Consulting`,
+    description: COMPANY_DESCRIPTION,
+    images: ['/logo.png'],
+  },
+  icons: {
+    icon: [{ url: '/favicon.png', type: 'image/png' }],
+    apple: [{ url: '/apple-touch-icon.png' }],
   },
   robots: {
     index: true,
@@ -58,10 +73,13 @@ const organizationJsonLd = {
   telephone: COMPANY_PHONE,
   areaServed: 'US',
   serviceType: [
-    'Cloud Security Assessment',
+    'Cybersecurity Consulting',
+    'Cloud Security Consulting',
+    'AWS and Azure Security Assessments',
     'Compliance Readiness',
-    'Incident Response Planning',
-    'Virtual CISO',
+    'Incident Response Readiness',
+    'Vulnerability Management',
+    'vCISO Advisory Services',
   ],
 };
 
@@ -73,16 +91,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={plusJakarta.variable} suppressHydrationWarning>
       <head>
-        <link
-          rel="icon"
-          href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230066ff'/><text x='50' y='72' font-size='56' font-weight='bold' fill='white' text-anchor='middle' font-family='system-ui'>D</text></svg>"
-        />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
       </head>
-      <body className="bg-black text-white font-sans antialiased">
+      <body className="bg-navy-900 text-white font-sans antialiased">
         <ThemeProvider>
           <a
             href="#main-content"

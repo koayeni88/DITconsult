@@ -1,36 +1,75 @@
 import { Metadata } from 'next';
 import HeroSection from '@/components/home/HeroSection';
+import CapabilityStrip from '@/components/home/CapabilityStrip';
+import CoreStrengths from '@/components/home/CoreStrengths';
+import CustomerProblems from '@/components/home/CustomerProblems';
+import FeaturedServices from '@/components/home/FeaturedServices';
+import PackagedEngagements from '@/components/home/PackagedEngagements';
+import FeaturedTools from '@/components/home/FeaturedTools';
+import AIRemediationSection from '@/components/home/AIRemediationSection';
+import IndustriesServed from '@/components/home/IndustriesServed';
+import ProcessSection from '@/components/home/ProcessSection';
+import DeliverablesSection from '@/components/home/DeliverablesSection';
+import ExampleEngagements from '@/components/home/ExampleEngagements';
+import FAQSection from '@/components/home/FAQSection';
+import CTASection from '@/components/home/CTASection';
+import { HOMEPAGE_FAQS } from '@/lib/content';
+import { COMPANY_NAME, COMPANY_DESCRIPTION } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'DITconsult | Enterprise Cybersecurity Consulting',
-  description: 'DITconsult helps organizations identify cyber risk, strengthen cloud security, meet compliance requirements, and respond confidently to modern threats.',
-  keywords: ['cybersecurity consulting', 'cloud security', 'compliance', 'incident response', 'virtual CISO', 'risk management'],
+  title: 'Cybersecurity & Cloud Security Consulting',
+  description: COMPANY_DESCRIPTION,
+  keywords: [
+    'DiTconsult',
+    'cybersecurity consulting',
+    'cloud security consulting',
+    'AWS security assessment',
+    'Azure security assessment',
+    'Google Cloud security assessment',
+    'multi-cloud security',
+    'compliance readiness consulting',
+    'risk-prioritized remediation',
+  ],
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: `${COMPANY_NAME} | Cybersecurity & Cloud Security Consulting`,
+    description: COMPANY_DESCRIPTION,
+    url: 'https://ditconsult.com',
+    images: [{ url: '/logo.png', width: 1024, height: 390, alt: `${COMPANY_NAME} logo` }],
+  },
 };
-import StatsBar from '@/components/home/StatsBar';
-import TrustBar from '@/components/home/TrustBar';
-import ProblemSection from '@/components/home/ProblemSection';
-import ServicesGrid from '@/components/home/ServicesGrid';
-import WhyChooseUs from '@/components/home/WhyChooseUs';
-import ProcessSection from '@/components/home/ProcessSection';
-import IndustriesServed from '@/components/home/IndustriesServed';
-import AIRemediationSection from '@/components/home/AIRemediationSection';
-import CaseStudies from '@/components/home/CaseStudies';
-import CTASection from '@/components/home/CTASection';
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: HOMEPAGE_FAQS.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+};
 
 export default function Home() {
   return (
-    <>
+    <div className="cyber-home relative bg-navy-950">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <HeroSection />
-      <StatsBar />
-      <TrustBar />
-      <ProblemSection />
-      <ServicesGrid />
-      <WhyChooseUs />
-      <ProcessSection />
-      <IndustriesServed />
+      <CapabilityStrip />
+      <CoreStrengths />
+      <CustomerProblems />
+      <FeaturedServices />
+      <PackagedEngagements />
+      <FeaturedTools />
       <AIRemediationSection />
-      <CaseStudies />
+      <IndustriesServed />
+      <ProcessSection />
+      <DeliverablesSection />
+      <ExampleEngagements />
+      <FAQSection />
       <CTASection />
-    </>
+    </div>
   );
 }

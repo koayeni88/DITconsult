@@ -1,48 +1,75 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import GlassmorphismCard from '@/components/common/GlassmorphismCard';
+import Link from 'next/link';
 import SectionHeading from '@/components/common/SectionHeading';
-import { INDUSTRIES } from '@/lib/constants';
+import { INDUSTRIES } from '@/lib/content';
 import { containerVariants, itemVariants } from '@/lib/animations';
+import CyberAtmosphere from './CyberAtmosphere';
+
+const industryIcons: Record<string, string> = {
+  healthcare: 'H',
+  finance: 'F',
+  education: 'E',
+  government: 'G',
+  saas: 'S',
+  business: 'B',
+};
 
 export default function IndustriesServed() {
   return (
-    <section className="section-padding bg-black">
-      <div className="container-custom">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-        >
-          <SectionHeading
-            title="Industries We Serve"
-            subtitle="Vertical Expertise"
-            description="Deep experience across regulated and high-risk industries"
-            centered
-            size="lg"
-          />
-        </motion.div>
+    <section className="cyber-section section-padding" aria-labelledby="industries-heading">
+      <CyberAtmosphere variant="subtle" />
+      <div className="container-custom relative z-10">
+        <SectionHeading
+          id="industries-heading"
+          title="Industry-focused security outcomes"
+          subtitle="Protected Industries"
+          description="Regulatory context and operational priorities vary by sector. We tailor assessments and advisory to your environment."
+          centered
+          size="lg"
+        />
 
         <motion.div
-          className="grid md:grid-cols-3 gap-6 mt-16"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           {INDUSTRIES.map((industry) => (
-            <motion.div key={industry.id} variants={itemVariants}>
-              <GlassmorphismCard
-                icon={industry.icon}
-                title={industry.name}
-                description={industry.description}
-                size="md"
-              />
-            </motion.div>
+            <motion.article key={industry.id} variants={itemVariants} className="h-full">
+              <Link href={industry.href} className="block h-full group">
+                <div className="cyber-panel p-7 h-full hover:border-primary-500/40 transition-smooth">
+                  <div
+                    className="w-10 h-10 rounded-lg bg-primary-500/15 border border-primary-500/25 flex items-center justify-center text-primary-400 font-bold text-sm mb-4 font-mono"
+                    aria-hidden="true"
+                  >
+                    {industryIcons[industry.icon] ?? '•'}
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-primary-300 transition-colors">
+                    {industry.name}
+                  </h3>
+                  <p className="text-white/60 text-sm mb-4 leading-relaxed">{industry.description}</p>
+                  <ul className="space-y-2">
+                    {industry.outcomes.map((outcome) => (
+                      <li key={outcome} className="flex gap-2 text-white/55 text-xs">
+                        <span className="text-primary-400 shrink-0">→</span>
+                        {outcome}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Link>
+            </motion.article>
           ))}
         </motion.div>
+
+        <p className="text-center mt-10">
+          <Link href="/industries" className="text-primary-400 font-semibold text-sm hover:underline">
+            View all industries →
+          </Link>
+        </p>
       </div>
     </section>
   );

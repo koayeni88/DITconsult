@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import IndustryPageTemplate from '@/components/common/IndustryPageTemplate';
 
 export const metadata: Metadata = {
-  title: 'Cybersecurity for Small Business | DITconsult',
+  title: 'Cybersecurity for Small Business | DiTconsult',
   description: 'Practical, affordable cybersecurity for small businesses. MFA, EDR, backup, and compliance guidance without enterprise complexity or cost.',
 };
 
