@@ -4,6 +4,7 @@ import CapabilityStrip from '@/components/home/CapabilityStrip';
 import CoreStrengths from '@/components/home/CoreStrengths';
 import CustomerProblems from '@/components/home/CustomerProblems';
 import FeaturedServices from '@/components/home/FeaturedServices';
+import CorporateTrainingSection from '@/components/home/CorporateTrainingSection';
 import PackagedEngagements from '@/components/home/PackagedEngagements';
 import FeaturedTools from '@/components/home/FeaturedTools';
 import AIRemediationSection from '@/components/home/AIRemediationSection';
@@ -61,6 +62,7 @@ export default function Home() {
       <CoreStrengths />
       <CustomerProblems />
       <FeaturedServices />
+      <CorporateTrainingSection />
       <PackagedEngagements />
       <FeaturedTools />
       <AIRemediationSection />

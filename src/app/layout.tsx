@@ -80,6 +80,7 @@ const organizationJsonLd = {
     'Incident Response Readiness',
     'Vulnerability Management',
     'vCISO Advisory Services',
+    'Corporate Cybersecurity and IT Training',
   ],
 };
 

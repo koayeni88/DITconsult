@@ -48,7 +48,7 @@ export default function FeaturedServices() {
         >
           {FEATURED_SERVICES.map((service) => (
             <motion.article key={service.id} variants={itemVariants} className="h-full">
-              <Link href={service.href} className="block h-full group">
+              <Link href={service.href} className="block h-full group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950 rounded-2xl">
                 <div className="cyber-panel p-7 h-full flex flex-col hover:border-primary-500/40 transition-smooth">
                   <div className="w-11 h-11 text-primary-400 mb-5 drop-shadow-[0_0_12px_rgba(0,102,255,0.45)]" aria-hidden="true">
                     {iconMap[service.icon] ?? <ShieldIcon />}

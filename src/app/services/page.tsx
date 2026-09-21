@@ -8,7 +8,7 @@ import { SERVICES, COMPANY_TAGLINE } from '@/lib/constants';
 export const metadata: Metadata = {
   title: 'Cybersecurity Services',
   description:
-    'Cloud security assessments, compliance readiness, vulnerability management, incident response planning, DevSecOps, and virtual CISO services.',
+    'Cloud security assessments, compliance readiness, vulnerability management, incident response planning, DevSecOps, virtual CISO, and corporate cybersecurity and IT training.',
   alternates: { canonical: '/services' },
 };
 
@@ -37,7 +37,7 @@ export default function ServicesPage() {
             <Link
               key={service.id}
               href={service.href}
-              className="glass-effect-lg rounded-2xl p-7 hover:border-primary-500/30 transition-smooth group"
+              className="glass-effect-lg rounded-2xl p-7 hover:border-primary-500/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900 transition-smooth group h-full flex flex-col"
             >
               <h2 className="text-lg font-bold text-white mb-2 group-hover:text-primary-300 transition-colors">
                 {service.title}

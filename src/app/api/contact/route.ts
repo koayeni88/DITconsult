@@ -35,6 +35,11 @@ const LIMITS: Record<string, number> = {
   preferredDate: 30,
   message: 4000,
   website: 0,
+  trainingTopic: 160,
+  participantCount: 40,
+  deliveryFormat: 40,
+  timeframe: 40,
+  learningGoals: 2000,
 };
 
 function escapeHtml(str: string): string {
@@ -88,6 +93,11 @@ export async function POST(req: NextRequest) {
   const preferredDate = normalizeString(raw.preferredDate);
   const message = typeof raw.message === 'string' ? raw.message.trim() : '';
   const consent = raw.consent === true;
+  const trainingTopic = normalizeString(raw.trainingTopic);
+  const participantCount = normalizeString(raw.participantCount);
+  const deliveryFormat = normalizeString(raw.deliveryFormat);
+  const timeframe = normalizeString(raw.timeframe);
+  const learningGoals = typeof raw.learningGoals === 'string' ? raw.learningGoals.trim() : '';
 
   if (!fullName || !businessEmail || !company || !serviceNeeded || !message) {
     return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 });
@@ -97,7 +107,20 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Privacy policy consent is required.' }, { status: 400 });
   }
 
-  const fields = { fullName, businessEmail, company, phone, serviceNeeded, preferredDate, message };
+  const fields = {
+    fullName,
+    businessEmail,
+    company,
+    phone,
+    serviceNeeded,
+    preferredDate,
+    message,
+    trainingTopic,
+    participantCount,
+    deliveryFormat,
+    timeframe,
+    learningGoals,
+  };
 
   for (const [key, val] of Object.entries(fields)) {
     if (val && val.length > (LIMITS[key] ?? 500)) {
@@ -110,9 +133,23 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid email address.' }, { status: 400 });
   }
 
+  const isTraining =
+    /corporate cybersecurity|corporate training|it training/i.test(serviceNeeded) ||
+    Boolean(trainingTopic || participantCount || deliveryFormat || timeframe || learningGoals);
+
   const e = escapeHtml;
+  const trainingRows = isTraining
+    ? `
+      ${trainingTopic ? `<tr><td><strong>Training topic</strong></td><td>${e(trainingTopic)}</td></tr>` : ''}
+      ${participantCount ? `<tr><td><strong>Approx. participants</strong></td><td>${e(participantCount)}</td></tr>` : ''}
+      ${deliveryFormat ? `<tr><td><strong>Preferred format</strong></td><td>${e(deliveryFormat)}</td></tr>` : ''}
+      ${timeframe ? `<tr><td><strong>Preferred timeframe</strong></td><td>${e(timeframe)}</td></tr>` : ''}
+      ${learningGoals ? `<tr><td><strong>Learning goals</strong></td><td style="white-space:pre-wrap">${e(learningGoals)}</td></tr>` : ''}
+    `
+    : '';
+
   const html = `
-    <h2>New consultation request</h2>
+    <h2>${isTraining ? 'New training inquiry' : 'New consultation request'}</h2>
     <p>Submitted via the contact form on the ${e(COMPANY_NAME)} website.</p>
     <table cellpadding="6" style="border-collapse:collapse">
       <tr><td><strong>Name</strong></td><td>${e(fullName)}</td></tr>
@@ -121,6 +158,7 @@ export async function POST(req: NextRequest) {
       <tr><td><strong>Phone</strong></td><td>${e(phone) || '—'}</td></tr>
       <tr><td><strong>Service</strong></td><td>${e(serviceNeeded)}</td></tr>
       ${preferredDate ? `<tr><td><strong>Preferred date</strong></td><td>${e(preferredDate)}</td></tr>` : ''}
+      ${trainingRows}
     </table>
     <h3>Message</h3>
     <p style="white-space:pre-wrap">${e(message)}</p>
@@ -130,7 +168,9 @@ export async function POST(req: NextRequest) {
     from: FROM_EMAIL,
     to: TO_EMAIL,
     replyTo: businessEmail,
-    subject: `Security consultation — ${company}`,
+    subject: isTraining
+      ? `Training inquiry — ${company}`
+      : `Security consultation — ${company}`,
     html,
   });
 

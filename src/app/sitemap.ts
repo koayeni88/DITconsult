@@ -7,6 +7,7 @@ const staticRoutes = [
   '/about',
   '/contact',
   '/services',
+  '/corporate-training',
   '/industries',
   '/cloud-security',
   '/compliance',

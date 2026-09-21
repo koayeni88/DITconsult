@@ -6,7 +6,7 @@ export const COMPANY_TAGLINE = BRAND_TAGLINE;
 export const COMPANY_EMAIL = 'support@ditconsult.com';
 export const COMPANY_PHONE = '(281) 885-9497';
 export const COMPANY_DESCRIPTION =
-  'DiTconsult helps organizations assess cloud security, improve compliance readiness, and deliver risk-prioritized remediation across AWS, Azure, and Google Cloud.';
+  'DiTconsult helps organizations assess cloud security, improve compliance readiness, and deliver risk-prioritized remediation across AWS, Azure, and Google Cloud. We also provide corporate cybersecurity and IT training.';
 
 /** Set real company profile URLs when ready; leave empty to hide footer social links. */
 export const SOCIAL_LINKS = {
@@ -40,6 +40,7 @@ export const NAV_GROUPS: NavGroup[] = [
       { label: 'Incident Response Planning', href: '/incident-response' },
       { label: 'DevSecOps & Secure Architecture', href: '/devsecops' },
       { label: 'Security Awareness Training', href: '/security-awareness' },
+      { label: 'Corporate Cybersecurity & IT Training', href: '/corporate-training' },
       { label: 'Virtual CISO', href: '/virtual-ciso' },
     ],
   },
@@ -137,6 +138,16 @@ export const SERVICES: Service[] = [
     href: '/security-awareness',
   },
   {
+    id: 'corporate-training',
+    title: 'Corporate Cybersecurity & IT Training',
+    shortDescription:
+      'We provide corporate cybersecurity and IT training to help organizations strengthen employee awareness, develop technical skills, and support secure, effective use of technology.',
+    description:
+      'Corporate cybersecurity and IT training discussions tailored to your teams, goals, and technology environment.',
+    icon: 'data-protection',
+    href: '/corporate-training',
+  },
+  {
     id: 'devsecops',
     title: 'DevSecOps and Secure Architecture',
     shortDescription: 'Integrate security into CI/CD, IaC, and cloud architecture.',
@@ -159,6 +170,7 @@ export const FOOTER_SECTIONS = {
     { label: 'Cloud Security', href: '/cloud-security' },
     { label: 'AI Cloud Remediation', href: '/ai-cloud-remediation' },
     { label: 'Compliance Readiness', href: '/compliance' },
+    { label: 'Corporate Training', href: '/corporate-training' },
     { label: 'Virtual CISO', href: '/virtual-ciso' },
   ],
   company: [

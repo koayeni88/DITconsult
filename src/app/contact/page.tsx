@@ -7,7 +7,7 @@ import { COMPANY_EMAIL, COMPANY_PHONE, COMPANY_NAME } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Contact Us',
-  description: `Contact ${COMPANY_NAME} for a cybersecurity consultation—cloud security, compliance readiness, or remediation. Messages are delivered to ${COMPANY_EMAIL}.`,
+  description: `Contact ${COMPANY_NAME} for a cybersecurity consultation or corporate training inquiry—cloud security, compliance readiness, remediation, or team training. Messages are delivered to ${COMPANY_EMAIL}.`,
   alternates: { canonical: '/contact' },
 };
 
@@ -22,7 +22,7 @@ export default function ContactPage() {
               <SectionHeading
                 title="Tell us what you need help with"
                 subtitle={`Contact ${COMPANY_NAME}`}
-                description="Choose a clear reason to reach out—cloud risk, compliance readiness, or a remediation backlog—and we’ll recommend the right packaged engagement."
+                description="Choose a clear reason to reach out—cloud risk, compliance readiness, a remediation backlog, or corporate cybersecurity and IT training—and we’ll recommend the right next step."
                 centered={false}
                 size="lg"
                 as="h1"

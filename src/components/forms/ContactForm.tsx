@@ -7,6 +7,12 @@ import { motion } from 'framer-motion';
 import Button from '@/components/common/Button';
 import { SERVICES, COMPANY_NAME } from '@/lib/constants';
 import { ENGAGEMENT_PACKAGES } from '@/lib/content';
+import {
+  TRAINING_TOPIC_OPTIONS,
+  TRAINING_CATEGORIES,
+  DELIVERY_FORMAT_OPTIONS,
+  TIMEFRAME_OPTIONS,
+} from '@/lib/training';
 import { validateEmail } from '@/lib/utils';
 
 const COUNTRY_CODES = [
@@ -291,6 +297,11 @@ interface FormInputs {
   preferredDate?: string;
   consent: boolean;
   website?: string;
+  trainingTopic?: string;
+  participantCount?: string;
+  deliveryFormat?: string;
+  timeframe?: string;
+  learningGoals?: string;
 }
 
 export default function ContactForm() {
@@ -314,23 +325,38 @@ export default function ContactForm() {
 
   const searchParams = useSearchParams();
   const packageParam = searchParams.get('service') ?? '';
+  const topicParam = searchParams.get('topic') ?? '';
+  const typeParam = searchParams.get('type') ?? '';
 
   const packageToService: Record<string, string> = {
     'cloud-posture-review': 'cloud-security',
     'compliance-readiness-sprint': 'compliance',
     'remediation-acceleration': 'ai-remediation',
+    training: 'corporate-training',
   };
 
   const initialService =
     packageToService[packageParam] ||
+    packageToService[typeParam] ||
     (SERVICES.some((s) => s.id === packageParam) ? packageParam : '');
 
+  const initialTopic = TRAINING_TOPIC_OPTIONS.some((o) => o.id === topicParam) ? topicParam : '';
+
   const { register, handleSubmit, watch, formState: { errors }, reset } = useForm<FormInputs>({
-    defaultValues: { serviceNeeded: initialService, consent: false, website: '', otherService: '' },
+    defaultValues: {
+      serviceNeeded: initialService,
+      trainingTopic: initialTopic,
+      consent: false,
+      website: '',
+      otherService: '',
+      deliveryFormat: '',
+      timeframe: '',
+    },
   });
 
   const selectedService = watch('serviceNeeded');
   const isOtherService = selectedService === 'other';
+  const isTrainingInquiry = selectedService === 'corporate-training';
 
   const onSubmit = async (data: FormInputs) => {
     setSubmitting(true);
@@ -343,6 +369,19 @@ export default function ContactForm() {
       (data.serviceNeeded === 'other'
         ? `Other: ${otherDetail}`
         : SERVICES.find((s) => s.id === data.serviceNeeded)?.title || data.serviceNeeded);
+
+    const trainingTopicLabel =
+      data.trainingTopic
+        ? TRAINING_TOPIC_OPTIONS.find((o) => o.id === data.trainingTopic)?.label || data.trainingTopic
+        : '';
+    const deliveryFormatLabel =
+      data.deliveryFormat
+        ? DELIVERY_FORMAT_OPTIONS.find((o) => o.id === data.deliveryFormat)?.label || data.deliveryFormat
+        : '';
+    const timeframeLabel =
+      data.timeframe
+        ? TIMEFRAME_OPTIONS.find((o) => o.id === data.timeframe)?.label || data.timeframe
+        : '';
 
     try {
       const res = await fetch('/api/contact', {
@@ -358,6 +397,11 @@ export default function ContactForm() {
           message: data.message,
           consent: data.consent === true,
           website: data.website || '',
+          trainingTopic: trainingTopicLabel,
+          participantCount: data.participantCount || '',
+          deliveryFormat: deliveryFormatLabel,
+          timeframe: timeframeLabel,
+          learningGoals: data.learningGoals || '',
         }),
       });
 
@@ -497,8 +541,111 @@ export default function ContactForm() {
                 className={inputClass}
               />
               {errors.otherService && (
-                <p className="text-red-400 text-xs mt-1">{errors.otherService.message}</p>
+                <p className="text-red-400 text-xs mt-1" role="alert">{errors.otherService.message}</p>
               )}
+            </div>
+          )}
+
+          {isTrainingInquiry && (
+            <div className="mt-5 space-y-5 rounded-xl border border-primary-500/20 bg-primary-500/5 p-4 sm:p-5">
+              <p className="text-sm text-white/70">
+                Optional details help us understand your training preferences. Format and timeframe are preferences,
+                not commitments.
+              </p>
+
+              <div>
+                <label htmlFor="trainingTopic" className="block text-sm font-semibold text-white mb-1.5">
+                  Training topic{' '}
+                  <span className="text-white/40 font-normal">(optional)</span>
+                </label>
+                <select
+                  id="trainingTopic"
+                  {...register('trainingTopic')}
+                  className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary-500 transition-colors"
+                >
+                  <option value="" className="bg-slate-900">
+                    Select a topic area...
+                  </option>
+                  {TRAINING_CATEGORIES.map((category) => (
+                    <optgroup key={category.id} label={category.title} className="bg-slate-900">
+                      {TRAINING_TOPIC_OPTIONS.filter((o) => o.categoryId === category.id).map((option) => (
+                        <option key={option.id} value={option.id} className="bg-slate-900">
+                          {option.label}
+                        </option>
+                      ))}
+                    </optgroup>
+                  ))}
+                  <option value="other" className="bg-slate-900">
+                    Other / multiple areas
+                  </option>
+                </select>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label htmlFor="participantCount" className="block text-sm font-semibold text-white mb-1.5">
+                    Approximate participant count{' '}
+                    <span className="text-white/40 font-normal">(optional)</span>
+                  </label>
+                  <input
+                    id="participantCount"
+                    type="text"
+                    inputMode="numeric"
+                    placeholder="e.g. 25"
+                    {...register('participantCount')}
+                    className={inputClass}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="deliveryFormat" className="block text-sm font-semibold text-white mb-1.5">
+                    Preferred delivery format{' '}
+                    <span className="text-white/40 font-normal">(optional)</span>
+                  </label>
+                  <select
+                    id="deliveryFormat"
+                    {...register('deliveryFormat')}
+                    className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary-500 transition-colors"
+                  >
+                    {DELIVERY_FORMAT_OPTIONS.map((option) => (
+                      <option key={option.id || 'empty'} value={option.id} className="bg-slate-900">
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="timeframe" className="block text-sm font-semibold text-white mb-1.5">
+                  Preferred timeframe{' '}
+                  <span className="text-white/40 font-normal">(optional)</span>
+                </label>
+                <select
+                  id="timeframe"
+                  {...register('timeframe')}
+                  className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary-500 transition-colors"
+                >
+                  {TIMEFRAME_OPTIONS.map((option) => (
+                    <option key={option.id || 'empty'} value={option.id} className="bg-slate-900">
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="learningGoals" className="block text-sm font-semibold text-white mb-1.5">
+                  Learning goals{' '}
+                  <span className="text-white/40 font-normal">(optional)</span>
+                </label>
+                <textarea
+                  id="learningGoals"
+                  rows={3}
+                  placeholder="What should participants be able to do or understand afterward?"
+                  {...register('learningGoals')}
+                  className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-primary-500 transition-colors resize-none"
+                />
+              </div>
             </div>
           )}
         </div>

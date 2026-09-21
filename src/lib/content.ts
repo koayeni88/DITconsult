@@ -5,13 +5,14 @@ export const BRAND_TAGLINE = 'Secure. Transform. Protect.';
 export const HERO = {
   headline: 'Secure your cloud. Reduce your risk. Build digital trust.',
   subheadline:
-    'DiTconsult helps organizations strengthen multi-cloud security, improve compliance readiness, and remediate the risks that matter most—with clear priorities, not generic reports.',
+    'DiTconsult helps organizations strengthen multi-cloud security, improve compliance readiness, and remediate the risks that matter most—with clear priorities, not generic reports. We also provide corporate cybersecurity and IT training to help teams build practical skills.',
   ctaPrimary: 'Book a Security Consultation',
   ctaSecondary: 'Explore Our Services',
   capabilities: [
     'AWS · Azure · Google Cloud',
     'Compliance readiness advisory',
     'Risk-prioritized remediation',
+    'Corporate cybersecurity & IT training',
   ],
 };
 
