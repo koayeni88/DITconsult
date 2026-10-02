@@ -1,18 +1,43 @@
+import { existsSync, readFileSync } from 'fs';
+import { join } from 'path';
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { COMPANY_EMAIL } from '@/lib/constants';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const DEFAULT_FROM = 'DITconsult Website <website@ditconsult.com>';
+const MAIL_KEYS = ['RESEND_API_KEY', 'CONTACT_EMAIL', 'FROM_EMAIL'] as const;
 
-/** Inbox that receives every contact-form submission */
-const TO_EMAIL = (process.env.CONTACT_EMAIL?.trim() || COMPANY_EMAIL).toLowerCase();
+function cleanEnvValue(value: string): string {
+  return value.replace(/^\uFEFF/, '').replace(/\r/g, '').trim().replace(/^['"]|['"]$/g, '').trim();
+}
 
-/**
- * Verified Resend sender on ditconsult.com.
- * Never use the visitor's address as From — set replyTo instead.
- */
-const FROM_EMAIL =
-  process.env.FROM_EMAIL?.trim() || 'DITconsult Website <website@ditconsult.com>';
+/** Prefer .env / .env.local on disk so a stale Next/PM2 process.env cannot win. */
+function fileEnv(): Record<string, string> {
+  const found: Record<string, string> = {};
+  for (const filename of ['.env', '.env.local']) {
+    const path = join(process.cwd(), filename);
+    if (!existsSync(path)) continue;
+    for (const line of readFileSync(path, 'utf8').split('\n')) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#') || !trimmed.includes('=')) continue;
+      const index = trimmed.indexOf('=');
+      const key = trimmed.slice(0, index).trim();
+      if ((MAIL_KEYS as readonly string[]).includes(key)) {
+        found[key] = cleanEnvValue(trimmed.slice(index + 1));
+      }
+    }
+  }
+  return found;
+}
+
+function mailEnv() {
+  const files = fileEnv();
+  const apiKey = files.RESEND_API_KEY || cleanEnvValue(process.env['RESEND_API_KEY'] ?? '');
+  const to = (files.CONTACT_EMAIL || cleanEnvValue(process.env['CONTACT_EMAIL'] ?? '') || COMPANY_EMAIL).toLowerCase();
+  const rawFrom = files.FROM_EMAIL || cleanEnvValue(process.env['FROM_EMAIL'] ?? '');
+  const from = rawFrom.includes('@') ? rawFrom : DEFAULT_FROM;
+  return { apiKey, to, from };
+}
 
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
 /** Emails actually dispatched per IP per hour */
@@ -124,10 +149,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true });
   }
 
-  if (!process.env.RESEND_API_KEY) {
+  const { apiKey, to: TO_EMAIL, from: FROM_EMAIL } = mailEnv();
+
+  if (!apiKey) {
     console.error('[Contact API] RESEND_API_KEY is not configured');
     return NextResponse.json({ error: GENERIC_SEND_ERROR }, { status: 503 });
   }
+
+  const resend = new Resend(apiKey);
 
   const fullName = normalizeString(raw.fullName);
   const businessEmail = normalizeString(raw.businessEmail).toLowerCase();
@@ -300,8 +329,24 @@ export async function POST(req: NextRequest) {
     });
 
     if (error) {
-      console.error('[Contact API] Resend rejected send:', error.name || 'unknown', error.message || 'no message');
-      return NextResponse.json({ error: GENERIC_SEND_ERROR }, { status: 500 });
+      const resendMessage = error.message || 'no message';
+      console.error(
+        '[Contact API] Resend rejected send:',
+        error.name || 'unknown',
+        resendMessage,
+        'from_has_at=' + String(FROM_EMAIL.includes('@')),
+        'to=' + TO_EMAIL,
+        'key_len=' + String(apiKey.length)
+      );
+      const testingOnly = /only send testing emails|domain is not verified/i.test(resendMessage);
+      return NextResponse.json(
+        {
+          error: testingOnly
+            ? 'Email delivery is limited until ditconsult.com is verified in Resend. Add the SPF/DKIM records from the Resend Domains page, then try again.'
+            : GENERIC_SEND_ERROR,
+        },
+        { status: 500 }
+      );
     }
 
     rate.bucket.sends += 1;
