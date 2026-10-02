@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CTASection from '@/components/home/CTASection';
 import { getInsightBySlug, INSIGHTS } from '@/lib/insights';
+import { COMPANY_NAME, FOUNDER, SITE_URL } from '@/lib/constants';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -19,7 +20,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: article.title,
     description: article.description,
     alternates: { canonical: `/blog/${slug}` },
-    openGraph: { title: article.title, description: article.description, type: 'article' },
+    openGraph: {
+      title: article.title,
+      description: article.description,
+      type: 'article',
+      url: `${SITE_URL}/blog/${slug}`,
+      publishedTime: article.publishedAt,
+      authors: [FOUNDER.name],
+    },
   };
 }
 
@@ -28,8 +36,37 @@ export default async function InsightArticlePage({ params }: Props) {
   const article = getInsightBySlug(slug);
   if (!article) notFound();
 
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.description,
+    datePublished: article.publishedAt,
+    dateModified: article.publishedAt,
+    articleSection: article.category,
+    keywords: article.tags,
+    inLanguage: 'en-US',
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/blog/${article.slug}` },
+    author: {
+      '@type': 'Person',
+      name: FOUNDER.name,
+      jobTitle: FOUNDER.title,
+      url: `${SITE_URL}/founder`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: COMPANY_NAME,
+      url: SITE_URL,
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <article className="section-padding-sm bg-navy-900">
         <div className="container-custom max-w-3xl">
           <Breadcrumbs items={[{ label: 'Insights', href: '/blog' }, { label: article.title }]} />

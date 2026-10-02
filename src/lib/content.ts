@@ -322,6 +322,18 @@ export const INDUSTRIES: Industry[] = [
     href: '/industries/small-business',
     icon: 'business',
   },
+  {
+    id: 'cloud-teams',
+    name: 'Cloud and Platform Teams',
+    description: 'Shift security left for engineering teams running cloud-native infrastructure.',
+    outcomes: [
+      'IaC and container security review',
+      'Cloud IAM and least-privilege assessment',
+      'DevSecOps pipeline guardrail design',
+    ],
+    href: '/industries/cloud-teams',
+    icon: 'saas',
+  },
 ];
 
 export const PROCESS_STEPS: ProcessStep[] = [

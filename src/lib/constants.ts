@@ -16,7 +16,7 @@ export const SOCIAL_LINKS = {
 
 export const FOUNDER = {
   name: 'Korede Ayeni',
-  title: 'Founder & Principal Consultant',
+  title: 'President and CEO',
   linkedin: 'https://www.linkedin.com/in/korede-ayeni-10b89aa4/',
   initials: 'KA',
   /** Public career span communicated on founder/about pages */
@@ -54,6 +54,7 @@ export const NAV_GROUPS: NavGroup[] = [
       { label: 'Government Contractors', href: '/industries/government' },
       { label: 'SaaS & Cloud-Native', href: '/industries/startups' },
       { label: 'Growing Businesses', href: '/industries/small-business' },
+      { label: 'Cloud & Platform Teams', href: '/industries/cloud-teams' },
     ],
   },
   {
@@ -178,6 +179,7 @@ export const FOOTER_SECTIONS = {
     { label: 'Founder', href: '/founder' },
     { label: 'Industries', href: '/industries' },
     { label: 'Contact', href: '/contact' },
+    { label: 'Trust Center', href: '/trust-center' },
     { label: 'Privacy Policy', href: '/privacy' },
     { label: 'Terms of Service', href: '/terms' },
   ],

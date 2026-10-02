@@ -236,8 +236,10 @@ html:not(.dark) .glass-effect-lg {
   border-color: rgba(15, 23, 42, 0.12) !important;
 }
 
-/* --- Text: all text-white variants → readable dark colors --- */
-html:not(.dark) *[class*="text-white"] {
+/* --- Text: light-mode white text utilities → readable dark colors ---
+   Avoid matching Tailwind dark: variants like dark:text-white/65 */
+html:not(.dark) [class^="text-white"],
+html:not(.dark) [class*=" text-white"] {
   color: #334155 !important; /* slate-700 — body / body-muted */
 }
 
@@ -280,7 +282,13 @@ html:not(.dark) *[class*="bg-white\/"] {
   background-color: rgba(255, 255, 255, 0.85) !important;
 }
 
-/* --- Header specific --- */
+/* --- Header: light surfaces in light mode (navy-950 headers become light) --- */
+html:not(.dark) header {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  border-bottom-color: rgba(15, 23, 42, 0.08) !important;
+  color: #0f172a;
+}
+
 html:not(.dark) header[class*="bg-black"] {
   background-color: rgba(248, 250, 252, 0.92) !important;
   border-color: rgba(15, 23, 42, 0.08) !important;

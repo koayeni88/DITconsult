@@ -2,7 +2,8 @@ import { Metadata } from 'next';
 import ExecutiveDashboard from '@/components/dashboard/ExecutiveDashboard';
 
 export const metadata: Metadata = {
-  title: 'Executive Cyber Dashboard | DiTconsult',
+  title: 'Executive Cyber Dashboard',
+  alternates: { canonical: '/executive-dashboard' },
   description: 'Preview the kind of executive cybersecurity dashboard DiTconsult delivers — risk metrics, compliance gaps, remediation progress, and cloud exposure.',
 };
 

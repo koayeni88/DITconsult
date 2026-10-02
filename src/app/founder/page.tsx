@@ -5,21 +5,22 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { FOUNDER } from '@/lib/constants';
+import { CREDENTIALS, EDUCATION } from '@/lib/founder-profile';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CTASection from '@/components/home/CTASection';
 
 const highlights = [
   {
-    value: `${FOUNDER.experienceYears} years`,
-    label: 'Cybersecurity & IT experience',
+    value: 'Over 15 years',
+    label: 'Information Technology experience',
   },
   {
     value: 'Enterprise',
     label: 'Cybersecurity at General Motors',
   },
   {
-    value: 'CISM · CEH',
-    label: 'Security management & ethical hacking',
+    value: 'CISM · CEH · CJIS',
+    label: 'Security management, ethical hacking & CJIS',
   },
   {
     value: 'Army',
@@ -58,19 +59,11 @@ const keySkills = [
   'Policy Creation and Enforcement',
 ];
 
-const credentials: { name: string; org: string }[] = [
-  { name: 'Certified Information Security Manager (CISM)', org: 'ISACA' },
-  { name: 'Certified Ethical Hacker (CEH)', org: 'EC-Council' },
-  { name: 'Microsoft Certified: Security Operations Analyst Associate', org: 'Microsoft' },
-  { name: 'Microsoft Certified: Azure Administrator Associate', org: 'Microsoft' },
-  { name: 'Microsoft Certified: Security, Compliance, and Identity Fundamentals', org: 'Microsoft' },
-  { name: 'Microsoft Certified: Azure Fundamentals', org: 'Microsoft' },
-  { name: 'AWS Certified Solutions Architect – Associate', org: 'Amazon Web Services' },
-];
+const credentials = CREDENTIALS;
 
 const timeline = [
   {
-    role: 'Founder & Principal Consultant',
+    role: 'President and CEO',
     org: 'DiTconsult',
     desc: 'Built DiTconsult to deliver senior cybersecurity expertise to mid-market companies, contractors, and cloud-native teams — without large-firm overhead.',
   },
@@ -96,26 +89,7 @@ const timeline = [
   },
 ];
 
-const education = [
-  {
-    year: '2010',
-    degree: 'B.S., Computer Science',
-    focus: 'Computing foundations · software · systems',
-    level: 'Undergraduate',
-  },
-  {
-    year: '2015',
-    degree: 'M.S., Information Technology',
-    focus: 'Systems · infrastructure · enterprise IT',
-    level: 'Graduate',
-  },
-  {
-    year: '2021',
-    degree: 'M.S., Information Assurance and Cybersecurity',
-    focus: 'Security strategy · risk · enterprise defense',
-    level: 'Graduate',
-  },
-];
+const education = EDUCATION;
 
 const principles = [
   {
@@ -177,16 +151,18 @@ export default function FounderPage() {
                 variants={fadeInUp}
                 className="mt-5 max-w-xl text-xl font-semibold leading-snug text-white/90 md:text-2xl"
               >
-                <span className="gradient-text">{FOUNDER.experienceYears} years</span> of cybersecurity
-                and IT experience — brought to DiTconsult clients as direct, senior consulting.
+                Over 15 years of experience in Information Technology — brought to DiTconsult
+                clients as direct, senior consulting.
               </motion.p>
               <motion.p
                 variants={fadeInUp}
                 className="mt-5 max-w-xl text-base leading-relaxed text-white/60 md:text-lg"
               >
-                Cybersecurity Engineer. CISM, CEH, Azure, AWS, GCP, and many more credentialed. Army veteran. I
-                help organizations assess real risk, prioritize remediation, and improve posture across AWS, Azure,
-                and Google Cloud.
+                President and CEO of DiTconsult. Army veteran, and holder of the CISM (ISACA), CEH (EC-Council), CJIS
+                (FBI), four Microsoft security and Azure certifications, and the AWS Certified Solutions Architect –
+                Associate. I
+                help organizations assess real risk, prioritize remediation, and improve posture across AWS, Azure, and
+                Google Cloud.
               </motion.p>
               <motion.div variants={fadeInUp} className="mt-8 flex flex-wrap gap-3">
                 <button
@@ -242,14 +218,14 @@ export default function FounderPage() {
                       <div className="text-center">
                         <div className="text-5xl font-black tracking-tight text-white">{FOUNDER.initials}</div>
                         <div className="mt-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-primary-400">
-                          CISM · CEH
+                          CISM · CEH · CJIS
                         </div>
                       </div>
                     )}
                   </div>
                   <div className="mt-8 border-t border-white/10 pt-6 text-center">
-                    <p className="text-3xl font-black text-white">{FOUNDER.experienceYears}</p>
-                    <p className="mt-1 text-sm text-white/55">years in cybersecurity &amp; IT</p>
+                    <p className="text-3xl font-black text-white">15+</p>
+                    <p className="mt-1 text-sm text-white/55">years in Information Technology</p>
                     <p className="mt-4 text-sm leading-relaxed text-white/45">
                       Azure · AWS · GCP · CrowdStrike · Wiz
                     </p>
@@ -345,14 +321,14 @@ export default function FounderPage() {
                 </h2>
                 <div className="mt-8 space-y-6 text-base leading-relaxed text-white/65 md:text-lg">
                   <p>
-                    Experienced Cyber Security Engineer with over 10 years of proven track record in designing,
-                    implementing, and managing robust security solutions that safeguard enterprise environments against
-                    evolving cyber threats. My expertise spans security risk contextualization, tracking, and reporting,
-                    with a strong focus on scaling and automating security processes to enhance operational efficiency and
-                    resilience.
+                    Experienced Cyber Security Engineer with over 15 years of experience in Information Technology
+                    and a proven track record in designing, implementing, and managing robust security solutions that
+                    safeguard enterprise environments against evolving cyber threats. My expertise spans security risk
+                    contextualization, tracking, and reporting, with a strong focus on scaling and automating security
+                    processes to enhance operational efficiency and resilience.
                   </p>
                   <p>
-                    With over ten (10) years of experience in the IT field, I have developed various skills and
+                    With over 15 years of experience in Information Technology, I have developed various skills and
                     competencies, such as cloud infrastructure, identity management, incident response, vulnerability
                     management, and malware analysis. I have also worked across diverse sectors, including banking,
                     consulting, higher education, and research, where I have demonstrated my ability to adapt, collaborate,
@@ -432,60 +408,43 @@ export default function FounderPage() {
               <div className="container-custom max-w-4xl">
                 <div className="mb-12 max-w-2xl">
                   <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.28em] text-primary-400">
-                    Education // 2010 → 2021
+                    Education
                   </p>
                   <h2 className="mt-3 text-3xl font-black text-white md:text-4xl">
                     From computer science to{' '}
                     <span className="gradient-text">cyber defense</span>
                   </h2>
                   <p className="mt-4 text-white/55 leading-relaxed">
-                    A decade of formal study — building from computing fundamentals through enterprise IT into
-                    information assurance and cybersecurity.
+                    Formal study building from computing fundamentals through enterprise IT into information assurance
+                    and cybersecurity.
                   </p>
                 </div>
 
                 <ol className="relative space-y-0">
                   <div
-                    className="absolute left-[1.65rem] top-4 bottom-4 w-px bg-gradient-to-b from-primary-400 via-cyan-500/50 to-white/10 md:left-1/2 md:-translate-x-px"
+                    className="absolute left-[1.65rem] top-4 bottom-4 w-px bg-gradient-to-b from-primary-400 via-cyan-500/50 to-white/10"
                     aria-hidden="true"
                   />
-                  {education.map((item, index) => {
-                    const isLeft = index % 2 === 0;
-                    return (
-                      <li key={`${item.year}-${item.degree}`} className="relative pb-14 last:pb-0">
-                        <div
-                          className="absolute left-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-lg border border-primary-400/50 bg-navy-950 font-mono text-xs font-bold text-primary-300 shadow-[0_0_20px_rgba(0,102,255,0.35)] md:left-1/2 md:-translate-x-1/2"
-                          aria-hidden="true"
-                        >
-                          {String(index + 1).padStart(2, '0')}
-                        </div>
+                  {education.map((item, index) => (
+                    <li key={item.degree} className="relative pb-12 pl-16 last:pb-0">
+                      <div
+                        className="absolute left-3 top-1.5 z-10 flex h-8 w-8 items-center justify-center rounded-lg border border-primary-400/50 bg-navy-950 font-mono text-xs font-bold text-primary-300 shadow-[0_0_20px_rgba(0,102,255,0.35)]"
+                        aria-hidden="true"
+                      >
+                        {String(index + 1).padStart(2, '0')}
+                      </div>
 
-                        <div className="grid items-start gap-4 pl-16 md:grid-cols-2 md:gap-16 md:pl-0">
-                          <div className={isLeft ? 'md:pr-14 md:text-right' : 'md:order-2 md:pl-14'}>
-                            <p className="font-mono text-4xl font-black tracking-tight text-primary-400/90 md:text-5xl">
-                              {item.year}
-                            </p>
-                            <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/35">
-                              {item.level}
-                            </p>
-                          </div>
-
-                          <div className={isLeft ? 'md:pl-14' : 'md:order-1 md:pr-14 md:text-right'}>
-                            <h3 className="text-xl font-bold leading-snug text-white md:text-2xl">
-                              {item.degree}
-                            </h3>
-                            <p
-                              className={`mt-3 inline-block border border-primary-500/25 bg-primary-500/10 px-3 py-1.5 font-mono text-[11px] tracking-wide text-primary-200/90 ${
-                                isLeft ? '' : 'md:float-right'
-                              }`}
-                            >
-                              {item.focus}
-                            </p>
-                          </div>
-                        </div>
-                      </li>
-                    );
-                  })}
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/35">
+                        {item.level}
+                      </p>
+                      <h3 className="mt-1.5 text-xl font-bold leading-snug text-white md:text-2xl">
+                        {item.degree}
+                      </h3>
+                      <p className="mt-3 inline-block border border-primary-500/25 bg-primary-500/10 px-3 py-1.5 font-mono text-[11px] tracking-wide text-primary-200/90">
+                        {item.focus}
+                      </p>
+                    </li>
+                  ))}
                 </ol>
               </div>
             </section>

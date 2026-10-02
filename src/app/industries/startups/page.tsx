@@ -2,7 +2,8 @@ import { Metadata } from 'next';
 import IndustryPageTemplate from '@/components/common/IndustryPageTemplate';
 
 export const metadata: Metadata = {
-  title: 'Cybersecurity for Startups | DiTconsult',
+  title: 'Cybersecurity for Startups',
+  alternates: { canonical: '/industries/startups' },
   description: 'Security-by-design for fast-growing startups. SOC 2 readiness, cloud security, and investor-ready security posture without slowing down development.',
 };
 

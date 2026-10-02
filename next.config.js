@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
 
+const isDev = process.env.NODE_ENV === 'development';
+
+// Next's hydration bootstrap and the next-themes script are inline, so
+// script-src still needs 'unsafe-inline' until a nonce-issuing middleware is added.
+// 'unsafe-eval' is only required by the dev-mode React refresh runtime.
+const scriptSrc = ["'self'", "'unsafe-inline'", isDev ? "'unsafe-eval'" : null]
+  .filter(Boolean)
+  .join(' ');
+
 const securityHeaders = [
   // Prevent clickjacking
   { key: 'X-Frame-Options', value: 'DENY' },
@@ -22,24 +31,49 @@ const securityHeaders = [
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+      `script-src ${scriptSrc}`,
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: https:",
       "connect-src 'self' https://ipapi.co",
       "frame-src 'none'",
       "object-src 'none'",
-      "upgrade-insecure-requests",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "frame-ancestors 'none'",
+      'upgrade-insecure-requests',
     ].join('; '),
   },
 ];
 
 const nextConfig = {
+  poweredByHeader: false,
   async headers() {
     return [
       {
         source: '/(.*)',
         headers: securityHeaders,
+      },
+      {
+        source: '/.well-known/security.txt',
+        headers: [{ key: 'Content-Type', value: 'text/plain; charset=utf-8' }],
+      },
+    ];
+  },
+  async redirects() {
+    return [
+      // Consolidate on the apex domain so link equity isn't split across hosts.
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.ditconsult.com' }],
+        destination: 'https://ditconsult.com/:path*',
+        permanent: true,
+      },
+      // Retired case-study URLs
+      {
+        source: '/case-studies/:slug*',
+        destination: '/',
+        permanent: true,
       },
     ];
   },

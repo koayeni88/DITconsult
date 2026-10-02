@@ -44,7 +44,9 @@ function DropdownMenu({ group, isActive }: { group: NavGroup; isActive: (href: s
         onClick={() => setOpen((o) => !o)}
         className={cn(
           'flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
-          active ? 'text-white bg-white/10' : 'text-white/65 hover:text-white hover:bg-white/5'
+          active
+            ? 'text-slate-900 bg-slate-900/8 dark:text-white dark:bg-white/10'
+            : 'text-slate-600 hover:text-slate-900 hover:bg-slate-900/5 dark:text-white/65 dark:hover:text-white dark:hover:bg-white/5'
         )}
         aria-expanded={open}
         aria-haspopup="true"
@@ -62,7 +64,7 @@ function DropdownMenu({ group, isActive }: { group: NavGroup; isActive: (href: s
       </button>
 
       {open && (
-        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 min-w-[220px] bg-slate-950 border border-white/10 rounded-2xl shadow-xl shadow-black/60 py-2 z-50">
+        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 min-w-[220px] bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-2xl shadow-xl shadow-slate-900/10 dark:shadow-black/60 py-2 z-50">
           {group.children?.map((child) => (
             <Link
               key={child.href}
@@ -71,8 +73,8 @@ function DropdownMenu({ group, isActive }: { group: NavGroup; isActive: (href: s
               className={cn(
                 'block px-4 py-2.5 text-sm transition-colors',
                 isActive(child.href)
-                  ? 'text-primary-400 bg-primary-500/10 font-medium'
-                  : 'text-white/65 hover:text-white hover:bg-white/5'
+                  ? 'text-primary-600 dark:text-primary-400 bg-primary-500/10 font-medium'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-white/65 dark:hover:text-white dark:hover:bg-white/5'
               )}
             >
               {child.label}
@@ -108,8 +110,8 @@ export default function Header() {
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-smooth',
           isScrolled
-            ? 'bg-navy-950/90 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/20'
-            : 'bg-transparent'
+            ? 'bg-white/90 dark:bg-navy-950/90 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/10 shadow-lg shadow-slate-900/5 dark:shadow-black/20'
+            : 'bg-white/80 dark:bg-transparent backdrop-blur-md dark:backdrop-blur-none border-b border-slate-200/60 dark:border-transparent'
         )}
       >
         <nav className="container-custom py-4 flex items-center justify-between" aria-label="Main">
@@ -126,8 +128,8 @@ export default function Header() {
                   className={cn(
                     'px-3 py-2 rounded-lg text-sm font-medium transition-colors',
                     isActive(group.href!)
-                      ? 'text-white bg-white/10'
-                      : 'text-white/65 hover:text-white hover:bg-white/5'
+                      ? 'text-slate-900 bg-slate-900/8 dark:text-white dark:bg-white/10'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-900/5 dark:text-white/65 dark:hover:text-white dark:hover:bg-white/5'
                   )}
                   aria-current={isActive(group.href!) ? 'page' : undefined}
                 >

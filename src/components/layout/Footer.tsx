@@ -17,7 +17,7 @@ export default function Footer() {
       <div className="container-custom py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-10 mb-12">
           <div className="md:col-span-1">
-            <Logo className="mb-4" />
+            <Logo className="mb-4" onDark />
             <p className="text-primary-400 font-semibold text-xs uppercase tracking-widest mb-1">
               Secure. Transform. Protect.
             </p>

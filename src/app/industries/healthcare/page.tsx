@@ -2,7 +2,8 @@ import { Metadata } from 'next';
 import IndustryPageTemplate from '@/components/common/IndustryPageTemplate';
 
 export const metadata: Metadata = {
-  title: 'Cybersecurity for Healthcare | DiTconsult',
+  title: 'Cybersecurity for Healthcare',
+  alternates: { canonical: '/industries/healthcare' },
   description: 'HIPAA-compliant cybersecurity services for hospitals, clinics, and digital health companies. Protect PHI, pass audits, and respond to ransomware.',
   keywords: ['healthcare cybersecurity', 'HIPAA compliance', 'PHI security', 'hospital security', 'ransomware healthcare'],
 };

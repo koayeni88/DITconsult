@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Button from '@/components/common/Button';
-import { SERVICES, COMPANY_NAME } from '@/lib/constants';
+import { SERVICES, COMPANY_NAME, COMPANY_EMAIL } from '@/lib/constants';
 import { ENGAGEMENT_PACKAGES } from '@/lib/content';
 import {
   TRAINING_TOPIC_OPTIONS,
@@ -240,6 +240,7 @@ function CountryCodePicker({ value, onChange }: { value: string; onChange: (code
         className="flex items-center gap-1 h-full px-3 py-2.5 bg-white/10 border border-white/20 rounded-lg text-white text-sm font-medium hover:bg-white/15 focus:outline-none focus:border-primary-500 transition-colors whitespace-nowrap"
         aria-haspopup="listbox"
         aria-expanded={open}
+        aria-label={`Country calling code, currently ${value}`}
       >
         {value}
         <svg className={`w-3 h-3 text-white/50 transition-transform ${open ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -298,17 +299,30 @@ interface FormInputs {
   consent: boolean;
   website?: string;
   trainingTopic?: string;
+  otherTrainingTopic?: string;
   participantCount?: string;
   deliveryFormat?: string;
   timeframe?: string;
   learningGoals?: string;
 }
 
+/** Fields surfaced in the accessible error summary, in visual order */
+const SUMMARY_FIELDS: { field: keyof FormInputs; label: string }[] = [
+  { field: 'fullName', label: 'Full name' },
+  { field: 'businessEmail', label: 'Business email' },
+  { field: 'company', label: 'Company' },
+  { field: 'serviceNeeded', label: 'Service needed' },
+  { field: 'otherService', label: 'Inquiry details' },
+  { field: 'message', label: 'Message' },
+  { field: 'consent', label: 'Privacy policy consent' },
+];
+
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [countryCode, setCountryCode] = useState('+1');
+  const [invalidSubmits, setInvalidSubmits] = useState(0);
 
   // Auto-detect country code from IP on mount
   useEffect(() => {
@@ -327,18 +341,25 @@ export default function ContactForm() {
   const packageParam = searchParams.get('service') ?? '';
   const topicParam = searchParams.get('topic') ?? '';
   const typeParam = searchParams.get('type') ?? '';
+  const resourceParam = (searchParams.get('resource') ?? '').slice(0, 120);
+
+  const contactServiceOptions = [
+    ...SERVICES.map((service) => ({ id: service.id, title: service.title })),
+    { id: 'educational-training', title: 'Educational Training' },
+  ];
 
   const packageToService: Record<string, string> = {
     'cloud-posture-review': 'cloud-security',
     'compliance-readiness-sprint': 'compliance',
     'remediation-acceleration': 'ai-remediation',
     training: 'corporate-training',
+    educational: 'educational-training',
   };
 
   const initialService =
     packageToService[packageParam] ||
     packageToService[typeParam] ||
-    (SERVICES.some((s) => s.id === packageParam) ? packageParam : '');
+    (contactServiceOptions.some((s) => s.id === packageParam) ? packageParam : '');
 
   const initialTopic = TRAINING_TOPIC_OPTIONS.some((o) => o.id === topicParam) ? topicParam : '';
 
@@ -349,18 +370,32 @@ export default function ContactForm() {
       consent: false,
       website: '',
       otherService: '',
+      otherTrainingTopic: '',
       deliveryFormat: '',
       timeframe: '',
+      message: resourceParam ? `Please send me the "${resourceParam}" download.` : '',
     },
   });
 
   const selectedService = watch('serviceNeeded');
+  const selectedTopic = watch('trainingTopic');
   const isOtherService = selectedService === 'other';
-  const isTrainingInquiry = selectedService === 'corporate-training';
+  const isEducationalTraining = selectedService === 'educational-training';
+  const isTrainingInquiry =
+    selectedService === 'corporate-training' || isEducationalTraining;
+  const showOtherTrainingTopic =
+    isEducationalTraining && (selectedTopic === 'others' || selectedTopic === 'other');
+
+  const summaryErrors = SUMMARY_FIELDS.filter(({ field }) => errors[field]).map(({ field, label }) => ({
+    field,
+    label,
+    message: errors[field]?.message as string | undefined,
+  }));
 
   const onSubmit = async (data: FormInputs) => {
     setSubmitting(true);
     setSubmitError(null);
+    setInvalidSubmits(0);
 
     const packageLabel = ENGAGEMENT_PACKAGES.find((p) => p.id === packageParam)?.name;
     const otherDetail = data.otherService?.trim() ?? '';
@@ -368,12 +403,14 @@ export default function ContactForm() {
       packageLabel ||
       (data.serviceNeeded === 'other'
         ? `Other: ${otherDetail}`
-        : SERVICES.find((s) => s.id === data.serviceNeeded)?.title || data.serviceNeeded);
+        : contactServiceOptions.find((s) => s.id === data.serviceNeeded)?.title || data.serviceNeeded);
 
     const trainingTopicLabel =
-      data.trainingTopic
-        ? TRAINING_TOPIC_OPTIONS.find((o) => o.id === data.trainingTopic)?.label || data.trainingTopic
-        : '';
+      data.trainingTopic === 'others' || data.trainingTopic === 'other'
+        ? 'Others'
+        : data.trainingTopic
+          ? TRAINING_TOPIC_OPTIONS.find((o) => o.id === data.trainingTopic)?.label || data.trainingTopic
+          : '';
     const deliveryFormatLabel =
       data.deliveryFormat
         ? DELIVERY_FORMAT_OPTIONS.find((o) => o.id === data.deliveryFormat)?.label || data.deliveryFormat
@@ -398,6 +435,7 @@ export default function ContactForm() {
           consent: data.consent === true,
           website: data.website || '',
           trainingTopic: trainingTopicLabel,
+          otherTrainingTopic: data.otherTrainingTopic?.trim() || '',
           participantCount: data.participantCount || '',
           deliveryFormat: deliveryFormatLabel,
           timeframe: timeframeLabel,
@@ -407,13 +445,22 @@ export default function ContactForm() {
 
       if (!res.ok) {
         const json = await res.json().catch(() => ({}));
-        throw new Error((json as { error?: string }).error || 'Something went wrong.');
+        const serverMessage = (json as { error?: string }).error;
+        // Prefer the server's user-facing message; never surface stack traces or secrets.
+        throw new Error(
+          serverMessage ||
+            `We couldn't send your message right now. Please try again shortly or email ${COMPANY_EMAIL} directly.`
+        );
       }
 
       setSubmitted(true);
       reset();
     } catch (err) {
-      setSubmitError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+      setSubmitError(
+        err instanceof Error
+          ? err.message
+          : `We couldn't send your message right now. Please try again shortly or email ${COMPANY_EMAIL} directly.`
+      );
     } finally {
       setSubmitting(false);
     }
@@ -442,63 +489,136 @@ export default function ContactForm() {
     'w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-primary-500 transition-colors';
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="glass-effect rounded-2xl p-6 md:p-8 space-y-5 w-full" noValidate>
+    <form
+      onSubmit={handleSubmit(onSubmit, () => setInvalidSubmits((n) => n + 1))}
+      className="glass-effect rounded-2xl p-6 md:p-8 space-y-5 w-full"
+      aria-describedby="form-sensitive-notice"
+      noValidate
+    >
       {/* Honeypot — hidden from users */}
       <div className="absolute opacity-0 pointer-events-none h-0 overflow-hidden" aria-hidden="true">
         <label htmlFor="website">Website</label>
         <input id="website" type="text" tabIndex={-1} autoComplete="off" {...register('website')} />
       </div>
 
+      {/* Persistent live region: react-hook-form moves focus to the first invalid
+          field, so this announces the full list without competing for focus. */}
+      <div aria-live="assertive">
+        {invalidSubmits > 0 && summaryErrors.length > 0 && (
+          <div
+            id="form-error-summary"
+            tabIndex={-1}
+            className="rounded-lg border border-red-400 bg-red-50 p-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 dark:border-red-500/40 dark:bg-red-500/10"
+          >
+            <h2 className="text-sm font-semibold text-red-800 dark:text-red-200">
+              {summaryErrors.length === 1
+                ? 'There is 1 problem with your submission'
+                : `There are ${summaryErrors.length} problems with your submission`}
+            </h2>
+            <ul className="mt-2 space-y-1 text-sm text-red-700 list-disc list-inside dark:text-red-200/90">
+              {summaryErrors.map(({ field, label, message }) => (
+                <li key={field}>
+                  <a href={`#${field}`} className="underline hover:no-underline">
+                    {label}: {message}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      <p id="form-sensitive-notice" className="text-xs text-white/55 leading-relaxed">
+        Please do not include passwords, access keys, API tokens, protected health information, or incident evidence in
+        this form. We will arrange a secure channel for sensitive material. Fields marked{' '}
+        <span className="text-red-600 dark:text-red-400">*</span> are required.
+      </p>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
         {/* Full Name */}
         <div>
-          <label className="block text-sm font-semibold text-white mb-1.5">Full Name</label>
+          <label htmlFor="fullName" className="block text-sm font-semibold text-white mb-1.5">
+            Full Name <span className="text-red-600 dark:text-red-400">*</span>
+          </label>
           <input
+            id="fullName"
             type="text"
+            autoComplete="name"
             placeholder="John Doe"
+            required
+            aria-invalid={errors.fullName ? true : undefined}
+            aria-describedby={errors.fullName ? 'fullName-error' : undefined}
             {...register('fullName', { required: 'Full name is required' })}
             className={inputClass}
           />
-          {errors.fullName && <p className="text-red-400 text-xs mt-1">{errors.fullName.message}</p>}
+          {errors.fullName && (
+            <p id="fullName-error" className="text-red-600 dark:text-red-400 text-xs mt-1">
+              {errors.fullName.message}
+            </p>
+          )}
         </div>
 
         {/* Business Email */}
         <div>
-          <label className="block text-sm font-semibold text-white mb-1.5">Business Email</label>
+          <label htmlFor="businessEmail" className="block text-sm font-semibold text-white mb-1.5">
+            Business Email <span className="text-red-600 dark:text-red-400">*</span>
+          </label>
           <input
+            id="businessEmail"
             type="email"
+            autoComplete="email"
             placeholder="john@company.com"
+            required
+            aria-invalid={errors.businessEmail ? true : undefined}
+            aria-describedby={errors.businessEmail ? 'businessEmail-error' : undefined}
             {...register('businessEmail', {
               required: 'Email is required',
               validate: (value) => validateEmail(value) || 'Invalid email',
             })}
             className={inputClass}
           />
-          {errors.businessEmail && <p className="text-red-400 text-xs mt-1">{errors.businessEmail.message}</p>}
+          {errors.businessEmail && (
+            <p id="businessEmail-error" className="text-red-600 dark:text-red-400 text-xs mt-1">
+              {errors.businessEmail.message}
+            </p>
+          )}
         </div>
 
         {/* Company */}
         <div>
-          <label className="block text-sm font-semibold text-white mb-1.5">Company</label>
+          <label htmlFor="company" className="block text-sm font-semibold text-white mb-1.5">
+            Company <span className="text-red-600 dark:text-red-400">*</span>
+          </label>
           <input
+            id="company"
             type="text"
+            autoComplete="organization"
             placeholder="Your Company"
+            required
+            aria-invalid={errors.company ? true : undefined}
+            aria-describedby={errors.company ? 'company-error' : undefined}
             {...register('company', { required: 'Company is required' })}
             className={inputClass}
           />
-          {errors.company && <p className="text-red-400 text-xs mt-1">{errors.company.message}</p>}
+          {errors.company && (
+            <p id="company-error" className="text-red-600 dark:text-red-400 text-xs mt-1">
+              {errors.company.message}
+            </p>
+          )}
         </div>
 
         {/* Phone */}
         <div>
-          <label className="block text-sm font-semibold text-white mb-1.5">
+          <label htmlFor="phone" className="block text-sm font-semibold text-white mb-1.5">
             Phone <span className="text-white/40 font-normal">(optional)</span>
           </label>
           <div className="flex gap-2">
             <CountryCodePicker value={countryCode} onChange={setCountryCode} />
             <input
+              id="phone"
               type="tel"
+              autoComplete="tel"
               placeholder="555 123-4567"
               {...register('phone')}
               className="flex-1 min-w-0 bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-primary-500 transition-colors"
@@ -508,20 +628,30 @@ export default function ContactForm() {
 
         {/* Service Needed */}
         <div className="sm:col-span-2">
-          <label className="block text-sm font-semibold text-white mb-1.5">Service Needed</label>
+          <label htmlFor="serviceNeeded" className="block text-sm font-semibold text-white mb-1.5">
+            Service Needed <span className="text-red-600 dark:text-red-400">*</span>
+          </label>
           <select
+            id="serviceNeeded"
+            required
+            aria-invalid={errors.serviceNeeded ? true : undefined}
+            aria-describedby={errors.serviceNeeded ? 'serviceNeeded-error' : undefined}
             {...register('serviceNeeded', { required: 'Please select a service' })}
             className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary-500 transition-colors"
           >
             <option value="">Select a service...</option>
-            {SERVICES.map((service) => (
+            {contactServiceOptions.map((service) => (
               <option key={service.id} value={service.id} className="bg-slate-900">
                 {service.title}
               </option>
             ))}
             <option value="other" className="bg-slate-900">Other</option>
           </select>
-          {errors.serviceNeeded && <p className="text-red-400 text-xs mt-1">{errors.serviceNeeded.message}</p>}
+          {errors.serviceNeeded && (
+            <p id="serviceNeeded-error" className="text-red-600 dark:text-red-400 text-xs mt-1">
+              {errors.serviceNeeded.message}
+            </p>
+          )}
 
           {isOtherService && (
             <div className="mt-3">
@@ -532,6 +662,8 @@ export default function ContactForm() {
                 id="otherService"
                 type="text"
                 placeholder="Describe the service or topic you need help with..."
+                aria-invalid={errors.otherService ? true : undefined}
+                aria-describedby={errors.otherService ? 'otherService-error' : undefined}
                 {...register('otherService', {
                   validate: (value, formValues) =>
                     formValues.serviceNeeded !== 'other' ||
@@ -541,7 +673,9 @@ export default function ContactForm() {
                 className={inputClass}
               />
               {errors.otherService && (
-                <p className="text-red-400 text-xs mt-1" role="alert">{errors.otherService.message}</p>
+                <p id="otherService-error" className="text-red-600 dark:text-red-400 text-xs mt-1">
+                  {errors.otherService.message}
+                </p>
               )}
             </div>
           )}
@@ -575,11 +709,37 @@ export default function ContactForm() {
                       ))}
                     </optgroup>
                   ))}
-                  <option value="other" className="bg-slate-900">
-                    Other / multiple areas
-                  </option>
+                  {isEducationalTraining ? (
+                    <option value="others" className="bg-slate-900">
+                      Others
+                    </option>
+                  ) : (
+                    <option value="other" className="bg-slate-900">
+                      Other / multiple areas
+                    </option>
+                  )}
                 </select>
               </div>
+
+              {showOtherTrainingTopic && (
+                <div>
+                  <label htmlFor="otherTrainingTopic" className="block text-sm font-semibold text-white mb-1.5">
+                    Other topic details{' '}
+                    <span className="text-white/40 font-normal">(optional)</span>
+                  </label>
+                  <textarea
+                    id="otherTrainingTopic"
+                    rows={3}
+                    placeholder="Type any additional information about the topic you need"
+                    aria-describedby="otherTrainingTopic-hint"
+                    {...register('otherTrainingTopic')}
+                    className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-primary-500 transition-colors resize-none"
+                  />
+                  <p id="otherTrainingTopic-hint" className="text-white/45 text-xs mt-1.5">
+                    Use this field for any topic or details that are not listed above.
+                  </p>
+                </div>
+              )}
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
@@ -652,18 +812,24 @@ export default function ContactForm() {
 
         {/* Preferred Date */}
         <div className="sm:col-span-2">
-          <label className="block text-sm font-semibold text-white mb-1.5">
+          <label htmlFor="preferredDate" className="block text-sm font-semibold text-white mb-1.5">
             Preferred Consultation Date{' '}
             <span className="text-white/40 font-normal">(Optional)</span>
           </label>
-          <input type="date" {...register('preferredDate')} className={inputClass} />
+          <input id="preferredDate" type="date" {...register('preferredDate')} className={inputClass} />
         </div>
 
         {/* Message */}
         <div className="sm:col-span-2">
-          <label className="block text-sm font-semibold text-white mb-1.5">Message</label>
+          <label htmlFor="message" className="block text-sm font-semibold text-white mb-1.5">
+            Message <span className="text-red-600 dark:text-red-400">*</span>
+          </label>
           <textarea
+            id="message"
             placeholder="Tell us about your security needs and challenges..."
+            required
+            aria-invalid={errors.message ? true : undefined}
+            aria-describedby={errors.message ? 'message-error' : undefined}
             {...register('message', {
               required: 'Message is required',
               minLength: { value: 10, message: 'Message must be at least 10 characters' },
@@ -671,7 +837,11 @@ export default function ContactForm() {
             rows={4}
             className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-primary-500 transition-colors resize-none"
           />
-          {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message.message}</p>}
+          {errors.message && (
+            <p id="message-error" className="text-red-600 dark:text-red-400 text-xs mt-1">
+              {errors.message.message}
+            </p>
+          )}
         </div>
       </div>
 
@@ -679,6 +849,9 @@ export default function ContactForm() {
         <input
           id="consent"
           type="checkbox"
+          required
+          aria-invalid={errors.consent ? true : undefined}
+          aria-describedby={errors.consent ? 'consent-error' : undefined}
           {...register('consent', { required: 'You must agree to the privacy policy' })}
           className="mt-1 h-4 w-4 rounded border-white/30 bg-white/10 text-primary-500 focus:ring-primary-400"
         />
@@ -687,12 +860,16 @@ export default function ContactForm() {
           <a href="/privacy" className="text-primary-400 hover:underline" target="_blank" rel="noopener noreferrer">
             Privacy Policy
           </a>{' '}
-          and consent to {COMPANY_NAME} contacting me about my inquiry. <span className="text-red-400">*</span>
+          and consent to {COMPANY_NAME} contacting me about my inquiry. <span className="text-red-600 dark:text-red-400">*</span>
         </label>
       </div>
-      {errors.consent && <p className="text-red-400 text-xs">{errors.consent.message}</p>}
+      {errors.consent && (
+        <p id="consent-error" className="text-red-600 dark:text-red-400 text-xs">
+          {errors.consent.message}
+        </p>
+      )}
 
-      {submitError && <p className="text-red-400 text-sm" role="alert">{submitError}</p>}
+      {submitError && <p className="text-red-600 dark:text-red-400 text-sm" role="alert">{submitError}</p>}
 
       <Button type="submit" variant="primary" size="lg" className="w-full" disabled={submitting}>
         {submitting ? 'Sending...' : 'Submit Inquiry'}

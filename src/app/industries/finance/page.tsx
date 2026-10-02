@@ -2,7 +2,8 @@ import { Metadata } from 'next';
 import IndustryPageTemplate from '@/components/common/IndustryPageTemplate';
 
 export const metadata: Metadata = {
-  title: 'Cybersecurity for Finance & Fintech | DiTconsult',
+  title: 'Cybersecurity for Finance & Fintech',
+  alternates: { canonical: '/industries/finance' },
   description: 'PCI DSS, SOC 2, and financial services cybersecurity. Protect cardholder data, meet regulatory requirements, and secure cloud banking infrastructure.',
 };
 

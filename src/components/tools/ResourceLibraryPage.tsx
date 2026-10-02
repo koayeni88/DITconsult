@@ -341,10 +341,11 @@ export default function ResourceLibraryPage() {
                       {isOpen ? 'Hide Preview' : 'Preview →'}
                     </button>
                     <a
-                      href="/contact"
+                      href={`/contact?resource=${encodeURIComponent(resource.title)}`}
                       className="px-4 py-2 text-xs font-semibold text-white bg-primary-500 hover:bg-primary-600 rounded-lg text-center transition-colors"
                     >
-                      ↓ Download
+                      Request download
+                      <span className="sr-only"> — {resource.title}</span>
                     </a>
                   </div>
                 </div>
@@ -364,7 +365,7 @@ export default function ResourceLibraryPage() {
                     </ul>
                     <div className="mt-4 flex gap-3">
                       <a
-                        href="/contact"
+                        href={`/contact?resource=${encodeURIComponent(resource.title)}`}
                         className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-500 hover:bg-primary-600 text-white text-sm font-semibold rounded-lg transition-colors"
                       >
                         Request Full Download — {resource.fileName}

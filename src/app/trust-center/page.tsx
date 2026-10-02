@@ -3,7 +3,8 @@ import SectionHeading from '@/components/common/SectionHeading';
 import CTASection from '@/components/home/CTASection';
 
 export const metadata: Metadata = {
-  title: 'Trust Center | DiTconsult',
+  title: 'Trust Center',
+  alternates: { canonical: '/trust-center' },
   description: 'Learn how DiTconsult protects client data, maintains confidentiality, and follows professional security methodology.',
   keywords: ['trust center', 'data security', 'confidentiality', 'methodology', 'compliance'],
 };

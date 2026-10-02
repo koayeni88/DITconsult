@@ -1,29 +1,53 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { COMPANY_EMAIL, COMPANY_NAME } from '@/lib/constants';
+import { COMPANY_EMAIL } from '@/lib/constants';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-/** All contact form submissions go here */
+/** Inbox that receives every contact-form submission */
 const TO_EMAIL = (process.env.CONTACT_EMAIL?.trim() || COMPANY_EMAIL).toLowerCase();
+
+/**
+ * Verified Resend sender on ditconsult.com.
+ * Never use the visitor's address as From — set replyTo instead.
+ */
 const FROM_EMAIL =
-  process.env.FROM_EMAIL?.trim() ||
-  `${COMPANY_NAME} Contact Form <onboarding@resend.dev>`;
+  process.env.FROM_EMAIL?.trim() || 'DITconsult Website <website@ditconsult.com>';
 
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
-const RATE_LIMIT_MAX = 5;
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+/** Emails actually dispatched per IP per hour */
+const SEND_LIMIT_MAX = 5;
+/** Total requests per IP per hour, so rejected attempts can't be hammered either */
+const REQUEST_LIMIT_MAX = 30;
+const MAX_BODY_BYTES = 32_768;
 
-function isRateLimited(ip: string): boolean {
+type Bucket = { requests: number; sends: number; resetAt: number };
+const rateLimitMap = new Map<string, Bucket>();
+
+function getBucket(ip: string): Bucket {
   const now = Date.now();
-  const entry = rateLimitMap.get(ip);
-  if (!entry || now > entry.resetAt) {
-    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
-    return false;
+  const existing = rateLimitMap.get(ip);
+  if (!existing || now > existing.resetAt) {
+    const fresh: Bucket = { requests: 0, sends: 0, resetAt: now + RATE_LIMIT_WINDOW_MS };
+    rateLimitMap.set(ip, fresh);
+    return fresh;
   }
-  if (entry.count >= RATE_LIMIT_MAX) return true;
-  entry.count += 1;
-  return false;
+  return existing;
+}
+
+/**
+ * Counts the request and reports whether the caller is over either limit.
+ * Validation failures only consume the looser request budget, so a visitor who
+ * mistypes a few times is not locked out of sending for an hour.
+ */
+function checkRateLimit(ip: string): { requestsExceeded: boolean; sendsExceeded: boolean; bucket: Bucket } {
+  const bucket = getBucket(ip);
+  bucket.requests += 1;
+  return {
+    requestsExceeded: bucket.requests > REQUEST_LIMIT_MAX,
+    sendsExceeded: bucket.sends >= SEND_LIMIT_MAX,
+    bucket,
+  };
 }
 
 const LIMITS: Record<string, number> = {
@@ -36,6 +60,7 @@ const LIMITS: Record<string, number> = {
   message: 4000,
   website: 0,
   trainingTopic: 160,
+  otherTrainingTopic: 2000,
   participantCount: 40,
   deliveryFormat: 40,
   timeframe: 40,
@@ -56,13 +81,28 @@ function normalizeString(value: unknown): string {
   return value.trim().replace(/\s+/g, ' ');
 }
 
+function rowHtml(label: string, value: string, multiline = false): string {
+  if (!value) return '';
+  const style = multiline ? ' style="white-space:pre-wrap"' : '';
+  return `<tr><td style="padding:6px 12px 6px 0;vertical-align:top;color:#555555;"><strong>${escapeHtml(label)}</strong></td><td style="padding:6px 0;color:#111111;"${style}>${escapeHtml(value)}</td></tr>`;
+}
+
+const GENERIC_SEND_ERROR =
+  `We couldn't send your message right now. Please try again shortly or email ${COMPANY_EMAIL} directly.`;
+
 export async function POST(req: NextRequest) {
+  const contentLength = Number(req.headers.get('content-length') || 0);
+  if (contentLength > MAX_BODY_BYTES) {
+    return NextResponse.json({ error: 'Request too large.' }, { status: 413 });
+  }
+
   const ip =
     req.headers.get('x-forwarded-for')?.split(',')[0].trim() ??
     req.headers.get('x-real-ip') ??
     'unknown';
 
-  if (isRateLimited(ip)) {
+  const rate = checkRateLimit(ip);
+  if (rate.requestsExceeded || rate.sendsExceeded) {
     return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 });
   }
 
@@ -73,16 +113,20 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid request.' }, { status: 400 });
   }
 
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+    return NextResponse.json({ error: 'Invalid request.' }, { status: 400 });
+  }
+
   const raw = body as Record<string, unknown>;
 
-  // Honeypot — bots fill hidden fields
+  // Honeypot — bots fill hidden fields; pretend success so they stop.
   if (typeof raw.website === 'string' && raw.website.trim().length > 0) {
     return NextResponse.json({ success: true });
   }
 
   if (!process.env.RESEND_API_KEY) {
     console.error('[Contact API] RESEND_API_KEY is not configured');
-    return NextResponse.json({ error: 'Unable to send message at this time.' }, { status: 503 });
+    return NextResponse.json({ error: GENERIC_SEND_ERROR }, { status: 503 });
   }
 
   const fullName = normalizeString(raw.fullName);
@@ -94,6 +138,7 @@ export async function POST(req: NextRequest) {
   const message = typeof raw.message === 'string' ? raw.message.trim() : '';
   const consent = raw.consent === true;
   const trainingTopic = normalizeString(raw.trainingTopic);
+  const otherTrainingTopic = typeof raw.otherTrainingTopic === 'string' ? raw.otherTrainingTopic.trim() : '';
   const participantCount = normalizeString(raw.participantCount);
   const deliveryFormat = normalizeString(raw.deliveryFormat);
   const timeframe = normalizeString(raw.timeframe);
@@ -116,6 +161,7 @@ export async function POST(req: NextRequest) {
     preferredDate,
     message,
     trainingTopic,
+    otherTrainingTopic,
     participantCount,
     deliveryFormat,
     timeframe,
@@ -134,53 +180,136 @@ export async function POST(req: NextRequest) {
   }
 
   const isTraining =
-    /corporate cybersecurity|corporate training|it training/i.test(serviceNeeded) ||
-    Boolean(trainingTopic || participantCount || deliveryFormat || timeframe || learningGoals);
+    /corporate cybersecurity|corporate training|it training|educational training/i.test(serviceNeeded) ||
+    Boolean(trainingTopic || otherTrainingTopic || participantCount || deliveryFormat || timeframe || learningGoals);
 
-  const e = escapeHtml;
-  const trainingRows = isTraining
-    ? `
-      ${trainingTopic ? `<tr><td><strong>Training topic</strong></td><td>${e(trainingTopic)}</td></tr>` : ''}
-      ${participantCount ? `<tr><td><strong>Approx. participants</strong></td><td>${e(participantCount)}</td></tr>` : ''}
-      ${deliveryFormat ? `<tr><td><strong>Preferred format</strong></td><td>${e(deliveryFormat)}</td></tr>` : ''}
-      ${timeframe ? `<tr><td><strong>Preferred timeframe</strong></td><td>${e(timeframe)}</td></tr>` : ''}
-      ${learningGoals ? `<tr><td><strong>Learning goals</strong></td><td style="white-space:pre-wrap">${e(learningGoals)}</td></tr>` : ''}
-    `
-    : '';
+  const inquiryId = `dit-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
 
-  const html = `
-    <h2>${isTraining ? 'New training inquiry' : 'New consultation request'}</h2>
-    <p>Submitted via the contact form on the ${e(COMPANY_NAME)} website.</p>
-    <table cellpadding="6" style="border-collapse:collapse">
-      <tr><td><strong>Name</strong></td><td>${e(fullName)}</td></tr>
-      <tr><td><strong>Email</strong></td><td><a href="mailto:${e(businessEmail)}">${e(businessEmail)}</a></td></tr>
-      <tr><td><strong>Company</strong></td><td>${e(company)}</td></tr>
-      <tr><td><strong>Phone</strong></td><td>${e(phone) || '—'}</td></tr>
-      <tr><td><strong>Service</strong></td><td>${e(serviceNeeded)}</td></tr>
-      ${preferredDate ? `<tr><td><strong>Preferred date</strong></td><td>${e(preferredDate)}</td></tr>` : ''}
-      ${trainingRows}
-    </table>
-    <h3>Message</h3>
-    <p style="white-space:pre-wrap">${e(message)}</p>
-  `;
+  // Bracketed system-style subjects are less likely to look like spoofed personal mail
+  // when Reply-To is a different domain than From (a common contact-form pattern).
+  const subject = `[DITconsult Contact Form] Inquiry from ${fullName}`;
 
-  const { error } = await resend.emails.send({
-    from: FROM_EMAIL,
-    to: TO_EMAIL,
-    replyTo: businessEmail,
-    subject: isTraining
-      ? `Training inquiry — ${company}`
-      : `Security consultation — ${company}`,
-    html,
-  });
+  const detailRows = [
+    rowHtml('Name', fullName),
+    rowHtml('Email', businessEmail),
+    rowHtml('Phone', phone),
+    rowHtml('Company', company),
+    rowHtml('Service', serviceNeeded),
+    preferredDate ? rowHtml('Preferred consultation date', preferredDate) : '',
+    isTraining ? rowHtml('Training topic', trainingTopic) : '',
+    isTraining ? rowHtml('Other topic details', otherTrainingTopic, true) : '',
+    isTraining ? rowHtml('Approx. participants', participantCount) : '',
+    isTraining ? rowHtml('Preferred format', deliveryFormat) : '',
+    isTraining ? rowHtml('Preferred timeframe', timeframe) : '',
+    isTraining ? rowHtml('Learning goals', learningGoals, true) : '',
+  ].join('');
 
-  if (error) {
-    console.error('[Contact API] Resend error');
-    return NextResponse.json(
-      { error: `Unable to send message. Please try again or email us directly at ${COMPANY_EMAIL}.` },
-      { status: 500 }
-    );
+  const html = `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>${escapeHtml(subject)}</title>
+  </head>
+  <body style="margin:0;padding:0;background:#ffffff;color:#111111;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.5;">
+    <div style="max-width:640px;margin:0 auto;padding:24px;">
+      <p style="margin:0 0 12px;font-size:12px;letter-spacing:0.02em;color:#666666;text-transform:uppercase;">
+        Automated notification · ditconsult.com contact form
+      </p>
+      <h1 style="margin:0 0 12px;font-size:18px;font-weight:bold;color:#111111;">
+        New website inquiry
+      </h1>
+      <p style="margin:0 0 16px;color:#333333;">
+        This message was generated automatically by the DITconsult website contact form.
+        It is not a direct email from the visitor. The visitor&apos;s address is set as Reply-To
+        so you can respond with one click.
+      </p>
+      <p style="margin:0 0 20px;padding:12px 14px;background:#f7f7f7;border:1px solid #e5e5e5;color:#222222;">
+        <strong>From address:</strong> website@ditconsult.com<br />
+        <strong>Reply goes to visitor:</strong> ${escapeHtml(businessEmail)}
+      </p>
+      <h2 style="margin:0 0 8px;font-size:15px;font-weight:bold;color:#111111;">Visitor details</h2>
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;width:100%;">
+        ${detailRows}
+      </table>
+      <h2 style="margin:24px 0 8px;font-size:15px;font-weight:bold;color:#111111;">Message</h2>
+      <p style="margin:0;white-space:pre-wrap;color:#111111;">${escapeHtml(message)}</p>
+      <hr style="border:none;border-top:1px solid #dddddd;margin:28px 0;" />
+      <p style="margin:0;font-size:12px;line-height:1.6;color:#666666;">
+        DITconsult · https://ditconsult.com<br />
+        Support mailbox: ${escapeHtml(COMPANY_EMAIL)}<br />
+        Inquiry ID: ${escapeHtml(inquiryId)}
+      </p>
+    </div>
+  </body>
+</html>`;
+
+  const textParts = [
+    'AUTOMATED NOTIFICATION — ditconsult.com contact form',
+    '',
+    'This message was generated automatically by the DITconsult website contact form.',
+    'It is not a direct email from the visitor.',
+    "The visitor's address is set as Reply-To so you can respond with one click.",
+    '',
+    'From address: website@ditconsult.com',
+    `Reply goes to visitor: ${businessEmail}`,
+    '',
+    'Visitor details',
+    `Name: ${fullName}`,
+    `Email: ${businessEmail}`,
+    phone ? `Phone: ${phone}` : '',
+    company ? `Company: ${company}` : '',
+    serviceNeeded ? `Service: ${serviceNeeded}` : '',
+    preferredDate ? `Preferred consultation date: ${preferredDate}` : '',
+    isTraining && trainingTopic ? `Training topic: ${trainingTopic}` : '',
+    isTraining && otherTrainingTopic ? `Other topic details:\n${otherTrainingTopic}` : '',
+    isTraining && participantCount ? `Approx. participants: ${participantCount}` : '',
+    isTraining && deliveryFormat ? `Preferred format: ${deliveryFormat}` : '',
+    isTraining && timeframe ? `Preferred timeframe: ${timeframe}` : '',
+    isTraining && learningGoals ? `Learning goals:\n${learningGoals}` : '',
+    '',
+    'Message:',
+    message,
+    '',
+    '—',
+    'DITconsult · https://ditconsult.com',
+    `Support mailbox: ${COMPANY_EMAIL}`,
+    `Inquiry ID: ${inquiryId}`,
+  ].filter((line, index, arr) => !(line === '' && arr[index - 1] === ''));
+
+  const text = textParts.join('\n');
+
+  try {
+    const { error } = await resend.emails.send({
+      from: FROM_EMAIL,
+      to: TO_EMAIL,
+      replyTo: businessEmail,
+      subject,
+      html,
+      text,
+      headers: {
+        'X-Entity-Ref-ID': inquiryId,
+        'Auto-Submitted': 'auto-generated',
+        'X-Auto-Response-Suppress': 'All',
+        'X-Mailer': 'DITconsult Contact Form',
+      },
+      tags: [
+        { name: 'category', value: 'contact_form' },
+        { name: 'source', value: 'ditconsult_website' },
+      ],
+    });
+
+    if (error) {
+      console.error('[Contact API] Resend rejected send:', error.name || 'unknown', error.message || 'no message');
+      return NextResponse.json({ error: GENERIC_SEND_ERROR }, { status: 500 });
+    }
+
+    rate.bucket.sends += 1;
+  } catch (err) {
+    const messageText = err instanceof Error ? err.message : 'unknown error';
+    console.error('[Contact API] Unexpected send failure:', messageText);
+    return NextResponse.json({ error: GENERIC_SEND_ERROR }, { status: 500 });
   }
 
-  return NextResponse.json({ success: true });
+  return NextResponse.json({ success: true }, { status: 200 });
 }

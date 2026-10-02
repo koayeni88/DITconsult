@@ -320,10 +320,19 @@ cp .env.example .env.local
 
 | Variable | Purpose |
 |---|---|
-| `RESEND_API_KEY` | Resend API key for the contact form |
+| `RESEND_API_KEY` | Resend API key for the contact form (server-side only) |
 | `CONTACT_EMAIL` | Inbox that receives form submissions (default: support@ditconsult.com) |
-| `FROM_EMAIL` | Verified Resend sender address |
+| `FROM_EMAIL` | Verified Resend sender — default: `DITconsult Website <website@ditconsult.com>` |
 | `PORT` / `HOSTNAME` | Used by `server.js` for Hostinger-style deployments |
+
+After changing production env vars on a PM2 host, restart with:
+
+```bash
+pm2 list
+pm2 restart ditconsult --update-env
+```
+
+Confirm the process name with `pm2 list` first if it differs.
 
 ---
 
