@@ -5,7 +5,7 @@ import { CREDENTIALS, EDUCATION } from '@/lib/founder-profile';
 export const metadata: Metadata = {
   title: 'Founder',
   alternates: { canonical: '/founder' },
-  description: `Meet ${FOUNDER.name}, President and CEO of ${COMPANY_NAME}, with over 15 years of experience in Information Technology. Cloud security, compliance readiness, and remediation consulting.`,
+  description: `Meet ${FOUNDER.name}, President and CEO of ${COMPANY_NAME}, with over 15 years of experience in Information Technology. Cloud security, compliance readiness, and remediation consulting. DiTconsult does not issue certifications.`,
   keywords: [
     FOUNDER.name,
     `${COMPANY_NAME} founder`,

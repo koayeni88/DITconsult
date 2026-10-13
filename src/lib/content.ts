@@ -3,46 +3,63 @@ import { FAQ, FeaturedService, Industry, ProcessStep } from '@/types';
 export const BRAND_TAGLINE = 'Secure. Transform. Protect.';
 
 export const HERO = {
-  headline: 'Secure your cloud. Reduce your risk. Build digital trust.',
+  headline: 'Identify the risks that matter. Strengthen the controls that last.',
   subheadline:
-    'DiTconsult helps organizations strengthen multi-cloud security, improve compliance readiness, and remediate the risks that matter most—with clear priorities, not generic reports. We also provide corporate cybersecurity and IT training to help teams build practical skills.',
-  ctaPrimary: 'Book a Security Consultation',
-  ctaSecondary: 'Explore Our Services',
+    'DiTconsult advises corporations, public-sector organizations, educational institutions, and growing businesses on multi-cloud security, risk management, compliance readiness, and capability development. An engagement begins with a scoped conversation and produces defined deliverables your teams can execute.',
+  ctaPrimary: 'Schedule a Security Consultation',
+  ctaSecondary: 'Explore Our Consulting Services',
   capabilities: [
     'AWS · Azure · Google Cloud',
-    'Compliance readiness advisory',
+    'Governance and compliance readiness',
     'Risk-prioritized remediation',
-    'Corporate cybersecurity & IT training',
+    'Corporate training and institutional advisory',
   ],
 };
 
 export const CORE_STRENGTHS = [
   {
-    title: 'Multi-cloud security',
+    title: 'Security',
     description:
-      'Assess and harden AWS, Azure, and Google Cloud environments—identity, configuration, logging, and architecture.',
+      'Assess identity, configuration, logging, and architecture across AWS, Azure, and Google Cloud so exposure is visible and ranked.',
     href: '/cloud-security',
   },
   {
-    title: 'Compliance readiness',
+    title: 'Transformation',
     description:
-      'Gap analysis and remediation planning for NIST CSF, ISO 27001, SOC 2, HIPAA, PCI DSS, CMMC, and FedRAMP readiness.',
+      'Support secure cloud adoption, modernization, and practical improvements to how teams build, deploy, and operate technology.',
+    href: '/devsecops',
+  },
+  {
+    title: 'Governance',
+    description:
+      'Prepare for NIST CSF, ISO/IEC 27001, SOC 2, HIPAA, PCI DSS, CMMC, and FedRAMP-aligned reviews through gap analysis and evidence planning. We do not issue certifications.',
     href: '/compliance',
   },
   {
-    title: 'Risk-prioritized remediation',
+    title: 'Capability development',
     description:
-      'Turn findings into an actionable backlog ranked by business impact, with guided fixes and validation evidence.',
-    href: '/ai-cloud-remediation',
+      'Equip employees, technical teams, leaders, and educational institutions with practical cybersecurity and IT skills they can apply in daily work.',
+    href: '/corporate-training',
   },
 ];
 
 export const CAPABILITY_STRIP = [
-  { label: 'Multi-cloud security', detail: 'AWS, Azure, and Google Cloud' },
-  { label: 'Compliance readiness', detail: 'NIST CSF, ISO 27001, SOC 2, and more' },
-  { label: 'Risk-prioritized remediation', detail: 'Fix what matters first' },
-  { label: 'Executive clarity', detail: 'Business-ready summaries and roadmaps' },
+  { label: 'Secure', detail: 'Assess risk and strengthen preventive controls' },
+  { label: 'Transform', detail: 'Modernize cloud, delivery, and IT operations securely' },
+  { label: 'Protect', detail: 'Govern risk, prepare for review, and develop capability' },
+  { label: 'Engage', detail: 'Scoped discovery, defined deliverables, clear next step' },
 ];
+
+export const EDUCATION_CONSULTING = {
+  title: 'Educational and Institutional Consulting',
+  homepageHeadline: 'Institutional technology and cybersecurity advisory for education leaders',
+  homepageCopy:
+    'Educational consulting addresses campus technology strategy, student-data protection, IT governance, faculty development, and digital-learning infrastructure. It is complementary to corporate training, which focuses on workforce skills inside a company.',
+  distinction:
+    'Corporate training develops employee and technical-team skills. Educational consulting supports universities, schools, and education technology organizations on institutional security, governance, and capacity building. DiTconsult does not grant degrees or affiliate with any university.',
+  href: '/services/education-consulting',
+  cta: 'Discuss Institutional Consulting Needs',
+};
 
 export const CUSTOMER_PROBLEMS = [
   {
@@ -85,33 +102,73 @@ export const CUSTOMER_PROBLEMS = [
 export const FEATURED_SERVICES: FeaturedService[] = [
   {
     id: 'cloud-security',
-    title: 'Cloud Security Assessment',
-    problem: 'Misconfigurations and weak controls expose data and workloads across cloud environments.',
+    title: 'Multi-Cloud Security Consulting',
+    problem: 'Misconfigurations, weak identity controls, and inconsistent logging leave data and workloads exposed across AWS, Azure, and Google Cloud.',
     approach:
-      'Assess identity, network, logging, encryption, and configuration posture across AWS, Azure, and Google Cloud.',
-    deliverable: 'Risk-ranked findings report, remediation backlog, and executive summary.',
+      'Review identity, network, encryption, logging, and architecture so you receive one ranked view of cloud exposure.',
+    deliverable: 'Executive risk summary, technical findings, and a risk-ranked remediation backlog.',
     href: '/cloud-security',
     icon: 'cloud-lock',
   },
   {
-    id: 'compliance',
-    title: 'Compliance Readiness',
-    problem: 'Regulatory and customer requirements demand structured controls and audit-ready evidence.',
+    id: 'risk-assessment',
+    title: 'Cybersecurity Risk Assessment',
+    problem: 'Leadership needs a shared view of cyber risk that connects technical findings to business consequences and funding decisions.',
     approach:
-      'Map gaps against NIST CSF, ISO 27001, SOC 2, HIPAA, PCI DSS, CMMC, and FedRAMP readiness criteria.',
-    deliverable: 'Compliance gap matrix, control roadmap, and evidence collection guidance.',
+      'Evaluate controls, develop realistic risk scenarios, and present treatment options executives can prioritize.',
+    deliverable: 'Executive risk summary, risk register, and a treatment roadmap.',
+    href: '/security-risk-assessment',
+    icon: 'shield',
+  },
+  {
+    id: 'ai-remediation',
+    title: 'AI-Assisted Detection and Remediation',
+    problem: 'Findings accumulate faster than teams can triage, leaving high-impact issues open.',
+    approach:
+      'Use AI-assisted analysis to rank work and recommend controlled changes. Production changes require human approval.',
+    deliverable: 'Prioritized remediation plan, recommended changes, and validation documentation.',
+    href: '/ai-cloud-remediation',
+    icon: 'vulnerability',
+  },
+  {
+    id: 'compliance',
+    title: 'Governance, Risk, and Compliance Advisory',
+    problem: 'Customers and regulators expect documented controls and evidence, often faster than internal teams can produce them.',
+    approach:
+      'Map gaps to NIST CSF, ISO/IEC 27001, SOC 2, HIPAA, PCI DSS, CMMC, or FedRAMP readiness criteria selected for your scope.',
+    deliverable: 'Gap matrix, control roadmap, and evidence-collection guidance. Independent auditors issue certifications.',
     href: '/compliance',
     icon: 'compliance',
   },
   {
-    id: 'ai-remediation',
-    title: 'Risk-Prioritized Remediation',
-    problem: 'Findings accumulate faster than teams can triage and remediate with confidence.',
+    id: 'devsecops',
+    title: 'DevSecOps and Infrastructure Security',
+    problem: 'Controls added after deployment are costly and incomplete when teams ship infrastructure and software continuously.',
     approach:
-      'Prioritize by business risk and guide controlled remediation—with human approval and validation evidence.',
-    deliverable: 'Prioritized remediation plan, change recommendations, and validation reporting.',
-    href: '/ai-cloud-remediation',
-    icon: 'shield',
+      'Review architecture, CI/CD gates, infrastructure as code, and secrets handling so security fits how your teams already deliver.',
+    deliverable: 'Architecture recommendations, pipeline control blueprint, and an implementation roadmap.',
+    href: '/devsecops',
+    icon: 'devsecops',
+  },
+  {
+    id: 'vciso',
+    title: 'Virtual CISO Advisory',
+    problem: 'Growing organizations face rising security and compliance expectations before they can fund a full-time CISO.',
+    approach:
+      'Provide fractional security leadership for strategy, governance, board reporting, and program direction.',
+    deliverable: 'Security roadmap, governance cadence, and executive reporting package.',
+    href: '/virtual-ciso',
+    icon: 'ciso',
+  },
+  {
+    id: 'corporate-training',
+    title: 'Corporate Cybersecurity and IT Training',
+    problem: 'Employees and technical teams need practical skills to use technology securely, not only an annual awareness module.',
+    approach:
+      'Scope workforce programs from foundational to expert across awareness, cloud, operations, identity, governance, and responsible AI.',
+    deliverable: 'A proposed curriculum, audience plan, and training discussion—schedules and credentials are confirmed after inquiry.',
+    href: '/corporate-training',
+    icon: 'data-protection',
   },
 ];
 
@@ -128,7 +185,7 @@ export const ENGAGEMENT_PACKAGES = [
     ],
     outcome: 'A prioritized action list your engineering and leadership teams can execute.',
     href: '/cloud-security',
-    cta: 'Request this package',
+    cta: 'Request a Cybersecurity Assessment',
   },
   {
     id: 'compliance-readiness-sprint',
@@ -140,9 +197,9 @@ export const ENGAGEMENT_PACKAGES = [
       'Evidence collection guidance',
       'Remediation roadmap aligned to audit timelines',
     ],
-    outcome: 'A readiness plan that clarifies owners, gaps, and what auditors will expect.',
+    outcome: 'A readiness plan that clarifies owners, gaps, and what an independent auditor will expect.',
     href: '/compliance',
-    cta: 'Request this package',
+    cta: 'Discuss Compliance Readiness',
   },
   {
     id: 'remediation-acceleration',
@@ -154,24 +211,24 @@ export const ENGAGEMENT_PACKAGES = [
       'Human-approved change planning',
       'Validation and evidence documentation',
     ],
-    outcome: 'Faster closure of high-risk issues with audit-ready validation.',
+    outcome: 'Faster closure of high-risk issues with documented validation. No unsupervised production changes.',
     href: '/ai-cloud-remediation',
-    cta: 'Request this package',
+    cta: 'Discuss Remediation Support',
   },
 ];
 
 export const FEATURED_TOOLS = [
   {
     title: 'Cyber Risk Score',
-    description: 'Answer a short set of questions and receive a practical risk rating with recommended next actions.',
+    description: 'An illustrative questionnaire that produces a directional risk rating and suggested discussion points. It is not an audit or certification.',
     href: '/cyber-risk-score',
-    cta: 'Get your risk score',
+    cta: 'Review the risk score tool',
   },
   {
     title: 'Compliance Calculator',
-    description: 'Estimate readiness across major frameworks and identify where advisory support will help most.',
+    description: 'An illustrative readiness estimator across common frameworks. Results are educational and do not constitute an attestation.',
     href: '/compliance-calculator',
-    cta: 'Check compliance readiness',
+    cta: 'Review the readiness tool',
   },
 ];
 
@@ -253,11 +310,11 @@ export const INDUSTRIES: Industry[] = [
   {
     id: 'healthcare',
     name: 'Healthcare',
-    description: 'Protect patient data and strengthen HIPAA-aligned security controls.',
+    description: 'HIPAA Security Rule readiness, PHI access review, and incident-notification planning for care organizations.',
     outcomes: [
-      'PHI access and encryption review',
-      'HIPAA security readiness advisory',
-      'Incident notification workflow planning',
+      'PHI access, encryption, and logging review',
+      'HIPAA Security Rule gap analysis',
+      'Ransomware and notification workflow planning',
     ],
     href: '/industries/healthcare',
     icon: 'healthcare',
@@ -265,11 +322,11 @@ export const INDUSTRIES: Industry[] = [
   {
     id: 'finance',
     name: 'Financial Services',
-    description: 'Support PCI DSS and SOC 2 readiness for regulated financial operations.',
+    description: 'PCI DSS and SOC 2 readiness advisory for banks, fintechs, and payment operations.',
     outcomes: [
-      'Payment and data-flow control mapping',
-      'Third-party and vendor risk alignment',
-      'Audit evidence preparation guidance',
+      'Cardholder-data scope and control mapping',
+      'Vendor and third-party risk alignment',
+      'Audit evidence and examination prep',
     ],
     href: '/industries/finance',
     icon: 'finance',
@@ -277,11 +334,12 @@ export const INDUSTRIES: Industry[] = [
   {
     id: 'education',
     name: 'Education',
-    description: 'Secure student and institutional data across campus and cloud systems.',
+    description:
+      'Institutional cybersecurity, campus IT governance, student-data protection, and faculty development for schools, universities, and EdTech teams.',
     outcomes: [
-      'Identity and access governance review',
-      'FERPA-aware data protection planning',
-      'Security awareness for faculty and staff',
+      'Campus technology and identity review',
+      'FERPA-aware data-handling advisory',
+      'Faculty development distinct from corporate training',
     ],
     href: '/industries/education',
     icon: 'education',
@@ -289,11 +347,11 @@ export const INDUSTRIES: Industry[] = [
   {
     id: 'government',
     name: 'Government Contractors',
-    description: 'Prepare for CMMC and FedRAMP-aligned control expectations.',
+    description: 'CMMC and FedRAMP readiness advisory for contractors handling CUI. We do not issue authorizations.',
     outcomes: [
-      'Control gap assessment against contract requirements',
-      'Documentation and evidence readiness',
-      'Supply-chain security advisory',
+      'NIST SP 800-171 and CMMC gap assessment',
+      'SSP, POA&M, and evidence planning',
+      'CUI scoping and subcontractor advisory',
     ],
     href: '/industries/government',
     icon: 'government',
@@ -301,11 +359,11 @@ export const INDUSTRIES: Industry[] = [
   {
     id: 'saas',
     name: 'SaaS and Cloud-Native',
-    description: 'Build secure architecture and compliance programs that scale with product growth.',
+    description: 'Cloud architecture review and SOC 2 readiness for product teams selling to enterprise buyers.',
     outcomes: [
-      'Secure CI/CD and IaC review',
-      'Customer trust and SOC 2 readiness planning',
-      'Multi-tenant and API security advisory',
+      'CI/CD, IaC, and multi-tenant security review',
+      'SOC 2 readiness and questionnaire support',
+      'API and identity control advisory',
     ],
     href: '/industries/startups',
     icon: 'saas',
@@ -313,10 +371,10 @@ export const INDUSTRIES: Industry[] = [
   {
     id: 'smb',
     name: 'Growing Businesses',
-    description: 'Right-sized security programs for teams with limited dedicated security staff.',
+    description: 'Prioritized security programs for organizations without a dedicated security team.',
     outcomes: [
-      'Prioritized risk reduction roadmap',
-      'Policy and process templates scaled to team size',
+      'Risk-ranked identity, email, and backup roadmap',
+      'Customer and insurance questionnaire support',
       'Fractional security leadership options',
     ],
     href: '/industries/small-business',
@@ -325,11 +383,11 @@ export const INDUSTRIES: Industry[] = [
   {
     id: 'cloud-teams',
     name: 'Cloud and Platform Teams',
-    description: 'Shift security left for engineering teams running cloud-native infrastructure.',
+    description: 'IAM, infrastructure-as-code, and pipeline control review for platform engineering teams.',
     outcomes: [
       'IaC and container security review',
       'Cloud IAM and least-privilege assessment',
-      'DevSecOps pipeline guardrail design',
+      'CI/CD guardrail and detection design',
     ],
     href: '/industries/cloud-teams',
     icon: 'saas',
@@ -411,7 +469,7 @@ export const HOMEPAGE_FAQS: FAQ[] = [
   {
     question: 'What happens during the initial consultation?',
     answer:
-      'We discuss your environment, regulatory context, current challenges, and goals. Within one business day of your inquiry, DiTconsult confirms receipt and proposes a short discovery call. After that call, you receive a recommended engagement scope—such as a Cloud Posture Review, Compliance Readiness Sprint, or Remediation Acceleration package—before any commitment.',
+      'We discuss your environment, regulatory context, constraints, and goals. After you submit the form, DiTconsult confirms receipt and proposes a short discovery call. Following that call, you receive a recommended scope—such as a Cloud Posture Review, Compliance Readiness Sprint, Remediation Acceleration package, or a training discussion—before any commitment.',
   },
   {
     question: 'Which cloud platforms do you support?',
@@ -426,12 +484,17 @@ export const HOMEPAGE_FAQS: FAQ[] = [
   {
     question: 'Can you help with SOC 2, HIPAA, PCI DSS, or ISO 27001 readiness?',
     answer:
-      'Yes. DiTconsult provides compliance readiness advisory—gap analysis, control mapping, evidence guidance, and remediation planning. We do not issue certifications or attestations; auditors and certifying bodies perform those independently.',
+      'Yes. DiTconsult provides compliance readiness advisory: gap analysis, control mapping, evidence guidance, and remediation planning. We do not issue certifications, attestations, or regulatory approvals. Independent auditors and certifying bodies perform those functions.',
   },
   {
     question: 'Does DiTconsult replace an internal security team?',
     answer:
       'No. We complement your team with specialized expertise, program structure, and executive reporting—especially valuable when a full-time CISO or dedicated cloud security function is not yet in place.',
+  },
+  {
+    question: 'How is corporate training different from educational consulting?',
+    answer:
+      'Corporate training develops workforce skills inside an organization—awareness, technical competence, and leadership education. Educational and institutional consulting advises schools and universities on campus cybersecurity, IT governance, digital-learning infrastructure, and faculty development. Many institutions use both. DiTconsult does not grant degrees or affiliate with any university.',
   },
   {
     question: 'How are sensitive client data and credentials protected?',
@@ -451,12 +514,12 @@ export const HOMEPAGE_FAQS: FAQ[] = [
 ];
 
 export const FINAL_CTA = {
-  headline: 'Get a clear next step for your security posture',
+  headline: 'Start with a scoped conversation',
   description:
-    'Book a DiTconsult consultation to review your cloud, compliance, or remediation priorities. After you submit the form, we confirm receipt, schedule a short discovery call, and recommend the right packaged engagement.',
+    'Request a DiTconsult consultation to review cloud risk, governance readiness, remediation priorities, corporate training, or educational consulting. After you submit the form, we confirm receipt, hold a short discovery call, and recommend a next engagement. DiTconsult does not issue certifications.',
   bullets: [
-    'Specific reason to reach out: cloud risk, compliance readiness, or remediation backlog',
+    'State a clear reason to reach out: security, transformation, governance, or capability development',
     'What happens next: confirmation, discovery call, scoped recommendation',
-    'No passwords, access keys, or incident evidence needed in the form',
+    'Do not include passwords, access keys, or incident evidence in the form',
   ],
 };

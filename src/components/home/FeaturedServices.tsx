@@ -13,6 +13,8 @@ import {
   VulnerabilityIcon,
   IncidentResponseIcon,
   CISOIcon,
+  DevSecOpsIcon,
+  DataProtectionIcon,
 } from '@/components/icons/CybersecurityIcons';
 import CyberAtmosphere from './CyberAtmosphere';
 
@@ -23,6 +25,8 @@ const iconMap: Record<string, React.ReactNode> = {
   vulnerability: <VulnerabilityIcon />,
   'incident-response': <IncidentResponseIcon />,
   ciso: <CISOIcon />,
+  devsecops: <DevSecOpsIcon />,
+  'data-protection': <DataProtectionIcon />,
 };
 
 export default function FeaturedServices() {
@@ -32,9 +36,9 @@ export default function FeaturedServices() {
       <div className="container-custom relative z-10">
         <SectionHeading
           id="services-heading"
-          title="Core services built around our three strengths"
-          subtitle="Security Services"
-          description="Multi-cloud security, compliance readiness, and risk-prioritized remediation. Additional services remain available from the full services page."
+          title="Core consulting services with a defined scope"
+          subtitle="How we help"
+          description="Each service addresses a distinct problem. Additional advisory work, awareness training, and educational consulting are available from the full services page."
           centered
           size="lg"
         />

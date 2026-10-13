@@ -2,10 +2,10 @@ import { Metadata } from 'next';
 import CyberRiskScoreTool from '@/components/tools/CyberRiskScoreTool';
 
 export const metadata: Metadata = {
-  title: 'Free Cyber Risk Score',
+  title: 'Illustrative Cyber Risk Score',
   alternates: { canonical: '/cyber-risk-score' },
-  description: 'Answer 10 quick questions and receive a personalized cyber risk rating with actionable recommendations — free from DiTconsult.',
-  keywords: ['cyber risk score', 'free security assessment', 'cybersecurity rating', 'risk evaluation'],
+  description: 'An illustrative 10-question questionnaire that produces a directional cyber risk rating. It is not an audit, assessment, or certification.',
+  keywords: ['cyber risk score', 'illustrative security questionnaire', 'cybersecurity rating', 'risk discussion'],
 };
 
 export default function CyberRiskScorePage() {

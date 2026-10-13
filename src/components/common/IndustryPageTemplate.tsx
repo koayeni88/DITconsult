@@ -32,6 +32,14 @@ interface IndustryPageProps {
   frameworks: string[];
   stats: IndustryStat[];
   cta: string;
+  ctaHref?: string;
+  distinction?: {
+    title: string;
+    description: string;
+    links?: { label: string; href: string }[];
+  };
+  deliverables?: string[];
+  benefits?: string[];
 }
 
 export default function IndustryPageTemplate({
@@ -46,6 +54,10 @@ export default function IndustryPageTemplate({
   frameworks,
   stats,
   cta,
+  ctaHref = '/contact',
+  distinction,
+  deliverables,
+  benefits,
 }: IndustryPageProps) {
   return (
     <>
@@ -66,11 +78,11 @@ export default function IndustryPageTemplate({
               </h1>
               <p className="text-lg text-white/65 mb-8 max-w-lg">{subheadline}</p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contact" className="px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white font-semibold rounded-lg transition-colors text-center">
+                <Link href={ctaHref} className="px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white font-semibold rounded-lg transition-colors text-center">
                   {cta}
                 </Link>
                 <Link href="/cyber-risk-score" className="px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold rounded-lg transition-colors text-center">
-                  Free Risk Score →
+                  Review the Risk Score Tool →
                 </Link>
               </div>
             </div>
@@ -104,9 +116,9 @@ export default function IndustryPageTemplate({
       <section className="section-padding bg-black">
         <div className="container-custom">
           <SectionHeading
-            title={`${industry} Cybersecurity Challenges`}
-            subtitle="The Threat Landscape"
-            description={`${industry} organizations face a unique set of cyber threats and regulatory requirements. Here's what we see most.`}
+            title={`${industry} technology and security challenges`}
+            subtitle="Operating context"
+            description={`The regulatory expectations, data-sensitivity issues, and operational constraints that commonly shape advisory work for ${industry.toLowerCase()} organizations.`}
             centered
             size="md"
           />
@@ -130,9 +142,9 @@ export default function IndustryPageTemplate({
       <section className="section-padding bg-slate-950/50 border-y border-white/10">
         <div className="container-custom">
           <SectionHeading
-            title={`Our ${industry} Security Services`}
-            subtitle="Tailored Solutions"
-            description={`Purpose-built cybersecurity services for ${industry.toLowerCase()} organizations — delivered by practitioners who understand your environment.`}
+            title={`Advisory capabilities for ${industry.toLowerCase()}`}
+            subtitle="Potential engagement scope"
+            description={`The work we typically discuss with ${industry.toLowerCase()} organizations. Scope, deliverables, and sequence are confirmed after discovery.`}
             centered
             size="md"
           />
@@ -148,11 +160,64 @@ export default function IndustryPageTemplate({
         </div>
       </section>
 
+      {(deliverables?.length || benefits?.length) && (
+        <section className="section-padding bg-black">
+          <div className="container-custom grid lg:grid-cols-2 gap-12">
+            {deliverables && deliverables.length > 0 && (
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-4">Expected deliverables</h2>
+                <ul className="space-y-3">
+                  {deliverables.map((item) => (
+                    <li key={item} className="flex gap-3 text-white/70 text-sm">
+                      <span className="text-primary-400 shrink-0" aria-hidden="true">✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {benefits && benefits.length > 0 && (
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-4">Business and operational benefits</h2>
+                <ul className="space-y-3">
+                  {benefits.map((item) => (
+                    <li key={item} className="flex gap-3 text-white/70 text-sm">
+                      <span className="text-primary-400 shrink-0" aria-hidden="true">→</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {distinction && (
+        <section className="section-padding-sm bg-navy-950 border-y border-white/10">
+          <div className="container-custom max-w-3xl">
+            <h2 className="text-2xl font-bold text-white mb-3">{distinction.title}</h2>
+            <p className="text-white/65 text-sm leading-relaxed">{distinction.description}</p>
+            {distinction.links && distinction.links.length > 0 && (
+              <ul className="mt-5 space-y-2">
+                {distinction.links.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-primary-400 text-sm font-semibold hover:underline">
+                      {link.label} →
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* Frameworks */}
       <section className="section-padding bg-black">
         <div className="container-custom text-center">
           <h2 className="text-2xl font-bold text-white mb-3">Frameworks We Work With</h2>
-          <p className="text-white/50 mb-8">We help {industry.toLowerCase()} organizations meet these requirements:</p>
+          <p className="text-white/50 mb-8">Advisory support we commonly discuss with {industry.toLowerCase()} organizations:</p>
           <div className="flex flex-wrap justify-center gap-3">
             {frameworks.map((fw, i) => (
               <span key={i} className="px-4 py-2 rounded-full border border-primary-500/30 bg-primary-500/10 text-primary-400 text-sm font-semibold">
@@ -166,11 +231,11 @@ export default function IndustryPageTemplate({
       {/* Interactive tools CTA */}
       <section className="section-padding bg-slate-950/50 border-y border-white/10">
         <div className="container-custom max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl font-bold text-white mb-3">Not sure where to start?</h2>
-          <p className="text-white/60 mb-8">Use our free tools to understand your risk posture before booking a call.</p>
+          <h2 className="text-2xl font-bold text-white mb-3">Prefer an illustrative starting point?</h2>
+          <p className="text-white/60 mb-8">These website tools are educational. They are not audits, assessments, or certifications.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/cyber-risk-score" className="px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold rounded-lg transition-colors">
-              Free Risk Score Quiz
+              Review the Risk Score Tool
             </Link>
             <Link href="/compliance-calculator" className="px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold rounded-lg transition-colors">
               Compliance Calculator

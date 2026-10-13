@@ -221,11 +221,11 @@ export default function SecurityMaturityModel() {
         <motion.div initial="initial" animate="animate" variants={fadeInUp} className="text-center mb-12">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary-500/30 bg-primary-500/10 px-4 py-1.5 text-primary-400 font-semibold text-xs uppercase tracking-widest mb-4">
             <span className="h-1.5 w-1.5 rounded-full bg-primary-400 animate-pulse" />
-            Self-Assessment
+            Illustrative tool
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Security Maturity Model</h1>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Identify where your organization falls on the maturity spectrum — from Reactive to Resilient — and see a tailored improvement path.
+            Compare your organization to an illustrative scale from Reactive to Resilient. The quiz result is a discussion aid, not a formal assessment or certification.
           </p>
           <div className="flex gap-3 justify-center mt-6">
             <button onClick={() => { setMode('overview'); setResult(null); }} className={`px-5 py-2 rounded-full text-sm font-semibold border transition-all ${mode === 'overview' ? 'bg-primary-500 border-primary-500 text-white' : 'border-white/20 text-white/60 hover:text-white'}`}>
@@ -338,7 +338,7 @@ export default function SecurityMaturityModel() {
         {mode === 'quiz' && result !== null && (
           <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} className={`bg-gradient-to-br ${LEVELS[result - 1].bg} border ${LEVELS[result - 1].border} rounded-2xl p-8`}>
             <div className="text-center mb-8">
-              <p className="text-white/40 text-xs uppercase tracking-widest mb-2">Your Security Maturity Level</p>
+              <p className="text-white/40 text-xs uppercase tracking-widest mb-2">Illustrative maturity level</p>
               <span className="text-6xl">{LEVELS[result - 1].icon}</span>
               <h2 className="text-3xl font-extrabold text-white mt-3">Level {result}: {LEVELS[result - 1].label}</h2>
               <p className="text-white/60 italic mt-1">"{LEVELS[result - 1].tagline}"</p>
@@ -367,7 +367,7 @@ export default function SecurityMaturityModel() {
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button asLink href="/contact" variant="primary" className="flex-1 justify-center">Get a Maturity Improvement Plan</Button>
+              <Button asLink href="/contact" variant="primary" className="flex-1 justify-center">Discuss a scoped maturity review</Button>
               <Button onClick={resetQuiz} variant="secondary" className="flex-1 justify-center">Retake Quiz</Button>
             </div>
           </motion.div>

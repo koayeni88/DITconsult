@@ -165,11 +165,11 @@ export default function ExecutiveDashboard() {
         <motion.div initial="initial" animate="animate" variants={fadeInUp} className="text-center mb-10">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary-500/30 bg-primary-500/10 px-4 py-1.5 text-primary-400 font-semibold text-xs uppercase tracking-widest mb-4">
             <span className="h-1.5 w-1.5 rounded-full bg-primary-400 animate-pulse" />
-            Sample Preview
+            Illustrative sample
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Executive Cyber Dashboard</h1>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            This is a preview of the executive-level reporting DiTconsult delivers to clients — risk metrics, compliance posture, remediation tracking, and cloud exposure in one view.
+            Sample reporting format for risk metrics, compliance posture, remediation tracking, and cloud exposure. Figures are illustrative and do not represent a live client environment.
           </p>
         </motion.div>
 
@@ -369,14 +369,14 @@ export default function ExecutiveDashboard() {
 
         {/* CTA */}
         <div className="mt-10 glass-effect-lg rounded-2xl p-8 text-center border border-primary-500/20">
-          <h3 className="text-2xl font-bold text-white mb-3">Want This Dashboard For Your Organization?</h3>
-          <p className="text-white/60 mb-6">DiTconsult delivers executive-level cybersecurity reporting tailored to your environment, compliance requirements, and business objectives.</p>
+          <h3 className="text-2xl font-bold text-white mb-3">Want reporting scoped to your organization?</h3>
+          <p className="text-white/60 mb-6">DiTconsult can prepare executive reporting from a scoped engagement. This sample is a format preview, not a live assessment.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="/contact" className="px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white font-semibold rounded-lg transition-colors">
-              Schedule a Dashboard Demo
+              Discuss executive reporting
             </a>
             <a href="/cyber-risk-score" className="px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold rounded-lg transition-colors">
-              Get Your Free Risk Score
+              Try the illustrative risk score
             </a>
           </div>
         </div>

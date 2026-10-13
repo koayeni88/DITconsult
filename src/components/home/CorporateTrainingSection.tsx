@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Button from '@/components/common/Button';
 import SectionHeading from '@/components/common/SectionHeading';
 import { TRAINING_PAGE, TRAINING_CATEGORIES, FLAGSHIP_WORKSHOPS } from '@/lib/training';
+import { EDUCATION_CONSULTING } from '@/lib/content';
 import CyberAtmosphere from './CyberAtmosphere';
 
 export default function CorporateTrainingSection() {
@@ -64,9 +65,24 @@ export default function CorporateTrainingSection() {
               href="/contact?service=corporate-training"
               className="inline-block mt-5 text-sm font-semibold text-primary-400 hover:text-primary-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 rounded"
             >
-              Request a Training Proposal →
+              Request a Corporate Training Proposal →
             </Link>
           </aside>
+        </div>
+
+        <div className="mt-12 cyber-panel p-7 md:p-8">
+          <p className="text-xs font-semibold uppercase tracking-widest text-gold-400 mb-2">Complementary offering</p>
+          <h3 className="text-xl font-bold text-white mb-3">{EDUCATION_CONSULTING.title}</h3>
+          <p className="text-sm text-white/65 leading-relaxed max-w-3xl">{EDUCATION_CONSULTING.homepageCopy}</p>
+          <p className="mt-3 text-sm text-white/50 leading-relaxed max-w-3xl">{EDUCATION_CONSULTING.distinction}</p>
+          <div className="mt-6 flex flex-col sm:flex-row gap-4">
+            <Button asLink href={EDUCATION_CONSULTING.href} variant="secondary" size="md">
+              Explore Educational Consulting
+            </Button>
+            <Button asLink href="/contact?service=educational-consulting" variant="primary" size="md">
+              {EDUCATION_CONSULTING.cta}
+            </Button>
+          </div>
         </div>
       </div>
     </section>

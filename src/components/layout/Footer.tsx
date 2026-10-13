@@ -22,13 +22,13 @@ export default function Footer() {
               Secure. Transform. Protect.
             </p>
             <p className="text-white/50 text-sm leading-relaxed">
-              Multi-cloud security, compliance readiness, and risk-prioritized remediation for growing organizations.
+              Cybersecurity consulting, multi-cloud assessment, governance readiness, corporate training, and educational advisory. DiTconsult does not issue certifications.
             </p>
             <Link
               href="/contact"
               className="inline-block mt-4 text-sm font-semibold text-primary-400 hover:text-primary-300 transition-colors"
             >
-              Book a consultation →
+              Request a consultation →
             </Link>
           </div>
 

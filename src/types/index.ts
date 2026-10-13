@@ -8,6 +8,7 @@ export interface NavGroup {
   label: string;
   href?: string;
   children?: NavLink[];
+  variant?: 'dropdown' | 'mega';
 }
 
 export interface Service {
@@ -68,6 +69,10 @@ export interface ServicePageData {
   frameworks: string[];
   platforms: string[];
   faqs: FAQ[];
+  benefits?: string[];
+  nextStep?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
 }
 
 export interface FormData {

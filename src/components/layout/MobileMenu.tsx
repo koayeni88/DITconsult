@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import Link from 'next/link';
 import { NAV_GROUPS } from '@/lib/constants';
+import { DIVISIONS } from '@/lib/divisions';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -14,12 +15,19 @@ interface MobileMenuProps {
 
 export default function MobileMenu({ isOpen, onClose, pathname }: MobileMenuProps) {
   const panelRef = useRef<HTMLDivElement>(null);
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
+  const [openDivision, setOpenDivision] = useState<string | null>(null);
+  const servicesId = useId();
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) {
+      setOpenGroup(null);
+      setOpenDivision(null);
+      return;
+    }
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
@@ -54,41 +62,124 @@ export default function MobileMenu({ isOpen, onClose, pathname }: MobileMenuProp
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-[4.5rem] left-0 right-0 bg-navy-950/98 backdrop-blur-xl border-b border-white/10 lg:hidden z-40 max-h-[calc(100vh-5rem)] overflow-y-auto"
+            className="fixed top-[4.5rem] left-0 right-0 bg-navy-950/98 backdrop-blur-xl border-b border-white/10 lg:hidden z-40 max-h-[calc(100vh-5rem)] overflow-y-auto overflow-x-hidden"
           >
-            <div className="container-custom py-5 flex flex-col gap-4">
-              {NAV_GROUPS.map((group) =>
-                group.children ? (
-                  <div key={group.label}>
-                    <div className="text-xs font-semibold text-white/35 uppercase tracking-widest mb-1.5 px-4">
-                      {group.label}
+            <div className="container-custom py-5 flex flex-col gap-2">
+              {NAV_GROUPS.map((group) => {
+                if (group.variant === 'mega') {
+                  const expanded = openGroup === group.label;
+                  const panelId = `${servicesId}-services`;
+                  return (
+                    <div key={group.label}>
+                      <button
+                        type="button"
+                        onClick={() => setOpenGroup(expanded ? null : group.label)}
+                        className="w-full flex items-center justify-between py-3 px-4 rounded-xl text-white/80 hover:text-white hover:bg-white/5 min-h-[44px] text-left font-medium"
+                        aria-expanded={expanded}
+                        aria-controls={panelId}
+                      >
+                        {group.label}
+                        <span aria-hidden="true">{expanded ? '−' : '+'}</span>
+                      </button>
+                      {expanded && (
+                        <div id={panelId} className="pl-2 pb-2">
+                          <Link
+                            href="/services"
+                            onClick={onClose}
+                            className="block py-2.5 px-4 rounded-xl text-sm text-primary-300 min-h-[44px] flex items-center"
+                          >
+                            All services
+                          </Link>
+                          {DIVISIONS.map((division) => {
+                            const divisionOpen = openDivision === division.id;
+                            const divisionPanelId = `${servicesId}-${division.id}`;
+                            return (
+                              <div key={division.id}>
+                                <button
+                                  type="button"
+                                  onClick={() => setOpenDivision(divisionOpen ? null : division.id)}
+                                  className="w-full flex items-center justify-between py-2.5 px-4 rounded-xl text-sm text-white/75 hover:text-white hover:bg-white/5 min-h-[44px] text-left"
+                                  aria-expanded={divisionOpen}
+                                  aria-controls={divisionPanelId}
+                                >
+                                  {division.title}
+                                  <span aria-hidden="true">{divisionOpen ? '−' : '+'}</span>
+                                </button>
+                                {divisionOpen && (
+                                  <div id={divisionPanelId} className="pl-3">
+                                    <Link
+                                      href={division.href}
+                                      onClick={onClose}
+                                      className="block py-2.5 px-4 rounded-xl text-sm text-primary-300 min-h-[44px] flex items-center"
+                                    >
+                                      {division.shortTitle} overview
+                                    </Link>
+                                    {division.menuLinks.map((link) => (
+                                      <Link
+                                        key={`${division.id}-${link.href}-${link.label}`}
+                                        href={link.href}
+                                        onClick={onClose}
+                                        className="block py-2.5 px-4 rounded-xl text-sm text-white/60 hover:text-white min-h-[44px] flex items-center"
+                                      >
+                                        {link.label}
+                                      </Link>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
-                    <div className="flex flex-col gap-0.5">
-                      {group.children.map((link) => (
-                        <Link
-                          key={link.href}
-                          href={link.href}
-                          onClick={onClose}
-                          className={cn(
-                            'block py-2.5 px-4 rounded-xl text-sm font-medium transition-colors min-h-[44px] flex items-center',
-                            isActive(link.href)
-                              ? 'text-white bg-primary-500/20 border border-primary-500/30'
-                              : 'text-white/60 hover:text-white hover:bg-white/5'
-                          )}
-                          aria-current={isActive(link.href) ? 'page' : undefined}
-                        >
-                          {link.label}
-                        </Link>
-                      ))}
+                  );
+                }
+
+                if (group.children) {
+                  const expanded = openGroup === group.label;
+                  const panelId = `${servicesId}-${group.label}`;
+                  return (
+                    <div key={group.label}>
+                      <button
+                        type="button"
+                        onClick={() => setOpenGroup(expanded ? null : group.label)}
+                        className="w-full flex items-center justify-between py-3 px-4 rounded-xl text-white/80 hover:text-white hover:bg-white/5 min-h-[44px] text-left font-medium"
+                        aria-expanded={expanded}
+                        aria-controls={panelId}
+                      >
+                        {group.label}
+                        <span aria-hidden="true">{expanded ? '−' : '+'}</span>
+                      </button>
+                      {expanded && (
+                        <div id={panelId} className="flex flex-col">
+                          {group.children.map((link) => (
+                            <Link
+                              key={link.href}
+                              href={link.href}
+                              onClick={onClose}
+                              className={cn(
+                                'block py-2.5 px-4 rounded-xl text-sm min-h-[44px] flex items-center',
+                                isActive(link.href.split('#')[0])
+                                  ? 'text-white bg-primary-500/20'
+                                  : 'text-white/60 hover:text-white hover:bg-white/5'
+                              )}
+                            >
+                              {link.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ) : (
+                  );
+                }
+
+                return (
                   <Link
                     key={group.href}
                     href={group.href!}
                     onClick={onClose}
                     className={cn(
-                      'block py-3 px-4 rounded-xl font-medium transition-colors min-h-[44px] flex items-center',
+                      'block py-3 px-4 rounded-xl font-medium min-h-[44px] flex items-center',
                       isActive(group.href!)
                         ? 'text-white bg-primary-500/20 border border-primary-500/30'
                         : 'text-white/70 hover:text-white hover:bg-white/5'
@@ -97,8 +188,8 @@ export default function MobileMenu({ isOpen, onClose, pathname }: MobileMenuProp
                   >
                     {group.label}
                   </Link>
-                )
-              )}
+                );
+              })}
               <Link
                 href="/contact"
                 onClick={onClose}

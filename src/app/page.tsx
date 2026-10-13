@@ -3,7 +3,7 @@ import HeroSection from '@/components/home/HeroSection';
 import CapabilityStrip from '@/components/home/CapabilityStrip';
 import CoreStrengths from '@/components/home/CoreStrengths';
 import CustomerProblems from '@/components/home/CustomerProblems';
-import FeaturedServices from '@/components/home/FeaturedServices';
+import DivisionCards from '@/components/home/DivisionCards';
 import CorporateTrainingSection from '@/components/home/CorporateTrainingSection';
 import PackagedEngagements from '@/components/home/PackagedEngagements';
 import FeaturedTools from '@/components/home/FeaturedTools';
@@ -18,7 +18,7 @@ import { HOMEPAGE_FAQS } from '@/lib/content';
 import { COMPANY_NAME, COMPANY_DESCRIPTION } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Cybersecurity & Cloud Security Consulting',
+  title: 'Cybersecurity and Cloud Security Consulting',
   description: COMPANY_DESCRIPTION,
   keywords: [
     'DiTconsult',
@@ -29,11 +29,14 @@ export const metadata: Metadata = {
     'Google Cloud security assessment',
     'multi-cloud security',
     'compliance readiness consulting',
+    'virtual CISO services',
+    'corporate cybersecurity training',
+    'educational consulting',
     'risk-prioritized remediation',
   ],
   alternates: { canonical: '/' },
   openGraph: {
-    title: `${COMPANY_NAME} | Cybersecurity & Cloud Security Consulting`,
+    title: `${COMPANY_NAME} | Cybersecurity and Cloud Security Consulting`,
     description: COMPANY_DESCRIPTION,
     url: 'https://ditconsult.com',
     images: [{ url: '/logo.png', width: 1024, height: 390, alt: `${COMPANY_NAME} logo` }],
@@ -61,7 +64,7 @@ export default function Home() {
       <CapabilityStrip />
       <CoreStrengths />
       <CustomerProblems />
-      <FeaturedServices />
+      <DivisionCards />
       <CorporateTrainingSection />
       <PackagedEngagements />
       <FeaturedTools />

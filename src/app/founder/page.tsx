@@ -20,7 +20,7 @@ const highlights = [
   },
   {
     value: 'CISM · CEH · CJIS',
-    label: 'Security management, ethical hacking & CJIS',
+    label: 'Security management, ethical hacking, and CJIS',
   },
   {
     value: 'Army',
@@ -65,22 +65,22 @@ const timeline = [
   {
     role: 'President and CEO',
     org: 'DiTconsult',
-    desc: 'Built DiTconsult to deliver senior cybersecurity expertise to mid-market companies, contractors, and cloud-native teams — without large-firm overhead.',
+    desc: 'Leads DiTconsult’s cybersecurity consulting practice for mid-market companies, contractors, and cloud-native teams.',
   },
   {
     role: 'Cybersecurity Engineer',
     org: 'General Motors',
-    desc: 'Designing, implementing, and managing security solutions that safeguard enterprise environments — with focus on risk contextualization, tracking, reporting, and automating security processes.',
+    desc: 'Designs, implements, and manages security solutions for enterprise environments, with focus on risk contextualization, tracking, reporting, and automating security processes.',
   },
   {
     role: 'Assistant Professor',
     org: 'Lone Star College',
-    desc: 'Taught and mentored students in computing and technology programs — translating technical concepts into practical, classroom-ready instruction.',
+    desc: 'Taught and mentored students in computing and technology programs, translating technical concepts into classroom instruction.',
   },
   {
     role: 'Security and Systems Administrator',
     org: 'DIT Services',
-    desc: 'Hands-on systems and security administration across infrastructure, access management, and day-to-day defensive operations.',
+    desc: 'Systems and security administration across infrastructure, access management, and day-to-day defensive operations.',
   },
   {
     role: 'IT Manager',
@@ -93,20 +93,20 @@ const education = EDUCATION;
 
 const principles = [
   {
-    title: 'Results over reports',
-    desc: 'Actionable recommendations your team can implement — not shelfware binders.',
+    title: 'Recommendations you can assign',
+    desc: 'Findings are ranked and written so your team can own the next step.',
   },
   {
-    title: 'Advisor, not vendor',
-    desc: 'Guidance aligned to your risk and budget — not tool quotas or unnecessary upsells.',
+    title: 'Independent advice',
+    desc: 'Guidance aligned to your risk and budget, not to a product quota.',
   },
   {
-    title: 'Plain-language risk',
-    desc: 'Executives and engineers get the same truth, explained in terms each can act on.',
+    title: 'One risk story',
+    desc: 'Executives and engineers receive the same findings, written for each audience.',
   },
   {
-    title: 'Speed with rigor',
-    desc: 'Focused engagements measured in weeks, with depth where it changes outcomes.',
+    title: 'Scoped, time-bound work',
+    desc: 'Engagements are focused on agreed scope, with deeper work where it changes decisions.',
   },
 ];
 
@@ -151,18 +151,17 @@ export default function FounderPage() {
                 variants={fadeInUp}
                 className="mt-5 max-w-xl text-xl font-semibold leading-snug text-white/90 md:text-2xl"
               >
-                Over 15 years of experience in Information Technology — brought to DiTconsult
-                clients as direct, senior consulting.
+                Over 15 years of experience in Information Technology, applied at DiTconsult
+                as direct senior consulting.
               </motion.p>
               <motion.p
                 variants={fadeInUp}
                 className="mt-5 max-w-xl text-base leading-relaxed text-white/60 md:text-lg"
               >
-                President and CEO of DiTconsult. Army veteran, and holder of the CISM (ISACA), CEH (EC-Council), CJIS
-                (FBI), four Microsoft security and Azure certifications, and the AWS Certified Solutions Architect –
-                Associate. I
-                help organizations assess real risk, prioritize remediation, and improve posture across AWS, Azure, and
-                Google Cloud.
+                President and CEO of DiTconsult. Army veteran. Credentials include CISM (ISACA), CEH (EC-Council), CJIS
+                (FBI), four Microsoft security and Azure certifications, and AWS Certified Solutions Architect –
+                Associate. I help organizations assess risk, prioritize remediation, and strengthen controls across AWS,
+                Azure, and Google Cloud.
               </motion.p>
               <motion.div variants={fadeInUp} className="mt-8 flex flex-wrap gap-3">
                 <button
@@ -178,7 +177,7 @@ export default function FounderPage() {
                   href="/contact"
                   className="rounded-xl border border-white/15 px-6 py-3 font-semibold text-white/90 transition-colors hover:border-primary-500/40 hover:text-white"
                 >
-                  Book a consultation
+                  Request a consultation
                 </Link>
                 <a
                   href={FOUNDER.linkedin}
@@ -321,24 +320,19 @@ export default function FounderPage() {
                 </h2>
                 <div className="mt-8 space-y-6 text-base leading-relaxed text-white/65 md:text-lg">
                   <p>
-                    Experienced Cyber Security Engineer with over 15 years of experience in Information Technology
-                    and a proven track record in designing, implementing, and managing robust security solutions that
-                    safeguard enterprise environments against evolving cyber threats. My expertise spans security risk
-                    contextualization, tracking, and reporting, with a strong focus on scaling and automating security
-                    processes to enhance operational efficiency and resilience.
+                    Cybersecurity engineer with over 15 years of experience in Information Technology. Work includes
+                    designing, implementing, and managing security solutions for enterprise environments, with emphasis
+                    on risk contextualization, tracking, reporting, and automating security processes.
                   </p>
                   <p>
-                    With over 15 years of experience in Information Technology, I have developed various skills and
-                    competencies, such as cloud infrastructure, identity management, incident response, vulnerability
-                    management, and malware analysis. I have also worked across diverse sectors, including banking,
-                    consulting, higher education, and research, where I have demonstrated my ability to adapt, collaborate,
-                    and innovate.
+                    Skills include cloud infrastructure, identity management, incident response, vulnerability
+                    management, and malware analysis. Experience spans banking, consulting, higher education, and
+                    research.
                   </p>
                   <p>
-                    In my enterprise role at General Motors, my mission is to leverage my cybersecurity skills and expertise
-                    to protect GM&apos;s systems, networks, and information, and to support the company&apos;s strategic
-                    goals and vision. Through DiTconsult, I bring that same discipline to organizations that need senior
-                    security guidance without large-firm overhead.
+                    In an enterprise cybersecurity role at General Motors, the work is to protect systems, networks, and
+                    information in support of the company&apos;s objectives. Through DiTconsult, that same discipline is
+                    applied to organizations that need senior security guidance.
                   </p>
                 </div>
               </div>
@@ -352,7 +346,7 @@ export default function FounderPage() {
                     Technical depth across cloud, infrastructure, and security
                   </h2>
                   <p className="mt-4 text-white/55">
-                    Multi-cloud platforms, enterprise infrastructure, identity, endpoint security, and modern cloud
+                    Multi-cloud platforms, enterprise infrastructure, identity, endpoint security, and cloud
                     security tooling.
                   </p>
                 </div>
@@ -378,7 +372,7 @@ export default function FounderPage() {
                     Professional <span className="gradient-text">background</span>
                   </h2>
                   <p className="mx-auto mt-4 max-w-xl text-white/55">
-                    From IT operations and security administration to enterprise cloud security and founding DiTconsult —
+                    From IT operations and security administration to enterprise cloud security and founding DiTconsult,
                     spanning {FOUNDER.experienceYears} years across banking, consulting, higher education, research, and
                     enterprise.
                   </p>
@@ -415,7 +409,7 @@ export default function FounderPage() {
                     <span className="gradient-text">cyber defense</span>
                   </h2>
                   <p className="mt-4 text-white/55 leading-relaxed">
-                    Formal study building from computing fundamentals through enterprise IT into information assurance
+                    Formal study from computing fundamentals through enterprise IT into information assurance
                     and cybersecurity.
                   </p>
                 </div>
@@ -454,10 +448,11 @@ export default function FounderPage() {
                 <div className="mx-auto max-w-2xl text-center">
                   <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary-400">Credentials</p>
                   <h2 className="mt-3 text-3xl font-bold text-white md:text-4xl">
-                    Certifications that back the experience
+                    Named professional credentials
                   </h2>
                   <p className="mt-4 text-white/55">
-                    Professional credentials spanning security management, ethical hacking, Azure, and AWS.
+                    Credentials spanning security management, ethical hacking, CJIS (FBI), Microsoft security and Azure,
+                    and AWS.
                   </p>
                 </div>
                 <ul className="mx-auto mt-12 max-w-3xl divide-y divide-white/10 border-y border-white/10">

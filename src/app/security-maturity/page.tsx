@@ -2,9 +2,9 @@ import { Metadata } from 'next';
 import SecurityMaturityPage from '@/components/tools/SecurityMaturityModel';
 
 export const metadata: Metadata = {
-  title: 'Security Maturity Model',
+  title: 'Illustrative Security Maturity Model',
   alternates: { canonical: '/security-maturity' },
-  description: 'Identify your organization\'s security maturity level — Reactive, Developing, Managed, Optimized, or Resilient — and get a tailored improvement roadmap.',
+  description: 'An illustrative maturity model from Reactive to Resilient. The quiz result is a discussion aid, not a formal assessment or certification.',
 };
 
 export default function MaturityPage() {

@@ -14,7 +14,7 @@ export const INSIGHTS: InsightArticle[] = [
     slug: 'multi-cloud-security-assessment-guide',
     title: 'What to Expect from a Multi-Cloud Security Assessment',
     description:
-      'A practical overview of how cloud security assessments work across AWS, Azure, and Google Cloud—and what deliverables you should expect.',
+      'How a multi-cloud security assessment typically works across AWS, Azure, and Google Cloud, and which deliverables to expect from a scoped engagement.',
     category: 'Cloud Security',
     publishedAt: '2026-03-01',
     readTime: '8 min read',

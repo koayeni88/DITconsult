@@ -8,7 +8,7 @@ import { COMPANY_NAME, COMPANY_TAGLINE, FOUNDER } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'About',
-  description: `${COMPANY_NAME} provides practical, risk-based cybersecurity consulting for multi-cloud security, compliance readiness, and risk-prioritized remediation.`,
+  description: `${COMPANY_NAME} provides risk-based cybersecurity and IT consulting for multi-cloud security, governance readiness, remediation planning, corporate training, and educational advisory.`,
   alternates: { canonical: '/about' },
 };
 
@@ -22,7 +22,7 @@ export default function AboutPage() {
             <p className="text-gold-400 text-xs font-semibold uppercase tracking-widest mb-3">{COMPANY_TAGLINE}</p>
             <SectionHeading
               title="About DiTconsult"
-              description="We help organizations see real security risk, prioritize what matters, and improve posture with work their teams can execute."
+              description="DiTconsult is a professionally managed cybersecurity and IT consulting firm. We help organizations with complex security, governance, technology, and workforce-development requirements make informed decisions and execute scoped work."
               centered={false}
               size="lg"
               as="h1"
@@ -31,38 +31,68 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section-padding-sm bg-navy-900">
+      <section id="overview" className="section-padding-sm bg-navy-900 scroll-mt-28">
         <div className="container-custom grid lg:grid-cols-2 gap-12">
           <div>
             <h2 className="text-2xl font-bold text-white mb-4">Why we exist</h2>
             <p className="text-white/70 leading-relaxed mb-4">
-              Many organizations operate across AWS, Azure, and Google Cloud with rising compliance
-              expectations and limited dedicated security staff. Assessments often produce long reports
-              that sit unused while misconfigurations remain.
+              Many organizations run AWS, Azure, and Google Cloud with rising compliance
+              expectations and a small security staff. Assessments often produce long reports
+              that are not acted on while misconfigurations remain.
             </p>
             <p className="text-white/70 leading-relaxed">
-              DiTconsult closes that gap: we translate findings into business priorities, package the
-              work into clear engagements, and support remediation with human oversight.
+              DiTconsult translates findings into business priorities, scopes the work into
+              clear engagements, and supports remediation with human review and approval.
             </p>
+            <div id="mission" className="mt-8 grid sm:grid-cols-2 gap-6 scroll-mt-28">
+              <div>
+                <h3 className="text-white font-semibold mb-2">Purpose</h3>
+                <p className="text-white/60 text-sm leading-relaxed">
+                  Give organizations senior cybersecurity and IT guidance they can act on—assessment,
+                  governance readiness, remediation planning, and capability development—without large-firm overhead.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-white font-semibold mb-2">Mission</h3>
+                <p className="text-white/60 text-sm leading-relaxed">
+                  Help clients see real risk, decide what to fix first, and improve posture through
+                  scoped work their teams can execute and verify.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-white font-semibold mb-2">Vision</h3>
+                <p className="text-white/60 text-sm leading-relaxed">
+                  Organizations should be able to modernize technology, meet governance expectations, and develop
+                  their people without treating security as an afterthought.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-white font-semibold mb-2">Consulting philosophy</h3>
+                <p className="text-white/60 text-sm leading-relaxed">
+                  Scope the problem, rank the work, and leave clients with deliverables their teams can execute.
+                  We do not guarantee security outcomes or issue certifications.
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="glass-effect rounded-2xl p-8">
+          <div id="approach" className="glass-effect rounded-2xl p-8 scroll-mt-28">
             <h2 className="text-lg font-bold text-white mb-4">How we work</h2>
             <ul className="space-y-3 text-white/70 text-sm">
-              <li className="flex gap-3"><span className="text-primary-400 shrink-0">→</span>Risk-based prioritization over checkbox theater</li>
+              <li className="flex gap-3"><span className="text-primary-400 shrink-0">→</span>Risk-based prioritization, not checklist volume</li>
               <li className="flex gap-3"><span className="text-primary-400 shrink-0">→</span>Vendor-neutral guidance aligned to your environment</li>
-              <li className="flex gap-3"><span className="text-primary-400 shrink-0">→</span>Transparent scope, deliverables, and limitations</li>
-              <li className="flex gap-3"><span className="text-primary-400 shrink-0">→</span>Plain-language reporting for executives and engineers</li>
-              <li className="flex gap-3"><span className="text-primary-400 shrink-0">→</span>Ethical, least-privilege handling of client access</li>
+              <li className="flex gap-3"><span className="text-primary-400 shrink-0">→</span>Clear scope, deliverables, and limitations</li>
+              <li className="flex gap-3"><span className="text-primary-400 shrink-0">→</span>Reporting written for executives and engineers</li>
+              <li className="flex gap-3"><span className="text-primary-400 shrink-0">→</span>Least-privilege handling of client access</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <section className="section-padding-sm bg-navy-950/80 border-y border-white/10">
+      <section id="leadership" className="section-padding-sm bg-navy-950/80 border-y border-white/10 scroll-mt-28">
         <div className="container-custom">
           <SectionHeading
             title="Leadership"
-            description="DiTconsult is led by its founder."
+            description="DiTconsult is led by its President and CEO."
             centered={false}
             size="md"
           />
@@ -91,15 +121,15 @@ export default function AboutPage() {
               </div>
               <p className="text-white/70 leading-relaxed">
                 Over 15 years of experience in Information Technology. {FOUNDER.name} founded DiTconsult
-                to give growing organizations direct access to senior guidance—multi-cloud assessment,
-                compliance readiness, and remediation planning—without large-firm overhead.
+                to give growing organizations direct access to senior guidance on multi-cloud assessment,
+                compliance readiness, and remediation planning.
               </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="glass-effect rounded-xl p-5">
                   <h4 className="text-white font-semibold text-sm mb-2">Certifications</h4>
                   <p className="text-white/60 text-sm leading-relaxed">
-                    CISM, CEH, CJIS (FBI), Microsoft Security Operations Analyst Associate, Azure certifications, and AWS
-                    Solutions Architect – Associate.
+                    CISM, CEH, CJIS (FBI), Microsoft Certified: Security Operations Analyst Associate, Microsoft Azure
+                    certifications, and AWS Certified Solutions Architect – Associate.
                   </p>
                 </div>
                 <div className="glass-effect rounded-xl p-5">
@@ -135,16 +165,16 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                title: 'Multi-cloud security',
-                text: 'Assess and improve posture across AWS, Azure, and Google Cloud—including risk-prioritized remediation with human-approved changes.',
+                title: 'Security and transformation',
+                text: 'Assess identity, configuration, and logging across AWS, Azure, and Google Cloud, then support secure modernization. Production changes require human approval.',
               },
               {
-                title: 'Compliance readiness',
-                text: 'Advisory for NIST CSF, ISO 27001, SOC 2, HIPAA, PCI DSS, CMMC, and FedRAMP alignment. DiTconsult does not issue certifications.',
+                title: 'Governance',
+                text: 'Advisory for NIST CSF, ISO/IEC 27001, SOC 2, HIPAA, PCI DSS, CMMC, and FedRAMP alignment. DiTconsult does not issue certifications.',
               },
               {
-                title: 'Clear business decisions',
-                text: 'Executive summaries alongside technical detail so leaders can fund the right work and track progress.',
+                title: 'Capability development',
+                text: 'Corporate training builds workforce skills. Educational consulting advises institutions on campus security, IT governance, and faculty development. They are complementary, not interchangeable.',
               },
             ].map((item) => (
               <article key={item.title} className="glass-effect rounded-xl p-6">
@@ -154,7 +184,7 @@ export default function AboutPage() {
             ))}
           </div>
           <p className="mt-10 text-white/50 text-sm">
-            Looking for packaged offers? Start with a{' '}
+            To discuss a scoped engagement, start with a{' '}
             <Link href="/contact" className="text-primary-400 hover:underline">
               DiTconsult consultation
             </Link>

@@ -268,11 +268,11 @@ export default function SecurityRoadmapGenerator() {
         <motion.div initial="initial" animate="animate" variants={fadeInUp} className="text-center mb-12">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary-500/30 bg-primary-500/10 px-4 py-1.5 text-primary-400 font-semibold text-xs uppercase tracking-widest mb-4">
             <span className="h-1.5 w-1.5 rounded-full bg-primary-400 animate-pulse" />
-            Personalized Plan
+            Illustrative tool
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Security Roadmap Generator</h1>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Answer 4 quick questions and receive a personalized 30/60/90-day cybersecurity improvement roadmap.
+            Answer four questions for an illustrative 30/60/90-day planning aid. The output is educational and is not a scoped engagement plan or certification.
           </p>
         </motion.div>
 
@@ -379,10 +379,10 @@ export default function SecurityRoadmapGenerator() {
 
               {/* CTAs */}
               <div className="glass-effect-lg rounded-2xl p-8 text-center border border-primary-500/20 mt-6">
-                <h3 className="text-2xl font-bold text-white mb-3">Want Expert Help Executing This?</h3>
-                <p className="text-white/60 mb-6">DiTconsult can help you execute this roadmap with expert guidance, accountability, and measurable results.</p>
+                <h3 className="text-2xl font-bold text-white mb-3">Want this plan scoped to your environment?</h3>
+                <p className="text-white/60 mb-6">DiTconsult can turn this illustrative list into a scoped roadmap based on your systems, constraints, and selected frameworks.</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button asLink href="/contact" variant="primary">Book a Roadmap Review Call</Button>
+                  <Button asLink href="/contact" variant="primary">Discuss a scoped roadmap</Button>
                   <Button onClick={() => { setGenerated(false); setStep(0); setBusiness(null); setCloud(null); setCompliance(null); setMaturity(null); }} variant="secondary">Start Over</Button>
                 </div>
               </div>

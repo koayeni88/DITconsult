@@ -21,7 +21,7 @@ export default function PrivacyPage() {
             <p>
               {COMPANY_NAME} is committed to protecting your privacy. This policy explains what information this website
               collects, why we collect it, who processes it on our behalf, and how long we keep it. It applies to{' '}
-              <span className="whitespace-nowrap">ditconsult.com</span> and to inquiries submitted through it.
+              <span className="whitespace-nowrap">ditconsult.com</span> and to inquiries submitted through this site.
             </p>
 
             <div>
@@ -34,8 +34,8 @@ export default function PrivacyPage() {
               </p>
               <p className="mt-4">
                 Please do not submit passwords, access keys, API tokens, protected health information, or incident
-                evidence through the website form. If an engagement requires sensitive material, we will agree a secure
-                channel with you first.
+                evidence through the website form. If an engagement requires sensitive material, we will agree on a
+                secure channel with you first.
               </p>
             </div>
 
@@ -49,7 +49,7 @@ export default function PrivacyPage() {
                 </li>
                 <li>
                   <strong className="text-white/90">An approximate country lookup</strong> is performed by the contact
-                  page so the phone field can default to the right international dialling code. This request is made to
+                  page so the phone field can default to the correct international dialing code. This request is made to
                   the third-party service ipapi.co from your browser.
                 </li>
                 <li>
@@ -88,7 +88,7 @@ export default function PrivacyPage() {
                   mailbox.
                 </li>
                 <li>
-                  <strong className="text-white/90">ipapi.co</strong> — returns an approximate country for the dialling
+                  <strong className="text-white/90">ipapi.co</strong> — returns an approximate country for the dialing
                   code default described above.
                 </li>
                 <li>
@@ -114,8 +114,8 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-bold text-white mb-4">Your choices and rights</h2>
               <p>
                 You can ask us to access, correct, or delete the information you submitted, or to stop contacting you.
-                Email {COMPANY_EMAIL} and we will action the request. Depending on where you live, you may have
-                additional rights under laws such as the GDPR or state privacy statutes; we will honour those requests
+                Email {COMPANY_EMAIL} and we will handle the request. Depending on where you live, you may have
+                additional rights under laws such as the GDPR or state privacy statutes; we will honor those requests
                 where they apply.
               </p>
             </div>

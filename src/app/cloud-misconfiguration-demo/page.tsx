@@ -2,9 +2,9 @@ import { Metadata } from 'next';
 import CloudMisconfigDemo from '@/components/tools/CloudMisconfigDemo';
 
 export const metadata: Metadata = {
-  title: 'Cloud Misconfiguration Demo',
+  title: 'Illustrative Cloud Misconfiguration Demo',
   alternates: { canonical: '/cloud-misconfiguration-demo' },
-  description: 'See real-world cloud misconfigurations across AWS, Azure, GCP, Terraform, and Kubernetes with expert remediation guidance.',
+  description: 'An illustrative set of common cloud misconfigurations across AWS, Azure, Google Cloud, Terraform, and Kubernetes. Sample findings are not a scan of your environment.',
   keywords: ['cloud misconfiguration', 'AWS security', 'Azure security', 'GCP security', 'Kubernetes security', 'Terraform security'],
 };
 
