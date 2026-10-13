@@ -20,7 +20,7 @@ export default function TermsPage() {
           <div className="prose prose-invert max-w-none space-y-8 text-white/70">
             <p>
               These terms govern your use of the {COMPANY_NAME} website at{' '}
-              <span className="whitespace-nowrap">ditconsult.com</span>, including its free assessment tools and
+              <span className="whitespace-nowrap">ditconsult.com</span>, including its illustrative tools and
               downloadable resources. By accessing the website you agree to be bound by these terms. Paid consulting and
               training work is governed by a separate signed agreement, which takes precedence over this page.
             </p>
@@ -36,13 +36,14 @@ export default function TermsPage() {
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold text-white mb-4">Free tools and resources are not a security assessment</h2>
+              <h2 className="text-2xl font-bold text-white mb-4">Illustrative tools and resources are not a security assessment</h2>
               <p>
                 The risk score, maturity model, compliance calculator, roadmap generator, dashboard preview, and
                 misconfiguration demo on this website are self-service educational aids. Their output is generated from
                 the answers you supply, is illustrative only, and is not a vulnerability assessment, penetration test,
                 audit opinion, certification, or legal or regulatory determination. Do not rely on them as evidence of
-                compliance or as a substitute for a scoped professional engagement.
+                compliance or as a substitute for a scoped professional engagement. {COMPANY_NAME} does not issue
+                certifications.
               </p>
             </div>
 

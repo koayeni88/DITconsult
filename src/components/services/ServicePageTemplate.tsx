@@ -28,8 +28,8 @@ export default function ServicePageTemplate({ data }: ServicePageTemplateProps) 
               size="lg"
               as="h1"
             />
-            <Button asLink href="/contact" variant="primary" size="lg" className="mt-8">
-              Book a Security Consultation
+            <Button asLink href={data.ctaHref ?? '/contact'} variant="primary" size="lg" className="mt-8">
+              {data.ctaLabel ?? 'Schedule a Security Consultation'}
             </Button>
           </div>
         </div>
@@ -38,7 +38,7 @@ export default function ServicePageTemplate({ data }: ServicePageTemplateProps) 
       <section className="section-padding-sm bg-navy-900">
         <div className="container-custom grid lg:grid-cols-2 gap-12">
           <div>
-            <h2 className="text-2xl font-bold text-white mb-4">The problem</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">Business challenge</h2>
             <p className="text-white/70 leading-relaxed">{data.problem}</p>
             <h3 className="text-lg font-semibold text-white mt-8 mb-3">Who this is for</h3>
             <ul className="space-y-2">
@@ -66,7 +66,7 @@ export default function ServicePageTemplate({ data }: ServicePageTemplateProps) 
 
       <section className="section-padding-sm bg-navy-950/80 border-y border-white/10">
         <div className="container-custom">
-          <SectionHeading title="What is included" centered size="md" />
+          <SectionHeading title="Key capabilities" centered size="md" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
             {data.included.map((item) => (
               <div key={item} className="glass-effect rounded-xl p-5">
@@ -79,7 +79,7 @@ export default function ServicePageTemplate({ data }: ServicePageTemplateProps) 
 
       <section className="section-padding-sm bg-navy-900">
         <div className="container-custom">
-          <SectionHeading title="Engagement process" centered size="md" />
+          <SectionHeading title="Our approach" centered size="md" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
             {data.process.map((step, i) => (
               <div key={step.title} className="relative glass-effect rounded-xl p-6">
@@ -95,7 +95,7 @@ export default function ServicePageTemplate({ data }: ServicePageTemplateProps) 
       <section className="section-padding-sm bg-navy-950/80 border-y border-white/10">
         <div className="container-custom grid lg:grid-cols-2 gap-12">
           <div>
-            <SectionHeading title="Deliverables" centered={false} size="md" />
+            <SectionHeading title="Potential deliverables" centered={false} size="md" />
             <ul className="mt-6 space-y-3">
               {data.deliverables.map((d) => (
                 <li key={d} className="flex gap-3 text-white/70 text-sm">
@@ -129,6 +129,35 @@ export default function ServicePageTemplate({ data }: ServicePageTemplateProps) 
           </div>
         </div>
       </section>
+
+      {(data.benefits?.length || data.nextStep) && (
+        <section className="section-padding-sm bg-navy-900">
+          <div className="container-custom grid lg:grid-cols-2 gap-12">
+            {data.benefits && data.benefits.length > 0 && (
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-4">Business benefits</h2>
+                <ul className="space-y-3">
+                  {data.benefits.map((benefit) => (
+                    <li key={benefit} className="flex gap-3 text-white/70 text-sm">
+                      <span className="text-primary-400 shrink-0" aria-hidden="true">→</span>
+                      {benefit}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {data.nextStep && (
+              <div className="glass-effect rounded-2xl p-8">
+                <h2 className="text-lg font-semibold text-white mb-3">Engagement next step</h2>
+                <p className="text-white/70 text-sm leading-relaxed mb-6">{data.nextStep}</p>
+                <Button asLink href={data.ctaHref ?? '/contact'} variant="primary" size="md">
+                  {data.ctaLabel ?? 'Schedule a Security Consultation'}
+                </Button>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {data.faqs.length > 0 && (
         <section className="section-padding-sm bg-navy-900">

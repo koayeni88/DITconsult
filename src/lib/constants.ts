@@ -6,7 +6,7 @@ export const COMPANY_TAGLINE = BRAND_TAGLINE;
 export const COMPANY_EMAIL = 'support@ditconsult.com';
 export const COMPANY_PHONE = '(281) 885-9497';
 export const COMPANY_DESCRIPTION =
-  'DiTconsult helps organizations assess cloud security, improve compliance readiness, and deliver risk-prioritized remediation across AWS, Azure, and Google Cloud. We also provide corporate cybersecurity and IT training.';
+  'DiTconsult is a cybersecurity and IT consulting firm that helps organizations assess multi-cloud risk, prepare for governance and compliance reviews, prioritize remediation, and develop workforce and institutional capability across AWS, Azure, and Google Cloud.';
 
 /** Set real company profile URLs when ready; leave empty to hide footer social links. */
 export const SOCIAL_LINKS = {
@@ -30,19 +30,8 @@ export const NAV_GROUPS: NavGroup[] = [
   { label: 'Home', href: '/' },
   {
     label: 'Services',
-    children: [
-      { label: 'All Services', href: '/services' },
-      { label: 'Cloud Security Assessment', href: '/cloud-security' },
-      { label: 'AI-Assisted Cloud Remediation', href: '/ai-cloud-remediation' },
-      { label: 'Compliance Readiness', href: '/compliance' },
-      { label: 'Vulnerability Assessment', href: '/vulnerability-assessment' },
-      { label: 'Security Risk Assessment', href: '/security-risk-assessment' },
-      { label: 'Incident Response Planning', href: '/incident-response' },
-      { label: 'DevSecOps & Secure Architecture', href: '/devsecops' },
-      { label: 'Security Awareness Training', href: '/security-awareness' },
-      { label: 'Corporate Cybersecurity & IT Training', href: '/corporate-training' },
-      { label: 'Virtual CISO', href: '/virtual-ciso' },
-    ],
+    href: '/services',
+    variant: 'mega',
   },
   {
     label: 'Industries',
@@ -50,128 +39,197 @@ export const NAV_GROUPS: NavGroup[] = [
       { label: 'All Industries', href: '/industries' },
       { label: 'Healthcare', href: '/industries/healthcare' },
       { label: 'Financial Services', href: '/industries/finance' },
-      { label: 'Education', href: '/industries/education' },
-      { label: 'Government Contractors', href: '/industries/government' },
-      { label: 'SaaS & Cloud-Native', href: '/industries/startups' },
-      { label: 'Growing Businesses', href: '/industries/small-business' },
-      { label: 'Cloud & Platform Teams', href: '/industries/cloud-teams' },
+      { label: 'Universities and Educational Institutions', href: '/industries/education' },
+      { label: 'Government and Public Sector', href: '/industries/government' },
+      { label: 'Technology and SaaS', href: '/industries/startups' },
+      { label: 'Small and Medium-Sized Businesses', href: '/industries/small-business' },
+      { label: 'Cloud and Platform Teams', href: '/industries/cloud-teams' },
+    ],
+  },
+  { label: 'Training', href: '/corporate-training' },
+  {
+    label: 'Resources',
+    children: [
+      { label: 'Resource Library', href: '/resources' },
+      { label: 'Articles and Insights', href: '/blog' },
+      { label: 'Cyber Risk Score', href: '/cyber-risk-score' },
+      { label: 'Cloud Security Demo', href: '/cloud-misconfiguration-demo' },
+      { label: 'Compliance Calculator', href: '/compliance-calculator' },
+      { label: 'Security Roadmap Generator', href: '/security-roadmap' },
+      { label: 'Trust Center', href: '/trust-center' },
     ],
   },
   {
-    label: 'Tools',
+    label: 'About Us',
     children: [
-      { label: 'Cyber Risk Score', href: '/cyber-risk-score' },
-      { label: 'Cloud Misconfiguration Demo', href: '/cloud-misconfiguration-demo' },
-      { label: 'Compliance Calculator', href: '/compliance-calculator' },
-      { label: 'Security Maturity Model', href: '/security-maturity' },
-      { label: 'Security Roadmap Generator', href: '/security-roadmap' },
-      { label: 'Executive Dashboard', href: '/executive-dashboard' },
+      { label: 'Company Overview', href: '/about#overview' },
+      { label: 'Mission and Vision', href: '/about#mission' },
+      { label: 'Leadership', href: '/founder' },
+      { label: 'Our Consulting Approach', href: '/about#approach' },
     ],
   },
-  { label: 'About', href: '/about' },
-  { label: 'Insights', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ];
 
 export const SERVICES: Service[] = [
   {
     id: 'cloud-security',
-    title: 'Cloud Security Assessment',
-    shortDescription: 'Assess misconfigurations and control gaps across AWS, Azure, and Google Cloud.',
-    description: 'Multi-cloud security assessment with risk-prioritized remediation guidance.',
+    title: 'Multi-Cloud Security Consulting',
+    shortDescription:
+      'Assess identity, configuration, logging, and architecture across AWS, Azure, and Google Cloud, then rank the work to close first.',
+    description:
+      'A scoped multi-cloud security review that produces one risk view for engineering and leadership. Distinct from enterprise risk registers and from finding-by-finding remediation support.',
     icon: 'cloud-lock',
     href: '/cloud-security',
   },
   {
+    id: 'risk-assessment',
+    title: 'Cybersecurity Risk Assessment and Management',
+    shortDescription:
+      'Give executives a shared view of cyber risk, control gaps, treatment options, and investment priorities.',
+    description:
+      'Business-oriented risk assessment and treatment planning. Distinct from cloud configuration reviews and from vulnerability-scanner triage.',
+    icon: 'shield',
+    href: '/security-risk-assessment',
+  },
+  {
     id: 'ai-remediation',
-    title: 'AI-Assisted Cloud Remediation',
-    shortDescription: 'Detect, prioritize, and guide remediation of cloud misconfigurations with human oversight.',
-    description: 'AI-assisted workflows for faster, risk-aware cloud security improvement.',
+    title: 'AI-Assisted Security Detection and Remediation',
+    shortDescription:
+      'Triage security findings, recommend controlled fixes, and document validation. Production changes require human approval.',
+    description:
+      'Detection and remediation planning that uses AI to accelerate analysis. Distinct from a one-time cloud assessment; this service focuses on closing known issues under human control.',
     icon: 'shield',
     href: '/ai-cloud-remediation',
   },
   {
     id: 'compliance',
-    title: 'Compliance Readiness',
-    shortDescription: 'Gap analysis and advisory for NIST, ISO 27001, SOC 2, HIPAA, PCI DSS, CMMC, and FedRAMP readiness.',
-    description: 'Structured compliance readiness without certification claims.',
+    title: 'Governance, Risk, and Compliance Advisory',
+    shortDescription:
+      'Control gap analysis, evidence planning, and readiness support for NIST CSF, ISO/IEC 27001, SOC 2, HIPAA, PCI DSS, CMMC, and FedRAMP-aligned reviews.',
+    description:
+      'Readiness advisory that prepares your team for independent audit or assessment. DiTconsult does not issue certifications or attestations.',
     icon: 'compliance',
     href: '/compliance',
   },
   {
+    id: 'devsecops',
+    title: 'DevSecOps and Infrastructure Security',
+    shortDescription:
+      'Build security into CI/CD pipelines, infrastructure as code, containers, and cloud architecture.',
+    description:
+      'Advisory for how software and infrastructure are designed, built, and released. Distinct from point-in-time cloud posture assessments.',
+    icon: 'devsecops',
+    href: '/devsecops',
+  },
+  {
+    id: 'vciso',
+    title: 'Virtual CISO and Strategic Security Advisory',
+    shortDescription:
+      'Fractional security leadership for strategy, governance, executive reporting, and program direction.',
+    description:
+      'Ongoing advisory leadership for organizations that need senior direction without a full-time CISO hire. Distinct from a single assessment engagement.',
+    icon: 'ciso',
+    href: '/virtual-ciso',
+  },
+  {
+    id: 'corporate-training',
+    title: 'Corporate Cybersecurity and IT Training',
+    shortDescription:
+      'Practical workforce training for employees, technical teams, and leaders, scoped from foundational to expert.',
+    description:
+      'Corporate training discussions tailored to audience, environment, and goals. Distinct from educational and institutional consulting. Schedules, pricing, and any credentials are confirmed after inquiry.',
+    icon: 'data-protection',
+    href: '/corporate-training',
+  },
+  {
+    id: 'educational-consulting',
+    title: 'Educational and Institutional Consulting',
+    shortDescription:
+      'Institutional technology strategy, campus cybersecurity, IT governance, faculty development, and digital-learning advisory for schools and universities.',
+    description:
+      'Advisory for education leaders and campus IT teams. Distinct from corporate workforce training. DiTconsult does not grant degrees or affiliate with any university.',
+    icon: 'data-protection',
+    href: '/services/education-consulting',
+  },
+  {
     id: 'vulnerability-management',
     title: 'Vulnerability Assessment and Remediation',
-    shortDescription: 'Risk-based vulnerability triage and remediation guidance.',
-    description: 'Prioritize and remediate vulnerabilities based on business impact.',
+    shortDescription: 'Convert scanner output into a risk-ranked backlog with owners and remediation guidance.',
+    description: 'Vulnerability triage based on exploitability, exposure, and business impact rather than volume alone.',
     icon: 'vulnerability',
     href: '/vulnerability-assessment',
   },
   {
-    id: 'risk-assessment',
-    title: 'Security Risk Assessment',
-    shortDescription: 'Executive-focused risk visibility and mitigation roadmaps.',
-    description: 'Quantify exposure and prioritize security investments.',
-    icon: 'shield',
-    href: '/security-risk-assessment',
-  },
-  {
     id: 'incident-response',
     title: 'Incident Response Planning',
-    shortDescription: 'Playbooks, tabletop exercises, and communication workflows.',
-    description: 'Build tested incident response capabilities.',
+    shortDescription: 'Playbooks, tabletop exercises, and notification workflows your teams can execute during an incident.',
+    description: 'Incident-response readiness planning and exercises. Scope for active incident support is discussed separately.',
     icon: 'incident-response',
     href: '/incident-response',
   },
   {
     id: 'penetration-testing',
     title: 'Penetration Testing Coordination',
-    shortDescription: 'Plan, coordinate, and oversee controlled adversarial testing.',
-    description: 'Validate security through managed penetration testing engagements.',
+    shortDescription: 'Define scope, coordinate qualified testers, and translate results into remediation work.',
+    description: 'Penetration testing coordination and oversight. DiTconsult coordinates testing; it does not claim to perform every test type independently.',
     icon: 'vulnerability',
     href: '/contact',
   },
   {
     id: 'security-training',
     title: 'Security Awareness Training',
-    shortDescription: 'Role-based training, phishing simulations, and leadership briefings.',
-    description: 'Build security-aware culture with measurable programs.',
+    shortDescription: 'Role-based awareness programs, phishing simulation design, and leadership briefings.',
+    description: 'Security-awareness programs designed to improve reporting habits, not only record completion. DiTconsult does not issue certifications.',
     icon: 'data-protection',
     href: '/security-awareness',
   },
+];
+
+export const SERVICE_CATEGORIES = [
   {
-    id: 'corporate-training',
-    title: 'Corporate Cybersecurity & IT Training',
-    shortDescription:
-      'We provide corporate cybersecurity and IT training to help organizations strengthen employee awareness, develop technical skills, and support secure, effective use of technology.',
+    id: 'core-consulting',
+    title: 'Core consulting services',
     description:
-      'Corporate cybersecurity and IT training discussions tailored to your teams, goals, and technology environment.',
-    icon: 'data-protection',
-    href: '/corporate-training',
+      'Distinct engagements for cloud security, enterprise risk, detection and remediation, governance, secure delivery, and security leadership.',
+    serviceIds: [
+      'cloud-security',
+      'risk-assessment',
+      'ai-remediation',
+      'compliance',
+      'devsecops',
+      'vciso',
+    ],
   },
   {
-    id: 'devsecops',
-    title: 'DevSecOps and Secure Architecture',
-    shortDescription: 'Integrate security into CI/CD, IaC, and cloud architecture.',
-    description: 'Secure-by-design engineering practices.',
-    icon: 'devsecops',
-    href: '/devsecops',
+    id: 'capability-development',
+    title: 'Workforce capability development',
+    description:
+      'Corporate training and awareness programs that build skills employees can apply in daily work. These offerings are not degree programs.',
+    serviceIds: ['corporate-training', 'security-training'],
   },
   {
-    id: 'vciso',
-    title: 'Virtual CISO Services',
-    shortDescription: 'Strategic security leadership, governance, and executive reporting.',
-    description: 'Fractional CISO advisory for growing organizations.',
-    icon: 'ciso',
-    href: '/virtual-ciso',
+    id: 'institutional',
+    title: 'Educational and institutional consulting',
+    description:
+      'Advisory for universities, schools, and education technology organizations. Complementary to corporate training, with a different audience and scope.',
+    serviceIds: ['educational-consulting'],
+  },
+  {
+    id: 'additional-advisory',
+    title: 'Additional advisory services',
+    description: 'Supporting work that can stand alone or follow a core engagement.',
+    serviceIds: ['vulnerability-management', 'incident-response', 'penetration-testing'],
   },
 ];
 
 export const FOOTER_SECTIONS = {
   services: [
-    { label: 'Cloud Security', href: '/cloud-security' },
-    { label: 'AI Cloud Remediation', href: '/ai-cloud-remediation' },
-    { label: 'Compliance Readiness', href: '/compliance' },
+    { label: 'Cybersecurity Consulting', href: '/services/cybersecurity-consulting' },
+    { label: 'IT & Digital Transformation', href: '/services/it-digital-transformation' },
     { label: 'Corporate Training', href: '/corporate-training' },
+    { label: 'Educational Consulting', href: '/services/education-consulting' },
+    { label: 'All Services', href: '/services' },
     { label: 'Virtual CISO', href: '/virtual-ciso' },
   ],
   company: [

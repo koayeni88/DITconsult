@@ -67,10 +67,10 @@ export const TRAINING_PAGE = {
     'Explore DiTconsult’s corporate cybersecurity and IT training curriculum framework—awareness, cloud, operations, application security, AI security, governance, and corporate IT skills.',
   h1: 'Corporate Cybersecurity & IT Training',
   intro:
-    'DiTconsult provides corporate cybersecurity and IT training to help organizations strengthen employee awareness, develop technical skills, and support secure, effective use of technology. Courses can be scoped from foundational to expert based on your team’s experience level. The curriculum below is a proposed framework for discussion—not a claim that every area is available as a scheduled public course.',
-  homepageHeadline: 'Equip your people with practical security and IT skills',
+    'DiTconsult designs corporate cybersecurity and IT training so employees, technical teams, and leaders can use technology securely and respond to common cyber risks. Programs can be scoped from foundational to expert. This offering is workforce development—not educational or institutional consulting. The curriculum below is a proposed framework for discussion—not a catalog of scheduled public courses, accredited qualifications, or guaranteed certificates.',
+  homepageHeadline: 'Build practical security and IT capability across your workforce',
   homepageCopy:
-    'We provide corporate cybersecurity and IT training to help organizations strengthen employee awareness, develop technical skills, and support secure, effective use of technology—from foundational through expert levels.',
+    'Corporate cybersecurity and IT training helps employees, engineers, and leaders develop skills they can apply in daily work—from awareness and identity practices through cloud operations and responsible AI use. This is workforce development, not educational or institutional consulting. Delivery format, schedule, and any credential details are confirmed after you contact us.',
   discussNote:
     'Share your goals, topics of interest, team size, current experience level (foundational through expert), preferred delivery format, and preferred timeframe. Format and timeframe are preferences we will discuss with you. Prices, schedules, durations, and certifications or accreditation details are provided after you contact us.',
   frameworkNote:

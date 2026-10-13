@@ -177,11 +177,11 @@ const FRAMEWORKS: Record<Framework, { color: string; bg: string; border: string;
 };
 
 const READINESS_LEVELS = [
-  { min: 0, max: 20, label: 'Not Ready', color: '#ef4444', desc: 'Significant gaps. Compliance is not achievable without major investment.' },
-  { min: 20, max: 40, label: 'Early Stage', color: '#f97316', desc: 'Foundation is weak. Key controls and documentation are missing.' },
-  { min: 40, max: 60, label: 'Developing', color: '#eab308', desc: 'Some controls exist but important gaps remain. 6-12 months of focused effort needed.' },
-  { min: 60, max: 80, label: 'Nearly Ready', color: '#22c55e', desc: 'Good baseline with a few gaps. Targeted remediation can close the gap.' },
-  { min: 80, max: 101, label: 'Audit Ready', color: '#06b6d4', desc: 'Strong posture. You are likely ready for a formal assessment or audit.' },
+  { min: 0, max: 20, label: 'Not Ready', color: '#ef4444', desc: 'Based on your answers, significant gaps appear. This is not a determination that compliance is impossible or that a specific investment is required.' },
+  { min: 20, max: 40, label: 'Early Stage', color: '#f97316', desc: 'Based on your answers, key controls and documentation appear incomplete. A scoped review is needed to confirm gaps.' },
+  { min: 40, max: 60, label: 'Developing', color: '#eab308', desc: 'Based on your answers, some controls exist and important gaps remain. Timeline depends on scope, staffing, and the selected framework.' },
+  { min: 60, max: 80, label: 'Nearly Ready', color: '#22c55e', desc: 'Based on your answers, a baseline appears in place with remaining gaps. This score is not an attestation.' },
+  { min: 80, max: 101, label: 'Stronger Baseline', color: '#06b6d4', desc: 'Based on your answers, many common controls appear present. This is not audit readiness, certification, or a formal assessment.' },
 ];
 
 export default function ComplianceCalculator() {
@@ -228,11 +228,11 @@ export default function ComplianceCalculator() {
         <motion.div initial="initial" animate="animate" variants={fadeInUp} className="text-center mb-12">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary-500/30 bg-primary-500/10 px-4 py-1.5 text-primary-400 font-semibold text-xs uppercase tracking-widest mb-4">
             <span className="h-1.5 w-1.5 rounded-full bg-primary-400 animate-pulse" />
-            Free Tool
+            Illustrative tool
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Compliance Readiness Calculator</h1>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Select a framework, rate your current controls, and see your readiness score with a domain-by-domain breakdown.
+            Select a framework, rate your current controls, and see an illustrative readiness score by domain. Results are educational. DiTconsult does not issue certifications.
           </p>
         </motion.div>
 
@@ -358,10 +358,10 @@ export default function ComplianceCalculator() {
 
               {/* CTAs */}
               <div className="glass-effect-lg rounded-2xl p-6 border border-primary-500/20 text-center mb-6">
-                <h3 className="text-lg font-bold text-white mb-2">Ready to close the gaps?</h3>
-                <p className="text-white/60 text-sm mb-5">DiTconsult provides gap assessments, remediation roadmaps, and audit support for all major frameworks.</p>
+                <h3 className="text-lg font-bold text-white mb-2">Discuss readiness work</h3>
+                <p className="text-white/60 text-sm mb-5">DiTconsult provides gap analysis, remediation planning, and evidence guidance for selected frameworks. Independent auditors issue certifications.</p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <Button asLink href="/contact" variant="primary">Schedule a Compliance Consultation</Button>
+                  <Button asLink href="/contact" variant="primary">Discuss compliance readiness</Button>
                   <Button onClick={() => { setAnswers({}); setSubmitted(false); }} variant="secondary">Try Another Framework</Button>
                 </div>
               </div>

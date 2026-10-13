@@ -21,7 +21,7 @@ const RESOURCES: Resource[] = [
   {
     id: 'cloud-security-checklist',
     title: 'Cloud Security Hardening Checklist',
-    description: 'Comprehensive checklist covering AWS, Azure, and GCP security configurations, IAM hardening, logging, and data protection controls.',
+    description: 'Checklist covering AWS, Azure, and Google Cloud security configurations, identity, logging, and data-protection controls. Use it as a starting point, not a formal assessment.',
     category: 'Checklists',
     pages: 8,
     tags: ['AWS', 'Azure', 'GCP', 'Cloud', 'IAM'],
@@ -41,7 +41,7 @@ const RESOURCES: Resource[] = [
   {
     id: 'incident-response-template',
     title: 'Incident Response Plan Template',
-    description: 'A battle-tested IR plan template covering preparation, identification, containment, eradication, recovery, and lessons learned phases.',
+    description: 'Incident response plan template covering preparation, identification, containment, eradication, recovery, and lessons learned.',
     category: 'Templates',
     pages: 14,
     tags: ['Incident Response', 'NIST', 'PICERL'],
@@ -60,7 +60,7 @@ const RESOURCES: Resource[] = [
   {
     id: 'ransomware-playbook',
     title: 'Ransomware Response Playbook',
-    description: 'Hour-by-hour response guidance for ransomware incidents, including isolation steps, communication templates, and recovery checklists.',
+    description: 'Structured response guidance for ransomware incidents, including isolation steps, communication templates, and recovery checklists.',
     category: 'Templates',
     pages: 10,
     tags: ['Ransomware', 'Incident Response', 'Recovery'],
@@ -78,7 +78,7 @@ const RESOURCES: Resource[] = [
   {
     id: 'nist-csf-guide',
     title: 'NIST CSF 2.0 Implementation Guide',
-    description: 'Practical guide to implementing the NIST Cybersecurity Framework 2.0, including the new Govern function and mapping to common tools.',
+    description: 'Guide to implementing the NIST Cybersecurity Framework 2.0, including the Govern function and mapping to common controls.',
     category: 'Guides',
     pages: 18,
     tags: ['NIST CSF', 'Compliance', 'Governance'],
@@ -96,7 +96,7 @@ const RESOURCES: Resource[] = [
   {
     id: 'soc2-readiness-guide',
     title: 'SOC 2 Readiness Guide for SaaS Companies',
-    description: 'Step-by-step guide to achieving SOC 2 Type II compliance, covering evidence collection, policy requirements, and audit preparation.',
+    description: 'Readiness guide for SOC 2 Type II preparation, covering evidence collection, policy requirements, and audit planning. DiTconsult does not issue SOC 2 reports.',
     category: 'Guides',
     pages: 16,
     tags: ['SOC 2', 'SaaS', 'Compliance', 'Audit'],
@@ -108,13 +108,13 @@ const RESOURCES: Resource[] = [
       '✦ Evidence collection checklist by TSC',
       '✦ Common audit failures and how to avoid them',
       '✦ Selecting an auditing firm',
-      '✦ Timeline: 3–6 month readiness roadmap',
+      '✦ Example readiness planning timeline',
     ],
   },
   {
     id: 'hipaa-security-checklist',
     title: 'HIPAA Security Rule Compliance Checklist',
-    description: 'Detailed checklist of HIPAA Security Rule requirements for healthcare organizations and business associates handling PHI.',
+    description: 'Checklist of HIPAA Security Rule topics for healthcare organizations and business associates that handle PHI. This is not a legal determination or certification.',
     category: 'Checklists',
     pages: 6,
     tags: ['HIPAA', 'Healthcare', 'PHI', 'Compliance'],
@@ -133,7 +133,7 @@ const RESOURCES: Resource[] = [
   {
     id: 'vendor-risk-questionnaire',
     title: 'Third-Party Vendor Risk Questionnaire',
-    description: 'Security questionnaire template for assessing the security posture of vendors and third-party service providers handling your data.',
+    description: 'Questionnaire template for reviewing vendors and other third parties that handle your data.',
     category: 'Templates',
     pages: 7,
     tags: ['Vendor Risk', 'Third-Party', 'Supply Chain'],
@@ -152,7 +152,7 @@ const RESOURCES: Resource[] = [
   {
     id: 'kubernetes-security-guide',
     title: 'Kubernetes Security Hardening Guide',
-    description: 'Security hardening guide for Kubernetes clusters covering RBAC, pod security, network policies, secrets management, and runtime protection.',
+    description: 'Hardening guide for Kubernetes clusters covering RBAC, pod security, network policies, secrets management, and runtime protection.',
     category: 'Guides',
     pages: 12,
     tags: ['Kubernetes', 'K8s', 'Container Security', 'Cloud'],
@@ -171,7 +171,7 @@ const RESOURCES: Resource[] = [
   {
     id: 'security-policy-templates',
     title: 'Information Security Policy Bundle',
-    description: 'A complete set of foundational security policies ready to customize for your organization — 8 policies covering the most critical areas.',
+    description: 'A set of foundational security policy templates you can customize—eight policies covering common governance areas.',
     category: 'Templates',
     pages: 28,
     tags: ['Policy', 'Governance', 'Compliance', 'NIST', 'SOC 2'],
@@ -190,7 +190,7 @@ const RESOURCES: Resource[] = [
   {
     id: 'cmmc-readiness-guide',
     title: 'CMMC 2.0 Readiness Guide for DoD Contractors',
-    description: 'Practical guide for small and medium DoD contractors preparing for CMMC Level 1 or Level 2 certification requirements.',
+    description: 'Readiness guide for small and mid-size DoD contractors preparing for CMMC Level 1 or Level 2 assessment requirements. DiTconsult does not issue CMMC certifications.',
     category: 'Frameworks',
     pages: 14,
     tags: ['CMMC', 'DoD', 'CUI', 'Compliance'],
@@ -208,7 +208,7 @@ const RESOURCES: Resource[] = [
   {
     id: 'cis-controls-guide',
     title: 'CIS Controls v8 Quick Start Guide',
-    description: 'Practical implementation guide for the CIS Critical Security Controls v8, with prioritized actions for each implementation group (IG1–IG3).',
+    description: 'Implementation guide for the CIS Critical Security Controls v8, with prioritized actions for implementation groups IG1 through IG3.',
     category: 'Frameworks',
     pages: 10,
     tags: ['CIS Controls', 'Baseline', 'SMB', 'Enterprise'],
@@ -226,7 +226,7 @@ const RESOURCES: Resource[] = [
   {
     id: 'pen-test-scope-template',
     title: 'Penetration Test Scoping & Rules of Engagement Template',
-    description: 'A professional template for defining the scope, rules of engagement, and authorization for internal or third-party penetration testing engagements.',
+    description: 'Template for defining scope, rules of engagement, and authorization when coordinating internal or third-party penetration testing.',
     category: 'Templates',
     pages: 5,
     tags: ['Penetration Testing', 'Red Team', 'Scoping'],
@@ -265,11 +265,11 @@ export default function ResourceLibraryPage() {
         <motion.div initial="initial" animate="animate" variants={fadeInUp} className="text-center mb-12">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary-500/30 bg-primary-500/10 px-4 py-1.5 text-primary-400 font-semibold text-xs uppercase tracking-widest mb-4">
             <span className="h-1.5 w-1.5 rounded-full bg-primary-400 animate-pulse" />
-            Free Downloads
+            Free downloads
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Cybersecurity Resource Library</h1>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Professional-grade checklists, templates, guides, and frameworks — free from DiTconsult. No email required to preview; download via the contact form.
+            Checklists, templates, and readiness guides from DiTconsult. Preview without email; request a download through the contact form. These materials are educational starting points, not certifications or formal assessments.
           </p>
         </motion.div>
 
@@ -380,10 +380,10 @@ export default function ResourceLibraryPage() {
 
         {/* CTA */}
         <div className="mt-12 glass-effect-lg rounded-2xl p-8 text-center border border-primary-500/20">
-          <h3 className="text-2xl font-bold text-white mb-3">Need Custom Templates or Policies?</h3>
-          <p className="text-white/60 mb-6">We create customized security documentation, policies, and procedures tailored to your organization&apos;s specific environment and compliance requirements.</p>
+          <h3 className="text-2xl font-bold text-white mb-3">Need policies written for your environment?</h3>
+          <p className="text-white/60 mb-6">DiTconsult can draft or adapt security documentation to your systems and selected frameworks. Independent auditors issue certifications; we do not.</p>
           <a href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white font-semibold rounded-lg transition-colors">
-            Request Custom Documentation
+            Request documentation support
           </a>
         </div>
       </div>

@@ -9,11 +9,13 @@ import Button from '@/components/common/Button';
 import Logo from '@/components/common/Logo';
 import MobileMenu from './MobileMenu';
 import ThemeToggle from '@/components/common/ThemeToggle';
+import ServicesMegaMenu from './ServicesMegaMenu';
 import { cn } from '@/lib/utils';
 
 function DropdownMenu({ group, isActive }: { group: NavGroup; isActive: (href: string) => boolean }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const menuId = `${group.label.replace(/\s+/g, '-').toLowerCase()}-menu`;
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -50,6 +52,7 @@ function DropdownMenu({ group, isActive }: { group: NavGroup; isActive: (href: s
         )}
         aria-expanded={open}
         aria-haspopup="true"
+        aria-controls={menuId}
       >
         {group.label}
         <svg
@@ -64,7 +67,10 @@ function DropdownMenu({ group, isActive }: { group: NavGroup; isActive: (href: s
       </button>
 
       {open && (
-        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 min-w-[220px] bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-2xl shadow-xl shadow-slate-900/10 dark:shadow-black/60 py-2 z-50">
+        <div
+          id={menuId}
+          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 min-w-[220px] bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-2xl shadow-xl shadow-slate-900/10 dark:shadow-black/60 py-2 z-50"
+        >
           {group.children?.map((child) => (
             <Link
               key={child.href}
@@ -101,8 +107,10 @@ export default function Header() {
     setMobileMenuOpen(false);
   }, [pathname]);
 
-  const isActive = (href: string) =>
-    href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
+  const isActive = (href: string) => {
+    const path = href.split('#')[0];
+    return path === '/' ? pathname === '/' : pathname === path || pathname.startsWith(`${path}/`);
+  };
 
   return (
     <>
@@ -119,7 +127,9 @@ export default function Header() {
 
           <div className="hidden lg:flex items-center gap-0.5">
             {NAV_GROUPS.map((group) =>
-              group.children ? (
+              group.variant === 'mega' ? (
+                <ServicesMegaMenu key={group.label} />
+              ) : group.children ? (
                 <DropdownMenu key={group.label} group={group} isActive={isActive} />
               ) : (
                 <Link
@@ -153,6 +163,7 @@ export default function Header() {
               className="flex flex-col gap-1.5 p-2 -mr-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded-lg"
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               <span
                 className={cn(

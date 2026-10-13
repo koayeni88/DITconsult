@@ -2,41 +2,82 @@ import { Metadata } from 'next';
 import IndustryPageTemplate from '@/components/common/IndustryPageTemplate';
 
 export const metadata: Metadata = {
-  title: 'Cybersecurity for Cloud Teams',
+  title: 'Cloud and Platform Team Security Consulting',
   alternates: { canonical: '/industries/cloud-teams' },
-  description: 'Cloud-native security, DevSecOps, and Kubernetes hardening for engineering teams. Secure your AWS, Azure, GCP workloads and shift security left.',
+  description:
+    'IAM, infrastructure-as-code, Kubernetes, and CI/CD control review for engineering teams running AWS, Azure, and Google Cloud.',
 };
 
 export default function CloudTeamsPage() {
   return (
     <IndustryPageTemplate
       industry="Cloud Teams"
-      badge="Cloud-Native · DevSecOps · K8s Security"
-      headline="Security Built for"
-      headlineAccent="Cloud-Native Teams"
-      subheadline="Embed security into every layer of your cloud infrastructure — from IaC pipelines to runtime containers — without slowing down your team."
+      badge="IAM · IaC · Kubernetes"
+      headline="Security advisory for"
+      headlineAccent="Cloud and platform teams"
+      subheadline="Review identity, infrastructure as code, containers, and pipeline controls so engineering can ship with fewer high-impact gaps."
       heroIcon="☁️"
       challenges={[
-        { icon: '⚙️', title: 'IaC Misconfigurations at Scale', desc: 'Infrastructure as Code enables speed but misconfigurations in Terraform, Pulumi, or CloudFormation propagate instantly across environments. Most teams lack automated scanning.' },
-        { icon: '🐳', title: 'Container & Kubernetes Attack Surface', desc: 'Kubernetes clusters running with privileged containers, exposed dashboards, or weak RBAC are a top attack vector — and many teams are unaware of their exposure.' },
-        { icon: '🔑', title: 'Secrets & Credential Sprawl', desc: 'Hardcoded secrets in code, overly-permissive IAM roles, and misconfigured service accounts create persistent blast radius across cloud accounts.' },
-        { icon: '🔄', title: 'Shifting Security Left Without Friction', desc: 'Engineering teams resist security tooling that slows CI/CD pipelines or generates noisy alerts. Effective DevSecOps requires targeted, high-signal controls.' },
+        {
+          icon: '⚙️',
+          title: 'IaC mistakes that replicate at scale',
+          desc: 'Insecure defaults in Terraform, Bicep, or CloudFormation copy across accounts and regions. Manual review rarely keeps pace with delivery.',
+        },
+        {
+          icon: '🐳',
+          title: 'Kubernetes and container exposure',
+          desc: 'Privileged pods, weak RBAC, and reachable dashboards create a large blast radius when clusters sit near the public internet.',
+        },
+        {
+          icon: '🔑',
+          title: 'Secrets and standing privilege',
+          desc: 'Hardcoded credentials, long-lived keys, and broad IAM roles extend the impact of a single compromised identity or pipeline.',
+        },
+        {
+          icon: '🔄',
+          title: 'Pipeline controls that teams ignore',
+          desc: 'Gates that block every build or flood chat channels lose support. Platform teams need high-signal checks and clear owners.',
+        },
       ]}
       services={[
-        { title: 'Cloud Security Posture Management', desc: 'Continuous assessment of your AWS, Azure, or GCP environment against CIS Benchmarks, NIST, and custom policies — with prioritized remediation by risk.', link: '/cloud-security' },
-        { title: 'Kubernetes & Container Security', desc: 'Cluster hardening, RBAC review, network policy design, admission controller configuration, and runtime threat detection for container workloads.', link: '/cloud-security' },
-        { title: 'IaC Security Scanning', desc: 'Integrate Checkov, Trivy, or Semgrep into your Terraform and CloudFormation pipelines to catch misconfigurations before they reach production.', link: '/services' },
-        { title: 'DevSecOps Program Design', desc: 'Build a right-sized security program into your SDLC — from pre-commit hooks and SAST to secrets detection, container scanning, and SCA in CI/CD.', link: '/services' },
-        { title: 'Cloud IAM & Privilege Review', desc: 'Audit IAM policies, service accounts, and assumed roles for least-privilege violations and identify credential sprawl across cloud and SaaS.', link: '/cloud-security' },
-        { title: 'Cloud Threat Detection & Response', desc: 'Configure GuardDuty, Microsoft Defender for Cloud, or GCP Security Command Center for meaningful alerting with runbooks for incident response.', link: '/incident-response' },
+        {
+          title: 'Multi-cloud posture review',
+          desc: 'Assessment of AWS, Azure, and Google Cloud against CIS Benchmarks and your policies, with a risk-ranked remediation backlog.',
+          link: '/cloud-security',
+        },
+        {
+          title: 'Kubernetes and container review',
+          desc: 'Cluster hardening, RBAC, network policy, and admission-control recommendations for container workloads.',
+          link: '/cloud-security',
+        },
+        {
+          title: 'IaC and pipeline guardrails',
+          desc: 'Add configuration and image checks to infrastructure-as-code and CI/CD so issues are caught before production.',
+          link: '/devsecops',
+        },
+        {
+          title: 'DevSecOps program design',
+          desc: 'Right-sized SAST, secrets detection, software composition analysis, and container scanning in the SDLC you already run.',
+          link: '/devsecops',
+        },
+        {
+          title: 'Cloud IAM and privilege review',
+          desc: 'Policies, service accounts, and assumed roles reviewed for least-privilege gaps across cloud accounts and related SaaS admin paths.',
+          link: '/cloud-security',
+        },
+        {
+          title: 'Cloud detection and response design',
+          desc: 'Configure native detection services and write runbooks your on-call engineers can execute. Active incident retainers are scoped separately.',
+          link: '/incident-response',
+        },
       ]}
-      frameworks={['CIS Benchmarks (AWS/Azure/GCP)', 'NIST CSF', 'SOC 2 Type II', 'ISO 27001', 'OWASP Top 10', 'PCI DSS (cloud scope)']}
+      frameworks={['CIS Benchmarks (AWS / Azure / Google Cloud)', 'NIST CSF', 'SOC 2 (readiness)', 'ISO/IEC 27001 (readiness)', 'OWASP Top 10']}
       stats={[
-        { label: 'Cloud breaches', value: '82%', sub: 'involve misconfiguration or credential theft' },
-        { label: 'Detection time', value: '197 days', sub: 'average time to detect cloud breach' },
-        { label: 'IaC findings', value: '60%+', sub: 'of cloud issues start in code' },
+        { label: 'Configuration risk', value: 'IaC', sub: 'Terraform, Bicep, and pipeline control review' },
+        { label: 'Runtime exposure', value: 'Kubernetes', sub: 'RBAC, network policy, and cluster hardening' },
+        { label: 'Access risk', value: 'IAM', sub: 'Least-privilege review across cloud accounts' },
       ]}
-      cta="Get a Cloud Security Review"
+      cta="Schedule a Security Consultation"
     />
   );
 }

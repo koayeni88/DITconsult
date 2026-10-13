@@ -45,12 +45,19 @@ export default function CorporateTrainingPage() {
               as="h1"
             />
             <p className="mt-5 text-sm text-white/55 leading-relaxed">{TRAINING_PAGE.frameworkNote}</p>
+            <p className="mt-4 text-sm text-white/50 leading-relaxed">
+              Looking for campus technology strategy, institutional cybersecurity, or faculty development? See{' '}
+              <Link href="/industries/education" className="text-primary-400 hover:underline">
+                educational and institutional consulting
+              </Link>
+              .
+            </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <Button asLink href="/contact?service=corporate-training" variant="primary" size="lg">
-                Discuss Your Training Needs
+                Discuss Your Training Requirements
               </Button>
               <Button asLink href="/contact?service=corporate-training" variant="secondary" size="lg">
-                Request a Training Proposal
+                Request a Corporate Training Proposal
               </Button>
             </div>
             <p className="mt-4 text-sm text-white/50">
@@ -108,7 +115,7 @@ export default function CorporateTrainingPage() {
             id="curriculum-heading"
             title="Proposed curriculum framework"
             subtitle="19 training areas"
-            description="Potential topics organizations can discuss with us—grouped for easier navigation. Each area can be tailored from foundational through expert based on your team’s experience."
+            description="Topics organizations can discuss with us, grouped for navigation. Each area can be scoped from foundational through expert based on your team’s current experience."
             centered
             size="md"
           />
@@ -206,7 +213,7 @@ export default function CorporateTrainingPage() {
                             variant="primary"
                             size="md"
                           >
-                            Discuss Your Training Needs
+                            Discuss this training area
                           </Button>
                         </div>
                       </article>
@@ -229,7 +236,7 @@ export default function CorporateTrainingPage() {
             id="proposed-courses-heading"
             title="12 proposed courses"
             subtitle="Recommended starting set"
-            description="An initial proposed course set drawn from the curriculum framework. Each course can be scoped from foundational to expert. These are discussion starters for scoping—not a claim that all 12 are currently scheduled."
+            description="An initial course set drawn from the curriculum framework. Each course can be scoped from foundational to expert. These are discussion starters for scoping, not a public schedule."
             centered
             size="md"
           />
@@ -269,7 +276,7 @@ export default function CorporateTrainingPage() {
             id="flagship-heading"
             title="Four flagship workshops"
             subtitle="Recommended workshops"
-            description="Shorter, high-impact workshop formats we recommend discussing first for broad organizational value."
+            description="Shorter workshop formats we recommend discussing first when you want broad organizational coverage."
             centered
             size="md"
           />
@@ -293,7 +300,7 @@ export default function CorporateTrainingPage() {
                   size="md"
                   className="mt-5"
                 >
-                  Request a Training Proposal
+                  Request a workshop proposal
                 </Button>
               </article>
             ))}
@@ -311,7 +318,7 @@ export default function CorporateTrainingPage() {
               id="prep-heading"
               title="Areas that need additional preparation"
               subtitle="Delivery readiness"
-              description="Some curriculum areas typically require specialist instructors, dedicated labs, or further preparation before delivery. We will discuss readiness with you during scoping."
+              description="Some curriculum areas typically require specialist instructors, dedicated labs, or further preparation before delivery. We confirm readiness with you during scoping."
               centered={false}
               size="md"
             />
@@ -339,7 +346,7 @@ export default function CorporateTrainingPage() {
         <div className="container-custom max-w-3xl">
           <SectionHeading
             id="tell-us-heading"
-            title="Tell Us About Your Team"
+            title="Tell us about your team"
             subtitle="Training inquiry"
             description={TRAINING_PAGE.discussNote}
             centered={false}
@@ -354,8 +361,8 @@ export default function CorporateTrainingPage() {
             <li className="glass-effect rounded-xl p-5">Preferred timeframe</li>
           </ul>
           <p className="mt-6 text-sm text-white/50 leading-relaxed">
-            Prices, schedules, durations, and certifications or accreditation details are provided after you contact
-            us. Start with the inquiry form, or email{' '}
+            Prices, schedules, durations, and any certification or accreditation details are confirmed after you contact
+            us. DiTconsult does not issue certifications. Start with the inquiry form, or email{' '}
             <a href={`mailto:${COMPANY_EMAIL}`} className="text-primary-400 hover:underline">
               {COMPANY_EMAIL}
             </a>
@@ -363,16 +370,20 @@ export default function CorporateTrainingPage() {
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
             <Button asLink href="/contact?service=corporate-training" variant="primary" size="lg">
-              Request a Training Proposal
+              Request a training proposal
             </Button>
             <Button asLink href="/services" variant="secondary" size="lg">
-              View All Services
+              View all services
             </Button>
           </div>
           <p className="mt-6 text-sm text-white/45">
-            Related offering:{' '}
+            Related offerings:{' '}
             <Link href="/security-awareness" className="text-primary-400 hover:underline">
               Security Awareness Training
+            </Link>
+            {' · '}
+            <Link href="/industries/education" className="text-primary-400 hover:underline">
+              Educational and Institutional Consulting
             </Link>
             .
           </p>

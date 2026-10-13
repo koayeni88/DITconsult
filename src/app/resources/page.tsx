@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import ResourceLibraryPage from '@/components/tools/ResourceLibraryPage';
 
 export const metadata: Metadata = {
-  title: 'Free Cybersecurity Resources',
-  description: 'Download free cybersecurity checklists, incident response templates, compliance guides, and security frameworks from DiTconsult.',
+  title: 'Cybersecurity Resource Library',
+  description: 'Checklists, incident response templates, and compliance readiness guides from DiTconsult. Materials are educational starting points and are not certifications or formal assessments.',
   keywords: ['cybersecurity resources', 'free checklists', 'incident response template', 'compliance guide', 'security policy templates'],
   alternates: { canonical: '/resources' },
 };

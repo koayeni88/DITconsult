@@ -323,11 +323,11 @@ export default function CloudMisconfigDemo() {
         <motion.div initial="initial" animate="animate" variants={fadeInUp} className="text-center mb-12">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary-500/30 bg-primary-500/10 px-4 py-1.5 text-primary-400 font-semibold text-xs uppercase tracking-widest mb-4">
             <span className="h-1.5 w-1.5 rounded-full bg-primary-400 animate-pulse" />
-            Live Demo
+            Illustrative demo
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Cloud Misconfiguration Demo</h1>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Real-world misconfigurations we find across AWS, Azure, GCP, Terraform, and Kubernetes — with expert remediation steps.
+            Sample misconfigurations commonly seen across AWS, Azure, Google Cloud, Terraform, and Kubernetes, with example remediation steps. This is not a scan of your environment.
           </p>
         </motion.div>
 
@@ -440,14 +440,14 @@ export default function CloudMisconfigDemo() {
 
         {/* CTA */}
         <div className="mt-12 glass-effect-lg rounded-2xl p-8 text-center border border-primary-500/20">
-          <h3 className="text-2xl font-bold text-white mb-3">Found in Your Cloud?</h3>
-          <p className="text-white/60 mb-6">Our cloud security assessments identify these and hundreds more misconfigurations across your real environment.</p>
+          <h3 className="text-2xl font-bold text-white mb-3">Want these controls reviewed in your cloud?</h3>
+          <p className="text-white/60 mb-6">A scoped cloud security assessment reviews identity, configuration, and logging in your AWS, Azure, or Google Cloud environment. Findings are ranked; production changes require human approval.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="/contact" className="px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white font-semibold rounded-lg transition-colors">
-              Request a Cloud Assessment
+              Request a cloud assessment
             </a>
             <a href="/cyber-risk-score" className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg border border-white/20 transition-colors">
-              Take the Risk Score Quiz
+              Try the illustrative risk score
             </a>
           </div>
         </div>

@@ -10,13 +10,13 @@ export default function CoreStrengths() {
       <div className="container-custom relative z-10">
         <SectionHeading
           id="strengths-heading"
-          title="Three strengths that define DiTconsult"
-          subtitle="Specialization"
-          description="We lead with multi-cloud security, compliance readiness, and risk-prioritized remediation—so visitors know exactly where we create the most value."
+          title="Secure. Transform. Protect."
+          subtitle="How we create value"
+          description="Four complementary themes guide our work. We apply them according to the engagement—not as a slogan on every page."
           centered
           size="lg"
         />
-        <div className="grid md:grid-cols-3 gap-6 mt-12">
+        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6 mt-12">
           {CORE_STRENGTHS.map((item, index) => (
             <Link
               key={item.title}

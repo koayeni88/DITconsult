@@ -28,10 +28,10 @@ export default function CTASection() {
         </ul>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
           <Button asLink href="/contact" variant="primary" size="lg">
-            Book a Security Consultation
+            Request a consultation
           </Button>
           <Button asLink href="/services" variant="secondary" size="lg">
-            Explore Services
+            View services
           </Button>
         </div>
       </div>

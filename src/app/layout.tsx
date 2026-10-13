@@ -74,13 +74,12 @@ const organizationJsonLd = {
   areaServed: 'US',
   serviceType: [
     'Cybersecurity Consulting',
-    'Cloud Security Consulting',
-    'AWS and Azure Security Assessments',
-    'Compliance Readiness',
-    'Incident Response Readiness',
-    'Vulnerability Management',
-    'vCISO Advisory Services',
+    'Cybersecurity Consulting',
+    'IT and Digital Transformation Advisory',
     'Corporate Cybersecurity and IT Training',
+    'Educational and Institutional Consulting',
+    'Multi-Cloud Security Consulting',
+    'Virtual CISO Advisory Services',
   ],
 };
 

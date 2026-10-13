@@ -3,12 +3,12 @@ import Link from 'next/link';
 import SectionHeading from '@/components/common/SectionHeading';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CTASection from '@/components/home/CTASection';
-import { INDUSTRIES } from '@/lib/content';
+import { BRAND_TAGLINE, INDUSTRIES } from '@/lib/content';
 
 export const metadata: Metadata = {
   title: 'Industries We Serve',
   description:
-    'Cybersecurity consulting for healthcare, financial services, education, government contractors, SaaS companies, and growing businesses.',
+    'Cybersecurity consulting for healthcare, financial services, education, government contractors, SaaS companies, growing businesses, and cloud teams.',
   alternates: { canonical: '/industries' },
 };
 
@@ -19,10 +19,11 @@ export default function IndustriesPage() {
         <div className="container-custom">
           <Breadcrumbs items={[{ label: 'Industries' }]} />
           <div className="mt-8 max-w-3xl">
+            <p className="text-gold-400 text-xs font-semibold uppercase tracking-widest mb-3">{BRAND_TAGLINE}</p>
             <SectionHeading
-              title="Security consulting tailored to your industry"
+              title="How the four divisions apply by sector"
               subtitle="Industries"
-              description="Regulatory requirements, data sensitivity, and operational models differ by sector. We align assessments and advisory to your context."
+              description="Industry pages explain sector challenges and map them to cybersecurity, IT advisory, corporate training, and educational consulting. They do not replace the service catalog."
               centered={false}
               size="lg"
               as="h1"

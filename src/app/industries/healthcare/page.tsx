@@ -2,42 +2,82 @@ import { Metadata } from 'next';
 import IndustryPageTemplate from '@/components/common/IndustryPageTemplate';
 
 export const metadata: Metadata = {
-  title: 'Cybersecurity for Healthcare',
+  title: 'Healthcare Cybersecurity Consulting',
   alternates: { canonical: '/industries/healthcare' },
-  description: 'HIPAA-compliant cybersecurity services for hospitals, clinics, and digital health companies. Protect PHI, pass audits, and respond to ransomware.',
-  keywords: ['healthcare cybersecurity', 'HIPAA compliance', 'PHI security', 'hospital security', 'ransomware healthcare'],
+  description:
+    'HIPAA Security Rule readiness, PHI access review, and incident-notification planning for hospitals, clinics, and digital health teams. Advisory only — DiTconsult does not issue certifications.',
 };
 
 export default function HealthcarePage() {
   return (
     <IndustryPageTemplate
       industry="Healthcare"
-      badge="HIPAA · PHI Protection · Ransomware Defense"
-      headline="Cybersecurity Built for"
-      headlineAccent="Healthcare Organizations"
-      subheadline="Protect patient data, pass HIPAA audits, and respond to ransomware — without disrupting care delivery."
+      badge="HIPAA · PHI · Incident Readiness"
+      headline="Security advisory for"
+      headlineAccent="Healthcare organizations"
+      subheadline="Review PHI access, strengthen HIPAA-aligned controls, and plan notification workflows without claiming certification or interrupting clinical operations."
       heroIcon="🏥"
       challenges={[
-        { icon: '🔐', title: 'PHI Data Breaches', desc: 'Healthcare suffers the highest average breach cost of any industry — $10.9M per incident. EHR systems and medical devices are prime targets.' },
-        { icon: '💊', title: 'Ransomware Attacks', desc: 'Hospitals face targeted ransomware that disrupts clinical operations, delays patient care, and forces costly system recoveries.' },
-        { icon: '📋', title: 'HIPAA Compliance', desc: 'HIPAA Security Rule compliance is mandatory but complex. Gaps in risk analysis, BAAs, and technical safeguards create serious regulatory risk.' },
-        { icon: '🩺', title: 'Medical Device Security', desc: 'Connected medical devices (IoMT) often run outdated software and cannot be patched, creating persistent network vulnerabilities.' },
+        {
+          icon: '🔐',
+          title: 'PHI concentrated in clinical systems',
+          desc: 'Electronic health records, imaging, and cloud stores hold patient data. Weak access control, incomplete audit logs, and uneven encryption leave records exposed to misuse or theft.',
+        },
+        {
+          icon: '💊',
+          title: 'Ransomware and care disruption',
+          desc: 'Attacks on clinical and revenue-cycle systems can halt scheduling, records, and care coordination. Tested backup, segmentation, and notification plans matter more than tools alone.',
+        },
+        {
+          icon: '📋',
+          title: 'HIPAA Security Rule gaps',
+          desc: 'Required risk analysis, Business Associate Agreements, and technical safeguards are often incomplete or outdated. Those gaps create regulatory, contractual, and patient-trust risk.',
+        },
+        {
+          icon: '🩺',
+          title: 'Connected medical devices',
+          desc: 'Many IoMT devices cannot be patched on clinical timelines. Network isolation and compensating controls are often the practical way to reduce exposure.',
+        },
       ]}
       services={[
-        { title: 'HIPAA Security Rule Assessment', desc: 'Full risk analysis against HIPAA administrative, physical, and technical safeguards with documented findings and remediation plan.', link: '/compliance' },
-        { title: 'Ransomware Preparedness', desc: 'Backup strategy, network segmentation, IR plan testing, and tabletop exercises specifically designed for healthcare operational environments.', link: '/incident-response' },
-        { title: 'EHR & Cloud Security Review', desc: 'Security assessment of Epic, Cerner, and cloud-hosted EHR configurations, including access control, audit logging, and data protection controls.', link: '/cloud-security' },
-        { title: 'Medical Device Security Assessment', desc: 'Inventory and risk assessment of connected medical devices with network isolation recommendations and compensating controls.', link: '/services' },
-        { title: 'Business Associate Agreement Review', desc: 'Review and remediation of BAA gaps with vendors and cloud providers handling PHI on your behalf.', link: '/compliance' },
-        { title: 'Virtual CISO for Healthcare', desc: 'Fractional CISO providing ongoing security leadership, board reporting, and regulatory guidance without the cost of a full-time hire.', link: '/virtual-ciso' },
+        {
+          title: 'HIPAA Security Rule readiness',
+          desc: 'Gap analysis against administrative, physical, and technical safeguards, with documented findings and a remediation plan. Independent authorities determine compliance status.',
+          link: '/compliance',
+        },
+        {
+          title: 'Ransomware and incident readiness',
+          desc: 'Backup strategy, segmentation guidance, notification-workflow planning, and tabletop exercises for clinical, IT, and leadership roles.',
+          link: '/incident-response',
+        },
+        {
+          title: 'EHR and cloud security review',
+          desc: 'Access control, audit logging, and data-protection review of cloud-hosted clinical systems and supporting infrastructure.',
+          link: '/cloud-security',
+        },
+        {
+          title: 'Medical device network advisory',
+          desc: 'Inventory support, risk ranking, and isolation recommendations for connected devices that cannot follow standard patch cycles.',
+          link: '/services',
+        },
+        {
+          title: 'Business Associate Agreement review',
+          desc: 'Identify BAA and vendor-control gaps for parties that create, receive, maintain, or transmit PHI on your behalf.',
+          link: '/compliance',
+        },
+        {
+          title: 'Virtual CISO for healthcare',
+          desc: 'Fractional security leadership for risk treatment, board reporting, and regulatory preparation when a full-time CISO is not in place.',
+          link: '/virtual-ciso',
+        },
       ]}
-      frameworks={['HIPAA Security Rule', 'NIST CSF', 'HITRUST', 'SOC 2', 'CIS Controls v8']}
+      frameworks={['HIPAA Security Rule', 'NIST CSF', 'HITRUST CSF (mapping)', 'SOC 2 (readiness)', 'CIS Controls']}
       stats={[
-        { label: 'Healthcare breach cost', value: '$10.9M', sub: 'average per incident' },
-        { label: 'Ransomware targets', value: '1 in 3', sub: 'healthcare orgs hit per year' },
-        { label: 'PHI exposed in 2024', value: '184M', sub: 'records breached' },
+        { label: 'Patient data', value: 'PHI', sub: 'Access, encryption, and audit-logging review' },
+        { label: 'Operational risk', value: 'Ransomware', sub: 'Backup, segmentation, and notification planning' },
+        { label: 'Regulatory posture', value: 'HIPAA', sub: 'Security Rule readiness advisory, not certification' },
       ]}
-      cta="Get a HIPAA Security Assessment"
+      cta="Schedule a Security Consultation"
     />
   );
 }

@@ -1,102 +1,118 @@
 import { ServicePageData } from '@/types';
 
 const sharedProcess = [
-  { title: 'Discover', description: 'Align on scope, stakeholders, systems in scope, and success criteria.' },
-  { title: 'Assess', description: 'Collect evidence through interviews, configuration review, and testing where appropriate.' },
-  { title: 'Prioritize', description: 'Rank findings by business impact, likelihood, and compliance relevance.' },
-  { title: 'Deliver', description: 'Provide reports, roadmaps, and optional remediation support with validation.' },
+  { title: 'Discover', description: 'Confirm scope, stakeholders, systems in scope, access needs, and success criteria.' },
+  { title: 'Assess', description: 'Collect evidence through interviews, configuration review, and testing only where authorized.' },
+  { title: 'Prioritize', description: 'Rank findings by business impact, exposure, and compliance relevance—not volume.' },
+  { title: 'Deliver', description: 'Provide reports, a remediation roadmap, and optional validation after agreed changes.' },
 ];
 
 export const SERVICE_PAGES: Record<string, ServicePageData> = {
   'cloud-security': {
     slug: 'cloud-security',
-    title: 'Cloud Security Assessment',
-    metaTitle: 'Cloud Security Assessment | AWS, Azure & Google Cloud',
+    title: 'Multi-Cloud Security Consulting',
+    metaTitle: 'Multi-Cloud Security Consulting | AWS, Azure, and Google Cloud',
     metaDescription:
-      'Multi-cloud security assessments for AWS, Azure, and Google Cloud. Identify misconfigurations, strengthen identity controls, and receive a risk-prioritized remediation plan.',
-    keywords: ['cloud security assessment', 'AWS security', 'Azure security', 'Google Cloud security', 'multi-cloud security'],
-    subtitle: 'Multi-Cloud Security',
+      'Multi-cloud security consulting across AWS, Azure, and Google Cloud. Review identity, configuration, logging, and architecture, then receive a risk-ranked remediation plan.',
+    keywords: ['multi-cloud security consulting', 'cloud security assessment', 'AWS security', 'Azure security', 'Google Cloud security'],
+    subtitle: 'Cloud posture and architecture',
     heroDescription:
-      'Identify misconfigurations, excessive permissions, and control gaps across AWS, Azure, and Google Cloud—with findings your engineering and leadership teams can act on.',
+      'Review identity, network, storage, encryption, and logging across AWS, Azure, and Google Cloud. Findings are ranked so engineering and leadership can act on the same list.',
     problem:
-      'Cloud environments evolve quickly. Misconfigurations, weak identity controls, and inconsistent logging create exposure that traditional perimeter security does not address.',
+      'Cloud estates change quickly. Public storage, over-privileged identities, and uneven logging create exposure that perimeter controls do not address. This service examines the cloud environment itself—not the enterprise risk register, scanner backlog, or delivery pipeline.',
     audience: [
-      'Organizations migrating to or operating in AWS, Azure, or Google Cloud',
-      'Teams preparing for customer security reviews or audits',
-      'Engineering leaders who need a prioritized remediation backlog',
+      'Organizations operating or migrating to AWS, Azure, or Google Cloud',
+      'Teams preparing for customer security reviews or independent audits',
+      'Engineering and security leaders who need a ranked remediation backlog',
     ],
     warningSigns: [
-      'Publicly accessible storage or databases discovered in scans',
-      'IAM roles with broad administrative permissions',
-      'Inconsistent logging and monitoring across accounts',
-      'Security findings backlog growing faster than remediation',
+      'Publicly accessible storage or databases appear in scans',
+      'IAM roles carry broad administrative permissions',
+      'Logging and monitoring differ by account or subscription',
+      'Security findings accumulate faster than they are closed',
     ],
     included: [
       'Identity and access management review',
-      'Network and segmentation assessment',
+      'Network and segmentation review',
       'Storage and encryption configuration review',
-      'Logging, monitoring, and alerting evaluation',
+      'Logging, monitoring, and alerting review',
       'Configuration baseline and drift analysis',
-      'Compliance-relevant control mapping (when in scope)',
+      'Compliance-relevant control mapping when that work is in scope',
     ],
     process: sharedProcess,
     deliverables: [
       'Executive risk summary',
-      'Technical findings with evidence',
+      'Technical findings with supporting evidence',
       'Risk-ranked remediation backlog',
       'Architecture and hardening recommendations',
-      'Optional re-validation after remediation',
+      'Optional re-validation after agreed remediation',
     ],
     frameworks: ['CIS Benchmarks', 'NIST CSF', 'CSA CCM'],
     platforms: ['AWS', 'Microsoft Azure', 'Google Cloud'],
+    benefits: [
+      'A single ranked view of cloud exposure instead of disconnected platform reports',
+      'Clear owners and next actions for identity, storage, network, and logging gaps',
+      'Evidence that supports later compliance readiness work without treating this as an audit',
+    ],
+    nextStep:
+      'Request a cybersecurity assessment to confirm platforms in scope, access needs, and whether a Cloud Posture Review is the right starting point.',
+    ctaLabel: 'Request a Cybersecurity Assessment',
+    ctaHref: '/contact?service=cloud-security',
     faqs: [
       {
         question: 'Do you need production access?',
-        answer: 'Scope determines access. Many assessments use read-only access, configuration exports, and interviews. We align on least-privilege access before work begins.',
+        answer:
+          'Access depends on scope. Many assessments use read-only access, configuration exports, and interviews. We agree least-privilege access before work begins.',
       },
       {
-        question: 'Can you assess multiple cloud providers in one engagement?',
-        answer: 'Yes. Multi-cloud and hybrid assessments are common. We provide a unified risk view with platform-specific remediation guidance.',
+        question: 'Can you assess more than one cloud provider in a single engagement?',
+        answer:
+          'Yes. Multi-cloud and hybrid reviews are common. You receive one risk view with platform-specific remediation guidance.',
+      },
+      {
+        question: 'How is this different from a risk assessment or remediation engagement?',
+        answer:
+          'This service evaluates cloud configuration, identity, and architecture. A cybersecurity risk assessment describes enterprise risk in business terms. AI-assisted detection and remediation focuses on closing known findings under human approval.',
       },
     ],
   },
   'ai-cloud-remediation': {
     slug: 'ai-cloud-remediation',
-    title: 'AI-Assisted Cloud Remediation',
-    metaTitle: 'AI-Assisted Cloud Misconfiguration Remediation',
+    title: 'AI-Assisted Security Detection and Remediation',
+    metaTitle: 'AI-Assisted Security Detection and Remediation',
     metaDescription:
-      'AI-assisted workflows to detect, prioritize, and guide remediation of cloud misconfigurations across AWS, Azure, and Google Cloud—with human oversight and auditability.',
-    keywords: ['cloud misconfiguration remediation', 'AI-assisted security', 'multi-cloud remediation', 'CSPM'],
-    subtitle: 'Intelligent Remediation',
+      'AI-assisted detection and prioritization of security findings across AWS, Azure, and Google Cloud. Production changes require human review and approval.',
+    keywords: ['AI-assisted security', 'cloud misconfiguration remediation', 'multi-cloud remediation', 'CSPM'],
+    subtitle: 'Detection, triage, and controlled change',
     heroDescription:
-      'Accelerate cloud security improvement with AI-assisted detection and prioritization—while keeping humans in control of every production change.',
+      'Use AI-assisted detection and prioritization to move security findings into a controlled remediation plan. People review and approve every production change.',
     problem:
-      'Cloud security findings accumulate across accounts and services. Manual triage slows remediation and leaves high-risk misconfigurations open longer than necessary.',
+      'Findings accumulate across accounts and services. Manual triage slows closure and leaves high-impact issues open longer than the business can accept. This service is for closing known work—not for producing a first-time cloud assessment or an enterprise risk register.',
     audience: [
-      'Teams with large cloud footprints and growing finding backlogs',
-      'Organizations seeking faster, risk-aware remediation workflows',
-      'Security and platform teams needing audit-ready change evidence',
+      'Teams with large cloud estates and growing finding backlogs',
+      'Organizations that need faster, risk-aware remediation planning',
+      'Security and platform teams that must document change evidence',
     ],
     warningSigns: [
       'Critical misconfigurations remain open for weeks',
-      'No consistent prioritization method across cloud platforms',
-      'Remediation efforts lack validation or documentation',
-      'Configuration drift reintroduces resolved issues',
+      'Prioritization methods differ across cloud platforms',
+      'Remediation work lacks validation or written evidence',
+      'Configuration drift reintroduces issues that were already closed',
     ],
     included: [
       'Cloud asset and configuration discovery',
-      'Misconfiguration and policy drift detection',
+      'Misconfiguration and policy-drift detection',
       'AI-assisted risk prioritization with business context',
       'Human-reviewed remediation recommendations',
       'Change validation and evidence documentation',
-      'Ongoing posture monitoring guidance',
+      'Guidance for ongoing posture monitoring',
     ],
     process: [
       { title: 'Discover', description: 'Inventory cloud assets, policies, and configuration baselines.' },
       { title: 'Detect', description: 'Identify misconfigurations, drift, and policy violations.' },
-      { title: 'Prioritize', description: 'Rank findings using risk context—not volume alone.' },
-      { title: 'Remediate', description: 'Guide approved changes with validation and audit evidence.' },
-      { title: 'Monitor', description: 'Track posture and prevent recurrence through continuous review.' },
+      { title: 'Prioritize', description: 'Rank findings by risk context, not ticket volume.' },
+      { title: 'Remediate', description: 'Guide approved changes with validation and audit evidence. Production changes require human approval.' },
+      { title: 'Monitor', description: 'Track posture and reduce recurrence through scheduled review.' },
     ],
     deliverables: [
       'Prioritized remediation backlog',
@@ -106,93 +122,113 @@ export const SERVICE_PAGES: Record<string, ServicePageData> = {
     ],
     frameworks: ['CIS Benchmarks', 'NIST CSF'],
     platforms: ['AWS', 'Microsoft Azure', 'Google Cloud'],
+    benefits: [
+      'Faster triage of high-impact findings without unsupervised production changes',
+      'Documented recommendations, approvals, and validation for audit evidence',
+      'A repeatable method for ranking work by business risk rather than ticket volume',
+    ],
+    nextStep:
+      'Discuss remediation support if you already have findings and need a controlled plan to close the highest-risk items first.',
+    ctaLabel: 'Discuss Remediation Support',
+    ctaHref: '/contact?service=ai-remediation',
     faqs: [
       {
         question: 'Does AI make changes automatically in production?',
         answer:
-          'No. AI assists with detection, prioritization, and recommendation. Production changes require human review and approval. Rollback planning and least-privilege principles apply throughout.',
+          'No. AI assists with detection, prioritization, and recommendation. Production changes require human review and approval. Rollback planning and least-privilege access apply throughout.',
       },
       {
         question: 'How is auditability maintained?',
-        answer: 'Recommendations, approvals, and validation results are documented to support internal audit and compliance evidence needs.',
+        answer:
+          'Recommendations, approvals, and validation results are documented to support internal audit and compliance evidence needs.',
       },
     ],
   },
   'vulnerability-assessment': {
     slug: 'vulnerability-assessment',
     title: 'Vulnerability Assessment and Remediation',
-    metaTitle: 'Vulnerability Assessment & Remediation Consulting',
+    metaTitle: 'Vulnerability Assessment and Remediation Consulting',
     metaDescription:
-      'Risk-based vulnerability assessment and remediation guidance across cloud infrastructure and critical systems.',
+      'Risk-based vulnerability assessment and remediation guidance for cloud infrastructure and other systems in scope. Findings are ranked by exploitability, exposure, and business impact.',
     keywords: ['vulnerability assessment', 'vulnerability remediation', 'risk-based patching', 'security scanning'],
-    subtitle: 'Risk-Based Triage',
+    subtitle: 'Risk-based triage',
     heroDescription:
-      'Move beyond scan volume to actionable remediation—prioritized by exploitability, exposure, and business impact.',
+      'Convert scanner output into a remediation backlog ranked by exploitability, exposure, and business impact—not by finding count alone.',
     problem:
-      'Vulnerability scanners produce thousands of findings. Without risk context, teams patch the wrong things first—or nothing at all.',
+      'Vulnerability scanners produce large volumes of findings. Without risk context, teams patch the wrong items first or stall entirely.',
     audience: [
-      'Teams overwhelmed by scanner output',
-      'Organizations preparing for audits or penetration tests',
+      'Teams overloaded by scanner output',
+      'Organizations preparing for audits or coordinated penetration testing',
       'Engineering leaders who need a defensible prioritization method',
     ],
     warningSigns: [
-      'Critical CVEs open beyond agreed SLA windows',
-      'No consistent scoring or ownership for findings',
-      'Scan results disconnected from asset criticality',
-      'Repeat findings after superficial fixes',
+      'Critical CVEs remain open past agreed SLA windows',
+      'Findings lack consistent scoring or named owners',
+      'Scan results are not tied to asset criticality',
+      'The same findings return after incomplete fixes',
     ],
     included: [
       'Vulnerability discovery and inventory alignment',
-      'Risk-based prioritization methodology',
+      'Risk-based prioritization method',
       'Remediation guidance with ownership assignment',
-      'Compliance correlation (when in scope)',
+      'Compliance correlation when that work is in scope',
       'Validation and re-scan coordination',
     ],
     process: sharedProcess,
     deliverables: [
       'Risk-ranked vulnerability backlog',
-      'Remediation playbooks for top findings',
+      'Remediation playbooks for the highest-priority findings',
       'Executive summary of exposure trends',
-      'Validation evidence after remediation',
+      'Validation evidence after agreed remediation',
     ],
     frameworks: ['CVSS contextualization', 'NIST CSF'],
     platforms: ['Cloud infrastructure', 'Endpoints', 'Applications (scope-dependent)'],
+    benefits: [
+      'A backlog ranked by exploitability and business impact rather than finding count',
+      'Named owners and guidance for the highest-priority items',
+      'Validation evidence after agreed remediation',
+    ],
+    nextStep:
+      'Speak with a security consultant if scanner output is growing faster than your team can close it.',
+    ctaLabel: 'Speak With a Security Consultant',
+    ctaHref: '/contact?service=vulnerability-management',
     faqs: [
       {
         question: 'Do you run scans or use our existing tools?',
-        answer: 'We can work with your existing scanning tools and processes or help evaluate tooling gaps as part of scope planning.',
+        answer:
+          'We can work with your existing scanning tools and processes, or help evaluate tooling gaps during scope planning.',
       },
     ],
   },
   'compliance': {
     slug: 'compliance',
-    title: 'Compliance Readiness',
-    metaTitle: 'Compliance Readiness Consulting | SOC 2, HIPAA, PCI, ISO 27001',
+    title: 'Governance, Risk, and Compliance Advisory',
+    metaTitle: 'Governance, Risk, and Compliance Advisory | SOC 2, HIPAA, ISO/IEC 27001',
     metaDescription:
-      'Compliance readiness advisory for NIST CSF, ISO 27001, SOC 2, HIPAA, PCI DSS, CMMC, and FedRAMP. Gap analysis, control mapping, and remediation planning.',
-    keywords: ['compliance readiness', 'SOC 2 readiness', 'HIPAA compliance advisory', 'ISO 27001 readiness', 'PCI DSS'],
-    subtitle: 'Audit-Ready Programs',
+      'GRC advisory for NIST CSF, ISO/IEC 27001, SOC 2, HIPAA, PCI DSS, CMMC, and FedRAMP readiness. Gap analysis, control mapping, and evidence planning. DiTconsult does not issue certifications.',
+    keywords: ['governance risk compliance', 'compliance readiness', 'SOC 2 readiness', 'HIPAA compliance advisory', 'ISO 27001 readiness'],
+    subtitle: 'Readiness for independent review',
     heroDescription:
-      'Build structured, evidence-ready security programs aligned to the frameworks your customers and regulators expect—without claiming certification on your behalf.',
+      'Structure cybersecurity governance, control ownership, and evidence so your team can enter an independent review with a clear plan. DiTconsult advises on readiness; independent auditors and certifying bodies issue certifications.',
     problem:
-      'Compliance requirements are complex and evolving. Teams struggle to map controls, collect evidence, and close gaps before audit deadlines.',
+      'Framework requirements are detailed and change over time. Teams struggle to map controls, collect evidence, and close gaps before review deadlines. This service is readiness advisory—not a cloud configuration assessment and not a certification.',
     audience: [
-      'Organizations pursuing SOC 2, ISO 27001, or industry-specific compliance',
-      'Healthcare and financial services with regulatory obligations',
-      'Government contractors preparing for CMMC or FedRAMP alignment',
+      'Organizations preparing for SOC 2, ISO 27001, or industry-specific reviews',
+      'Healthcare and financial services teams with regulatory obligations',
+      'Government contractors aligning to CMMC or FedRAMP expectations',
     ],
     warningSigns: [
-      'Policies exist but are not operationalized',
-      'Audit preparation consumes weeks of manual effort',
-      'Control owners unclear on evidence requirements',
-      'Gaps discovered late in the audit cycle',
+      'Policies exist but are not followed in daily operations',
+      'Audit preparation requires weeks of unstructured effort',
+      'Control owners are unclear on evidence requirements',
+      'Gaps appear late in the audit or assessment cycle',
     ],
     included: [
       'Framework selection and scoping guidance',
-      'Control gap analysis and maturity assessment',
+      'Control gap analysis and maturity review',
       'Policy and procedure advisory',
       'Evidence collection planning',
-      'Remediation roadmap aligned to audit timelines',
+      'Remediation roadmap aligned to review timelines',
       'Auditor coordination support (advisory only)',
     ],
     process: sharedProcess,
@@ -202,8 +238,17 @@ export const SERVICE_PAGES: Record<string, ServicePageData> = {
       'Evidence collection checklist',
       'Executive readiness summary',
     ],
-    frameworks: ['NIST CSF', 'ISO 27001', 'SOC 2', 'HIPAA', 'PCI DSS', 'CMMC', 'FedRAMP (readiness)'],
+    frameworks: ['NIST CSF', 'ISO/IEC 27001', 'SOC 2', 'HIPAA', 'PCI DSS', 'CMMC', 'FedRAMP (readiness)'],
     platforms: ['Cloud and on-premises (scope-dependent)'],
+    benefits: [
+      'A control gap matrix tied to the frameworks in your agreed scope',
+      'Clearer ownership of evidence collection before an auditor is engaged',
+      'A remediation sequence that leadership can fund against review timelines',
+    ],
+    nextStep:
+      'Discuss compliance readiness if you are preparing for SOC 2, ISO/IEC 27001, HIPAA, PCI DSS, CMMC, or a related review.',
+    ctaLabel: 'Discuss Compliance Readiness',
+    ctaHref: '/contact?service=compliance',
     faqs: [
       {
         question: 'Do you provide certification or attestation?',
@@ -214,25 +259,25 @@ export const SERVICE_PAGES: Record<string, ServicePageData> = {
   },
   'security-risk-assessment': {
     slug: 'security-risk-assessment',
-    title: 'Security Risk Assessment',
-    metaTitle: 'Security Risk Assessment Consulting',
+    title: 'Cybersecurity Risk Assessment and Management',
+    metaTitle: 'Cybersecurity Risk Assessment and Management Consulting',
     metaDescription:
-      'Executive-focused security risk assessments that quantify exposure, evaluate controls, and produce prioritized mitigation roadmaps.',
-    keywords: ['security risk assessment', 'cyber risk assessment', 'risk quantification', 'security posture'],
-    subtitle: 'Risk Visibility',
+      'Cybersecurity risk assessments that describe exposure in business terms, evaluate controls, and produce a prioritized treatment roadmap for executives and boards.',
+    keywords: ['cybersecurity risk assessment', 'security risk assessment', 'risk management consulting', 'security posture'],
+    subtitle: 'Enterprise risk and treatment decisions',
     heroDescription:
-      'Understand your security posture in business terms—with clear control gaps, threat scenarios, and prioritized mitigation actions.',
+      'Describe security posture in business terms: control gaps, realistic threat scenarios, and prioritized treatment options leadership can fund and track.',
     problem:
-      'Leadership needs risk visibility that connects technical findings to business consequences—not disconnected scan results.',
+      'Leadership needs a shared view of cyber risk that connects technical findings to business consequences—not disconnected scan results or a cloud configuration inventory.',
     audience: [
-      'Executives planning security investments',
+      'Executives planning security investment',
       'Boards requesting cyber risk reporting',
-      'Teams preparing for M&A diligence or insurance reviews',
+      'Teams preparing for merger diligence or insurance reviews',
     ],
     warningSigns: [
-      'No shared view of top cyber risks across leadership',
-      'Security spending without measurable risk reduction',
-      'Inconsistent risk language between IT and business units',
+      'Leadership does not share a view of the top cyber risks',
+      'Security spending is not tied to measurable risk reduction',
+      'IT and business units use inconsistent risk language',
     ],
     included: [
       'Current-state control evaluation',
@@ -248,45 +293,60 @@ export const SERVICE_PAGES: Record<string, ServicePageData> = {
       'Control maturity assessment',
       'Implementation roadmap',
     ],
-    frameworks: ['NIST CSF', 'NIST 800-30 (risk guidance)', 'ISO 27005'],
+    frameworks: ['NIST CSF', 'NIST SP 800-30 (risk guidance)', 'ISO/IEC 27005'],
     platforms: ['Enterprise-wide (scope-defined)'],
+    benefits: [
+      'A shared risk language for executives, boards, and technical teams',
+      'Treatment options tied to business impact rather than finding volume',
+      'A foundation for later compliance, remediation, or virtual CISO work',
+    ],
+    nextStep:
+      'Schedule a security consultation to define assessment scope, stakeholders, and the decisions this work should support.',
+    ctaLabel: 'Schedule a Security Consultation',
+    ctaHref: '/contact?service=risk-assessment',
     faqs: [
       {
         question: 'Is this different from a penetration test?',
-        answer: 'Yes. Risk assessments evaluate controls and exposure holistically. Penetration testing validates specific attack paths. Both can complement each other.',
+        answer:
+          'Yes. A risk assessment evaluates controls and exposure across the agreed scope. Penetration testing validates specific attack paths. DiTconsult coordinates penetration testing; the two services can complement each other when both are in scope.',
+      },
+      {
+        question: 'How is this different from a cloud security assessment?',
+        answer:
+          'A multi-cloud security review examines configuration, identity, and architecture on AWS, Azure, and Google Cloud. This service produces an enterprise risk view and treatment options. The two can be sequenced when both are needed.',
       },
     ],
   },
   'incident-response': {
     slug: 'incident-response',
     title: 'Incident Response Planning',
-    metaTitle: 'Incident Response Planning & Tabletop Exercises',
+    metaTitle: 'Incident Response Planning and Tabletop Exercises',
     metaDescription:
-      'Build and test incident response capabilities with playbooks, tabletop exercises, and communication workflows aligned to your organization.',
+      'Incident response planning, playbooks, tabletop exercises, and communication workflows aligned to your organization and notification requirements.',
     keywords: ['incident response planning', 'tabletop exercises', 'IR playbooks', 'incident readiness'],
-    subtitle: 'Prepared Response',
+    subtitle: 'Prepared response',
     heroDescription:
-      'Develop tested incident response procedures so your team knows what to do, who to notify, and how to contain threats when minutes matter.',
+      'Build and exercise incident response procedures so roles, notification paths, and containment decisions are clear before an event occurs.',
     problem:
-      'Untested incident plans fail under pressure. Unclear roles, missing communication paths, and outdated procedures extend damage and recovery time.',
+      'Untested plans break under pressure. Unclear roles, missing communication paths, and outdated procedures extend impact and recovery time.',
     audience: [
-      'Organizations without formal IR procedures',
-      'Teams that have not exercised their plan in 12+ months',
+      'Organizations without formal incident response procedures',
+      'Teams that have not exercised their plan in 12 or more months',
       'Regulated industries with breach notification requirements',
     ],
     warningSigns: [
-      'No documented escalation paths',
-      'Legal, PR, and IT roles undefined during incidents',
-      'Backups untested for recovery scenarios',
-      'Tabletop exercises never conducted',
+      'Escalation paths are undocumented',
+      'Legal, communications, and IT roles are undefined during incidents',
+      'Backups have not been tested for recovery scenarios',
+      'Tabletop exercises have not been conducted',
     ],
     included: [
-      'IR plan and playbook development',
+      'Incident response plan and playbook development',
       'Role and responsibility mapping',
       'Tabletop exercise facilitation',
       'Communication and notification templates',
       'Post-exercise improvement planning',
-      'Integration with existing security tooling (scope-dependent)',
+      'Integration with existing security tooling when in scope',
     ],
     process: sharedProcess,
     deliverables: [
@@ -297,35 +357,45 @@ export const SERVICE_PAGES: Record<string, ServicePageData> = {
     ],
     frameworks: ['NIST CSF Respond function', 'NIST 800-61'],
     platforms: ['Organization-wide'],
+    benefits: [
+      'Role-based procedures teams can follow under pressure',
+      'Practiced notification and escalation paths',
+      'An improvement plan after tabletop exercises',
+    ],
+    nextStep:
+      'Schedule a security consultation to discuss readiness planning. Active-incident support is scoped separately.',
+    ctaLabel: 'Schedule a Security Consultation',
+    ctaHref: '/contact?service=incident-response',
     faqs: [
       {
         question: 'Do you provide 24/7 incident response retainer services?',
-        answer: 'Scope varies by engagement. Contact us to discuss readiness planning versus active incident support needs.',
+        answer:
+          'Scope varies by engagement. Contact us to discuss readiness planning versus support during an active incident.',
       },
     ],
   },
   'devsecops': {
     slug: 'devsecops',
-    title: 'DevSecOps and Secure Architecture',
-    metaTitle: 'DevSecOps & Secure Cloud Architecture Consulting',
+    title: 'DevSecOps and Infrastructure Security',
+    metaTitle: 'DevSecOps and Infrastructure Security Consulting',
     metaDescription:
-      'Integrate security into CI/CD pipelines, infrastructure as code, and cloud architecture with practical DevSecOps controls.',
-    keywords: ['DevSecOps consulting', 'secure architecture', 'CI/CD security', 'infrastructure as code security'],
-    subtitle: 'Secure by Design',
+      'Security advisory for CI/CD pipelines, infrastructure as code, containers, and cloud architecture. Practical controls designed to fit how your teams already build and deploy.',
+    keywords: ['DevSecOps consulting', 'infrastructure security', 'CI/CD security', 'infrastructure as code security'],
+    subtitle: 'Secure delivery and infrastructure',
     heroDescription:
-      'Embed security into how you build and deploy—secure architecture, pipeline controls, and IaC scanning that developers can adopt.',
+      'Build security into design, pipeline, and release workflows—architecture review, CI/CD controls, and infrastructure-as-code guidance your developers can adopt.',
     problem:
-      'Security bolted on after deployment is expensive and ineffective. Teams need security integrated into design, build, and release workflows.',
+      'Controls added after deployment are costly and incomplete. Teams need security in design, build, and release—not only in a point-in-time production review.',
     audience: [
       'Platform and DevOps teams scaling cloud delivery',
       'Organizations adopting infrastructure as code',
       'SaaS companies shipping frequently to production',
     ],
     warningSigns: [
-      'No security gates in CI/CD pipelines',
-      'Containers and IaC deployed without scanning',
-      'Architecture reviews skipped under delivery pressure',
-      'Secrets or credentials found in repositories',
+      'CI/CD pipelines have no security gates',
+      'Containers and infrastructure as code deploy without scanning',
+      'Architecture reviews are skipped under delivery pressure',
+      'Secrets or credentials appear in repositories',
     ],
     included: [
       'Secure architecture design review',
@@ -339,15 +409,25 @@ export const SERVICE_PAGES: Record<string, ServicePageData> = {
     deliverables: [
       'Architecture security recommendations',
       'Pipeline security control blueprint',
-      'IaC and container hardening guide',
+      'Infrastructure-as-code and container hardening guide',
       'Implementation roadmap',
     ],
     frameworks: ['CIS Benchmarks', 'NIST SSDF', 'OWASP'],
     platforms: ['AWS', 'Azure', 'Google Cloud', 'Kubernetes (scope-dependent)'],
+    benefits: [
+      'Security checks placed where developers already work',
+      'Clearer handling of secrets, images, and infrastructure as code',
+      'Architecture guidance that can be adopted incrementally',
+    ],
+    nextStep:
+      'Explore cloud security and delivery controls if your teams are scaling CI/CD, infrastructure as code, or multi-cloud release processes.',
+    ctaLabel: 'Explore Cloud Security Solutions',
+    ctaHref: '/contact?service=devsecops',
     faqs: [
       {
-        question: 'Will this slow down our release cadence?',
-        answer: 'Effective DevSecOps automates checks early in the pipeline—reducing late-stage failures and rework. We design controls that fit your delivery model.',
+        question: 'Will this slow our release cadence?',
+        answer:
+          'Well-placed checks run early in the pipeline and reduce late-stage failures and rework. We design controls to fit your delivery model; we do not promise a specific change in release speed.',
       },
     ],
   },
@@ -356,70 +436,85 @@ export const SERVICE_PAGES: Record<string, ServicePageData> = {
     title: 'Security Awareness Training',
     metaTitle: 'Security Awareness Training Programs',
     metaDescription:
-      'Role-based security awareness training, phishing simulations, and leadership briefings tailored to your organization.',
+      'Role-based security awareness training, phishing simulation design, and leadership briefings tailored to your organization. DiTconsult does not issue certifications.',
     keywords: ['security awareness training', 'phishing simulation', 'security culture', 'employee training'],
-    subtitle: 'Human Layer Defense',
+    subtitle: 'Workforce awareness',
     heroDescription:
-      'Build security-aware teams with targeted training, realistic simulations, and leadership engagement—not annual checkbox compliance.',
+      'Give employees, engineers, and leaders role-specific guidance, realistic simulations, and reporting habits—not a single annual completion exercise.',
     problem:
-      'Human error remains a leading factor in breaches. Generic annual training does not change behavior or reduce phishing susceptibility.',
+      'People remain a common factor in security incidents. Generic annual training rarely changes reporting behavior or phishing susceptibility.',
     audience: [
-      'Organizations with compliance training requirements',
-      'Teams experiencing phishing or social engineering incidents',
-      'Leaders building security culture across departments',
+      'Organizations with compliance-driven training requirements',
+      'Teams that have seen phishing or social-engineering incidents',
+      'Leaders building consistent security practice across departments',
     ],
     warningSigns: [
       'High click rates on simulated phishing',
-      'Employees unsure how to report suspicious activity',
-      'No role-specific security guidance',
-      'Training completion without measurable behavior change',
+      'Employees are unsure how to report suspicious activity',
+      'No role-specific security guidance exists',
+      'Training completion is tracked without behavior measures',
     ],
     included: [
       'Training needs assessment',
-      'Customized curriculum development',
+      'Curriculum development for your audience',
       'Phishing simulation program design',
-      'Role-based modules (executive, engineering, general staff)',
-      'Compliance-aligned content (when required)',
+      'Role-based modules for executives, engineering, and general staff',
+      'Compliance-aligned content when required',
       'Metrics and improvement reporting',
     ],
     process: sharedProcess,
     deliverables: [
       'Training program plan',
-      'Custom training materials',
-      'Simulation results report',
+      'Training materials for the agreed audience',
+      'Simulation results report when simulations are in scope',
       'Improvement recommendations',
     ],
     frameworks: ['NIST CSF Protect function', 'HIPAA (when applicable)'],
     platforms: ['Organization-wide'],
+    benefits: [
+      'Role-specific guidance instead of a single annual module',
+      'Clearer reporting habits for suspicious activity',
+      'Awareness work that can sit alongside broader corporate training',
+    ],
+    nextStep:
+      'Discuss your training requirements if you need awareness programs, or explore the broader corporate curriculum if technical upskilling is also in scope.',
+    ctaLabel: 'Discuss Your Training Requirements',
+    ctaHref: '/contact?service=security-training',
     faqs: [
       {
         question: 'How often should training run?',
-        answer: 'Frequency depends on risk profile and regulatory requirements. We recommend ongoing micro-learning and periodic simulations rather than one annual session.',
+        answer:
+          'Frequency depends on risk profile and regulatory requirements. Many organizations benefit from short, recurring sessions and periodic simulations rather than one annual session. We confirm cadence during scoping.',
+      },
+      {
+        question: 'How is this different from corporate or educational consulting?',
+        answer:
+          'Awareness training focuses on everyday security habits and social engineering. Corporate training covers broader technical and leadership skills. Educational consulting advises institutions on campus technology, governance, and faculty development.',
       },
     ],
   },
   'virtual-ciso': {
     slug: 'virtual-ciso',
-    title: 'Virtual CISO Services',
-    metaTitle: 'Virtual CISO (vCISO) Advisory Services',
+    title: 'Virtual CISO and Strategic Security Advisory',
+    metaTitle: 'Virtual CISO and Strategic Security Advisory',
     metaDescription:
-      'Strategic cybersecurity leadership for organizations that need executive guidance, governance, and board-ready reporting without a full-time CISO.',
+      'Fractional cybersecurity leadership for strategy, governance, risk reporting, and program direction. Virtual CISO advisory does not replace an internal security operations team.',
     keywords: ['virtual CISO', 'vCISO services', 'fractional CISO', 'cybersecurity leadership'],
-    subtitle: 'Executive Leadership',
+    subtitle: 'Ongoing security leadership',
     heroDescription:
-      'Access experienced security leadership for strategy, governance, risk reporting, and program direction—on a schedule that fits your organization.',
+      'Add senior security leadership for strategy, governance, risk reporting, and program direction—without hiring a full-time chief information security officer.',
     problem:
-      'Growing organizations face increasing security and compliance expectations without budget or need for a full-time Chief Information Security Officer.',
+      'Growing organizations face rising security and compliance expectations before they need, or can fund, a full-time CISO.',
     audience: [
-      'SMBs and mid-market companies without a CISO',
-      'Startups preparing for enterprise customers or funding diligence',
+      'Small and mid-market companies without a CISO',
+      'Startups preparing for enterprise customers or investor diligence',
       'Organizations between CISO hires',
     ],
     warningSigns: [
       'No security strategy aligned to business goals',
-      'Board or investors requesting cyber risk updates',
-      'Compliance deadlines without program ownership',
-      'Security decisions made ad hoc by IT',
+      'The board or investors request cyber risk updates',
+      'Compliance deadlines exist without program ownership',
+      'Security decisions are made ad hoc by IT',
     ],
     included: [
       'Security strategy and roadmap development',
@@ -431,8 +526,8 @@ export const SERVICE_PAGES: Record<string, ServicePageData> = {
     ],
     process: [
       { title: 'Assess', description: 'Evaluate current program maturity and stakeholder expectations.' },
-      { title: 'Plan', description: 'Develop strategy, roadmap, and governance cadence.' },
-      { title: 'Execute', description: 'Guide program initiatives and cross-functional alignment.' },
+      { title: 'Plan', description: 'Develop strategy, roadmap, and a governance cadence.' },
+      { title: 'Execute', description: 'Guide program work and cross-functional alignment.' },
       { title: 'Report', description: 'Deliver recurring executive and board-ready updates.' },
     ],
     deliverables: [
@@ -441,13 +536,22 @@ export const SERVICE_PAGES: Record<string, ServicePageData> = {
       'Executive and board reporting package',
       'Policy and program documentation',
     ],
-    frameworks: ['NIST CSF', 'ISO 27001', 'SOC 2 (program alignment)'],
+    frameworks: ['NIST CSF', 'ISO/IEC 27001', 'SOC 2 (program alignment)'],
     platforms: ['Organization-wide'],
+    benefits: [
+      'Senior direction without a full-time CISO hire',
+      'A governance cadence leadership can sustain',
+      'Clearer ownership of risk reporting and program decisions',
+    ],
+    nextStep:
+      'Speak with a security consultant to discuss whether fractional leadership, a time-boxed assessment, or both would fit your organization.',
+    ctaLabel: 'Speak With a Security Consultant',
+    ctaHref: '/contact?service=vciso',
     faqs: [
       {
-        question: 'How is vCISO different from a managed security provider?',
+        question: 'How is a virtual CISO different from a managed security provider?',
         answer:
-          'vCISO provides strategic leadership and governance—not outsourced SOC monitoring. We advise your organization; operational security tooling remains your choice.',
+          'A virtual CISO provides strategic leadership and governance. It is not outsourced security operations center monitoring. We advise your organization; you choose operational tooling and providers.',
       },
     ],
   },

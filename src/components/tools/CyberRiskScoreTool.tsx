@@ -120,11 +120,11 @@ const QUESTIONS = [
 
 const getRiskLevel = (score: number) => {
   const pct = (score / 30) * 100;
-  if (pct < 25) return { label: 'Critical Risk', color: '#ef4444', bg: 'from-red-950/60 to-red-900/30', border: 'border-red-500/40', desc: 'Your organization has significant security gaps that expose you to high risk of breach, ransomware, and regulatory penalties. Immediate action is needed.' };
-  if (pct < 50) return { label: 'High Risk', color: '#f97316', bg: 'from-orange-950/60 to-orange-900/30', border: 'border-orange-500/40', desc: 'Several foundational controls are missing or inconsistent. You have meaningful exposure that a motivated attacker could exploit.' };
-  if (pct < 70) return { label: 'Moderate Risk', color: '#eab308', bg: 'from-yellow-950/60 to-yellow-900/30', border: 'border-yellow-500/40', desc: 'You have some security controls in place but gaps remain. Focused improvements would significantly reduce your exposure.' };
-  if (pct < 90) return { label: 'Low Risk', color: '#22c55e', bg: 'from-green-950/60 to-green-900/30', border: 'border-green-500/40', desc: 'Your security posture is solid. Targeted enhancements and continuous improvement will help you reach and maintain an optimized state.' };
-  return { label: 'Resilient', color: '#06b6d4', bg: 'from-cyan-950/60 to-cyan-900/30', border: 'border-cyan-500/40', desc: 'Excellent security posture. Focus on continuous improvement, red teaming, and staying ahead of emerging threats.' };
+  if (pct < 25) return { label: 'Critical Risk', color: '#ef4444', bg: 'from-red-950/60 to-red-900/30', border: 'border-red-500/40', desc: 'Based on your answers, several foundational controls appear weak or missing. Treat this as a discussion prompt, not a formal finding.' };
+  if (pct < 50) return { label: 'High Risk', color: '#f97316', bg: 'from-orange-950/60 to-orange-900/30', border: 'border-orange-500/40', desc: 'Based on your answers, foundational controls look incomplete or inconsistent. A scoped review would be needed to confirm exposure.' };
+  if (pct < 70) return { label: 'Moderate Risk', color: '#eab308', bg: 'from-yellow-950/60 to-yellow-900/30', border: 'border-yellow-500/40', desc: 'Based on your answers, some controls are in place and gaps remain. Use this as a starting point for prioritization, not a guarantee of risk reduction.' };
+  if (pct < 90) return { label: 'Low Risk', color: '#22c55e', bg: 'from-green-950/60 to-green-900/30', border: 'border-green-500/40', desc: 'Based on your answers, many common controls appear present. Targeted review can still identify gaps this questionnaire cannot see.' };
+  return { label: 'Resilient', color: '#06b6d4', bg: 'from-cyan-950/60 to-cyan-900/30', border: 'border-cyan-500/40', desc: 'Based on your answers, controls appear comparatively mature. This score is illustrative and does not certify posture or predict incident outcomes.' };
 };
 
 const getRecommendations = (answers: number[]) => {
@@ -139,7 +139,7 @@ const getRecommendations = (answers: number[]) => {
   if (answers[7] < 2) recs.push('Automate backups and test restoration quarterly. Move to immutable or offsite copies.');
   if (answers[8] < 2) recs.push('Engage a compliance consultant to map your environment to NIST CSF or SOC 2.');
   if (answers[9] < 2) recs.push('Build a vendor risk questionnaire and assess your top 10 third-party suppliers.');
-  return recs.length ? recs : ['Excellent foundation — focus on red team exercises, threat intelligence, and zero-trust maturity.'];
+  return recs.length ? recs : ['Your answers suggest a comparatively strong foundation. A scoped review can still identify gaps this questionnaire cannot see.'];
 };
 
 export default function CyberRiskScoreTool() {
@@ -182,11 +182,11 @@ export default function CyberRiskScoreTool() {
         <motion.div initial="initial" animate="animate" variants={fadeInUp} className="text-center mb-12">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary-500/30 bg-primary-500/10 px-4 py-1.5 text-primary-400 font-semibold text-xs uppercase tracking-widest mb-4">
             <span className="h-1.5 w-1.5 rounded-full bg-primary-400 animate-pulse" />
-            Free Assessment
+            Illustrative tool
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Cyber Risk Score</h1>
           <p className="text-white/60 text-lg max-w-xl mx-auto">
-            Answer 10 questions about your security posture and receive a personalized risk rating with actionable recommendations — no email required.
+            Answer 10 questions for a directional risk rating and discussion points. This is not an audit, formal assessment, or certification. No email is required.
           </p>
         </motion.div>
 
@@ -239,7 +239,7 @@ export default function CyberRiskScoreTool() {
                 size="lg"
                 className="w-full disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                {current + 1 === QUESTIONS.length ? 'Get My Risk Score' : 'Next Question →'}
+                {current + 1 === QUESTIONS.length ? 'See illustrative score' : 'Next question →'}
               </Button>
             </motion.div>
           ) : (
@@ -252,7 +252,7 @@ export default function CyberRiskScoreTool() {
               {/* Score card */}
               <div className={`bg-gradient-to-br ${risk.bg} border ${risk.border} rounded-2xl p-8 md:p-10 mb-6`}>
                 <div className="text-center mb-8">
-                  <p className="text-white/50 text-sm uppercase tracking-widest mb-2">Your Risk Level</p>
+                  <p className="text-white/50 text-sm uppercase tracking-widest mb-2">Illustrative risk level</p>
                   <h2 className="text-5xl font-extrabold mb-1" style={{ color: risk.color }}>{risk.label}</h2>
                   <p className="text-white/60 text-sm mt-3 max-w-lg mx-auto">{risk.desc}</p>
                 </div>
@@ -315,10 +315,10 @@ export default function CyberRiskScoreTool() {
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asLink href="/contact" variant="primary" size="lg" className="flex-1 justify-center">
-                  Get a Full Security Assessment
+                  Discuss a scoped assessment
                 </Button>
                 <Button onClick={handleReset} variant="secondary" size="lg" className="flex-1 justify-center">
-                  Retake Assessment
+                  Retake questionnaire
                 </Button>
               </div>
             </motion.div>

@@ -2,41 +2,82 @@ import { Metadata } from 'next';
 import IndustryPageTemplate from '@/components/common/IndustryPageTemplate';
 
 export const metadata: Metadata = {
-  title: 'Cybersecurity for Finance & Fintech',
+  title: 'Financial Services Cybersecurity Consulting',
   alternates: { canonical: '/industries/finance' },
-  description: 'PCI DSS, SOC 2, and financial services cybersecurity. Protect cardholder data, meet regulatory requirements, and secure cloud banking infrastructure.',
+  description:
+    'PCI DSS and SOC 2 readiness, cloud control review, and examination preparation for banks, fintechs, and payment teams. DiTconsult does not issue certifications.',
 };
 
 export default function FinancePage() {
   return (
     <IndustryPageTemplate
       industry="Finance & Fintech"
-      badge="PCI DSS · SOC 2 · Financial Services"
-      headline="Enterprise Security for"
-      headlineAccent="Finance & Fintech"
-      subheadline="PCI DSS compliance, SOC 2 readiness, and cloud security for banks, fintechs, and financial services companies."
+      badge="PCI DSS · SOC 2 · Cloud Controls"
+      headline="Security advisory for"
+      headlineAccent="Financial services and fintech"
+      subheadline="Map payment and customer-data controls, prepare for PCI DSS or SOC 2 reviews, and reduce cloud misconfiguration risk in regulated environments."
       heroIcon="🏦"
       challenges={[
-        { icon: '💳', title: 'PCI DSS Compliance', desc: 'Processing payments requires PCI DSS compliance — scope definition, network segmentation, encryption, and quarterly scanning must all be maintained.' },
-        { icon: '🏴‍☠️', title: 'Financial Fraud & APT Attacks', desc: 'Financial institutions are prime targets for sophisticated nation-state and criminal threat actors using supply chain attacks, insider threats, and account takeover.' },
-        { icon: '☁️', title: 'Cloud Banking Security', desc: 'Moving core banking to AWS, Azure, or GCP introduces new misconfiguration risks, data sovereignty questions, and regulatory examination expectations.' },
-        { icon: '⚖️', title: 'Regulatory Examinations', desc: 'OCC, FFIEC, FDIC, and state regulators examine cybersecurity programs. Gaps can result in enforcement actions, fines, and reputational damage.' },
+        {
+          icon: '💳',
+          title: 'Cardholder-data scope',
+          desc: 'PCI DSS requires a defined cardholder data environment, segmentation, encryption, and recurring testing. Unclear scope is a frequent source of findings and rework.',
+        },
+        {
+          icon: '🏴‍☠️',
+          title: 'Fraud and account takeover',
+          desc: 'Payment and digital-banking channels attract credential abuse, social engineering, and targeted intrusion. Identity, transaction monitoring, and vendor access need consistent owners.',
+        },
+        {
+          icon: '☁️',
+          title: 'Cloud workloads under examination',
+          desc: 'Core and customer applications on AWS, Azure, or Google Cloud raise configuration, identity, logging, and data-residency questions examiners and customers will ask.',
+        },
+        {
+          icon: '⚖️',
+          title: 'Regulatory examination readiness',
+          desc: 'OCC, FFIEC, FDIC, and state reviews expect documented cybersecurity programs. Thin evidence and unclear control owners create examination risk.',
+        },
       ]}
       services={[
-        { title: 'PCI DSS Assessment & Remediation', desc: 'Scoping, gap assessment, and remediation support for PCI DSS v4.0 compliance across your cardholder data environment.', link: '/compliance' },
-        { title: 'SOC 2 Readiness for Fintechs', desc: 'SOC 2 Type II readiness assessment, policy development, evidence collection, and auditor coordination.', link: '/compliance' },
-        { title: 'Cloud Security for Financial Services', desc: 'Security assessment and hardening of cloud environments hosting financial applications, APIs, and customer data.', link: '/cloud-security' },
-        { title: 'FFIEC Cybersecurity Assessment', desc: 'Assessment against the FFIEC Cybersecurity Assessment Tool (CAT) to prepare for regulatory examinations.', link: '/services' },
-        { title: 'Penetration Testing', desc: 'External and internal penetration testing of financial applications, APIs, and network infrastructure.', link: '/services' },
-        { title: 'Incident Response Planning', desc: 'Financial-services-specific IR plan development and testing, including regulatory notification procedures.', link: '/incident-response' },
+        {
+          title: 'PCI DSS readiness advisory',
+          desc: 'Scoping, gap assessment, and remediation planning for your cardholder data environment. Qualified Security Assessors issue Reports on Compliance.',
+          link: '/compliance',
+        },
+        {
+          title: 'SOC 2 readiness for fintechs',
+          desc: 'Trust Services Criteria gap analysis, policy and evidence planning, and auditor coordination support. Independent auditors issue SOC 2 reports.',
+          link: '/compliance',
+        },
+        {
+          title: 'Cloud security for financial workloads',
+          desc: 'Identity, logging, encryption, and network review of environments hosting applications, APIs, and customer data.',
+          link: '/cloud-security',
+        },
+        {
+          title: 'FFIEC-aligned program review',
+          desc: 'Advisory mapping to FFIEC cybersecurity expectations to support internal preparation for regulatory examinations.',
+          link: '/services',
+        },
+        {
+          title: 'Vulnerability assessment and test coordination',
+          desc: 'Risk-ranked findings from assessments and coordinated testing of applications and APIs. Scope and tester selection are agreed before work begins.',
+          link: '/vulnerability-assessment',
+        },
+        {
+          title: 'Incident-response planning',
+          desc: 'Playbooks and tabletop exercises that include financial-sector notification, customer communication, and evidence preservation.',
+          link: '/incident-response',
+        },
       ]}
-      frameworks={['PCI DSS v4.0', 'SOC 2 Type II', 'NIST CSF', 'FFIEC CAT', 'ISO 27001', 'GLBA Safeguards Rule']}
+      frameworks={['PCI DSS', 'SOC 2 (readiness)', 'NIST CSF', 'FFIEC CAT (mapping)', 'ISO/IEC 27001 (readiness)', 'GLBA Safeguards Rule']}
       stats={[
-        { label: 'Finance breach cost', value: '$6.1M', sub: 'average per incident' },
-        { label: 'Fintech growth', value: '3x', sub: 'increase in cloud-native threats' },
-        { label: 'PCI fines', value: '$100K/mo', sub: 'for non-compliance' },
+        { label: 'Payment data', value: 'PCI DSS', sub: 'Scope, segmentation, and control readiness' },
+        { label: 'Customer trust', value: 'SOC 2', sub: 'Readiness advisory before an independent audit' },
+        { label: 'Cloud operations', value: 'Multi-cloud', sub: 'AWS, Azure, and Google Cloud posture review' },
       ]}
-      cta="Schedule a Financial Services Assessment"
+      cta="Schedule a Security Consultation"
     />
   );
 }

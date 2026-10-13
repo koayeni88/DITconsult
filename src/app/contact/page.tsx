@@ -7,7 +7,7 @@ import { COMPANY_EMAIL, COMPANY_PHONE, COMPANY_NAME } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Contact Us',
-  description: `Contact ${COMPANY_NAME} for a cybersecurity consultation or corporate training inquiry—cloud security, compliance readiness, remediation, or team training. Messages are delivered to ${COMPANY_EMAIL}.`,
+  description: `Contact ${COMPANY_NAME} about multi-cloud security, risk assessment, compliance readiness, remediation, corporate training, or educational consulting. Messages are delivered to ${COMPANY_EMAIL}.`,
   alternates: { canonical: '/contact' },
 };
 
@@ -22,7 +22,7 @@ export default function ContactPage() {
               <SectionHeading
                 title="Tell us what you need help with"
                 subtitle={`Contact ${COMPANY_NAME}`}
-                description="Choose a clear reason to reach out—cloud risk, compliance readiness, a remediation backlog, or corporate cybersecurity and IT training—and we’ll recommend the right next step."
+                description="Describe the work you need—cloud risk, governance readiness, remediation, corporate training, or educational and institutional consulting. We confirm receipt, hold a short discovery call, and recommend a scoped next step."
                 centered={false}
                 size="lg"
                 as="h1"
@@ -33,9 +33,9 @@ export default function ContactPage() {
                   <h2 className="text-white font-semibold text-base">What happens after you submit</h2>
                   <ol className="space-y-3 list-decimal list-inside">
                     <li>Your message is emailed to {COMPANY_EMAIL}.</li>
-                    <li>We confirm receipt of your inquiry.</li>
-                    <li>We review your risks, objectives, and constraints.</li>
-                    <li>We recommend a packaged next step.</li>
+                    <li>We confirm that we received your inquiry.</li>
+                    <li>We review your objectives, constraints, and stated risks.</li>
+                    <li>We recommend a scoped next step.</li>
                   </ol>
                 </div>
 
